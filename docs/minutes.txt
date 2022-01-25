@@ -1,0 +1,4 @@
+    DATE      |       TIME      |     TYPE
+-----------------------------------------------------
+Sunday 1/23   |  3:00 to 4:30   |    Group work
+Tuesday 1/25  |  12:30 to 1:45  |    Sponsor meeting
