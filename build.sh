@@ -1,2 +1,3 @@
 #!/bin/bash
-exit 127
+./mvnw spring-boot:run
+exit 0

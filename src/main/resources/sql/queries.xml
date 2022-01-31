@@ -1,0 +1,19 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="queries">
+    <insert id="add" parameterType="java.util.Map">
+        INSERT INTO QUESTIONS
+        (QUESTION,
+         CHAPTER,
+         CHARS)
+        VALUES (#{question},
+                #{chapter},
+                #{chars})
+    </insert>
+    <select id="getAllByChapter" parameterType="Integer" resultType="String">
+        SELECT QUESTION FROM QUESTIONS
+                WHERE CHAPTER = #{chapter}
+    </select>
+</mapper>
