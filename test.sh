@@ -1,2 +1,3 @@
 #!/bin/bash
-exit 127
+./mvnw test
+exit 0
