@@ -16,7 +16,8 @@ jobs:
         distribution: 'temurin'
         cache: maven
     - name: Build with Maven
-      run: mvn test
+    - run:  build.sh |
+    - run:  test.sh
   deploy_to_heroku:
     runs-on: ubuntu-latest
     steps:
