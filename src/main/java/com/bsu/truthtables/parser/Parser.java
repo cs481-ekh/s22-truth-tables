@@ -3,6 +3,8 @@ package com.bsu.truthtables.parser;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+import java.util.stream.Collectors;
+
 
 @Component
 public class Parser {
@@ -10,9 +12,10 @@ public class Parser {
     @Value("${operators}")
     private String operators;   //loaded from applicaiton properties, this is all the known operators
 
-    public int parseChars(String question) {
-        return (int) question.replaceAll("[" + operators + "]", "").replaceAll(",", "").replaceAll(" ", "").chars().distinct().count();
+    public String parseChars(String question) {
+        return question.replaceAll("[" + operators + "]", "").replaceAll(",", "").replaceAll(" ", "").chars().distinct().mapToObj(c -> String.valueOf((char) c)).collect(Collectors.joining());
     }
+
     public Object parseQuestion(String question) {
         //example string as of now = A | B, B ^ C | D. calling parse chars should return ABCD in order it was added. for example B | A | C would return BAC
 

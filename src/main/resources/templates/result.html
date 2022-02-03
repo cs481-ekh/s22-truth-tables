@@ -1,15 +1,37 @@
 <!DOCTYPE HTML>
 <html xmlns:th="https://www.thymeleaf.org">
 <head>
-    <title>Getting Started: Handling Form Submission</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Add Question</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 </head>
 <body>
 <h1>Question added</h1>
-<p th:text="'Question: ' + ${question.question} + ' added to chapter ' + ${question.chapter} + '.'" />
-<tr th:each="q: ${listOfQuestions}">
-    <td th:text="' Previously added ' + ${q}" />
-</tr>
+<p> Question: <b th:text="${question.question}"/> added to chapter <b th:text="${question.chapter}"/> </p>
+
+<table>
+    <tr>
+        <!-- print the input chars -->
+        <p> inputs</p>
+        <th:block th:each="char : ${inputChars.toCharArray()}">
+            <th th:text="${char}"></th>
+        </th:block>
+    </tr>
+    <!-- print the input values -->
+    <th:block th:each="i: ${#numbers.sequence(1, boxDepth)}">
+        <tr>
+            <th:block th:each="j : ${#numbers.sequence(1, inputChars.length())}">
+                <td th:text="${prefilled.charAt( i * inputChars.length() - inputChars.length() + j - 1)}"/>
+            </th:block>
+        </tr>
+    </th:block>
+</table>
+
+
+<h3>Previously entered questions: </h3>
+<p th:each="q: ${listOfQuestions}" th:text="${q}">
+
+</p>
+<br>
 <a href="/add">Add a new question</a>
 </body>
 </html>

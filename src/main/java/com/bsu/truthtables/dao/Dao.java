@@ -8,11 +8,11 @@ import java.util.Map;
 
 public class Dao extends SqlSessionDaoSupport {
 
-    public void add(String question, String chapter, int chars) {
+    public void add(String question, String chapter, String chars) {
         Map<String, String> params = new HashMap<>();
         params.put("chapter", chapter);
         params.put("question", question);
-        params.put("chars", String.valueOf(chars));
+        params.put("chars", chars);
         getSqlSession().insert("add", params); //todo drop test table and change chars to be varchar
     }
     public List<String> getAllByChapter(int chapter){
