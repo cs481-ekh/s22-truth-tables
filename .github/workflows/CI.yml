@@ -15,6 +15,8 @@ jobs:
         java-version: '8'
         distribution: 'temurin'
         cache: maven
+    - name: chmod
+      run: chmod +x ./mvnw
     - name: Build with Maven
       run:  bash test.sh - xe
   deploy_to_heroku:
