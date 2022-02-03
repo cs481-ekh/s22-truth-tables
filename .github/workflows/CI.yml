@@ -7,6 +7,7 @@ on:
 jobs:
   build_and_test:
     runs-on: ubuntu-latest
+    timeout-minutes: 1
     steps:
     - uses: actions/checkout@v2
     - name: Set up JDK 8
@@ -15,10 +16,12 @@ jobs:
         java-version: '8'
         distribution: 'temurin'
         cache: maven
-    - name: chmod
+    - name: chmod mvn
       run: chmod +x ./mvnw
-    - name: Build with Maven
+    - name: Test with Maven
       run:  bash test.sh - xe
+    - name: Build with Maven
+      run:  bash build.sh - xe
   deploy_to_heroku:
     runs-on: ubuntu-latest
     steps:
