@@ -1,3 +1,5 @@
+![Workflow](https://github.com/cs481-ekh/s22-truth-tables/actions/workflows/CI.yml/badge.svg)
+
 <h1>Truth Tables</h1>
 <h3>Semester - Spring 2022, Eric Henderson</h3>
 <h4>Authors:
