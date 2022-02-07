@@ -1,3 +1,31 @@
+## Friday 2/4 - 7p - 8:30p
+
+Scribe: Berto
+
+Present: Trevor, Berto, Josh, Zach, Kyle
+
+Absent: N/A
+
+Summary: Worked on final draft of project plan.
+
+Action items: Everyone look over the plan throughout the weekend and add any touches as seen fit.
+
+------
+
+## Tuesday 2/1 - 3:50p - 4:30p
+
+Scribe: Josh
+
+Present: Trevor, Berto, Josh
+
+Absent: Zach, Kyle
+
+Summary: Discussed requirements for CI/CD pipelines and worked on them.
+
+Action items: Zach and Kyle work on UI mockup, Trevor research and practice with Thyme Leaf to help with front end. Josh work on CI/CD pipelines.
+
+------
+
 ## Thursday 1/27 - 6:00p - 7:00p
 
 Scribe: Trevor
