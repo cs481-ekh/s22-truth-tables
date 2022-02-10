@@ -7,10 +7,18 @@
 
 
 <h1>Student View - Main Page</h1>
-<form action="#" th:action="@{/}" th:object="${question}" method="post">
+<form action="#" th:action="@{/practice-problem}" th:object="${question}" method="post">
     <p>Enter a question: <input type="text" th:field="*{question}" /></p>
     <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
 </form>
+
+<h3>Chapter Questions</h3>
+<th:block th:each="chap : ${chapters}">
+    <a th:href="@{'/chapter-questions/'+${chap}}" th:text="'Chapter ' + ${chap}"></a>
+</th:block>
+
+
+
 
 </body>
 

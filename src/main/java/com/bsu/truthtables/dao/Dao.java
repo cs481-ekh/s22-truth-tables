@@ -2,6 +2,7 @@ package com.bsu.truthtables.dao;
 
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,5 +18,11 @@ public class Dao extends SqlSessionDaoSupport {
     }
     public List<String> getAllByChapter(int chapter){
         return getSqlSession().selectList("getAllByChapter", chapter);
+    }
+
+    public List<Integer> getChapters() {
+        List<Integer> list = getSqlSession().selectList("getChapters");
+        Collections.sort(list);
+        return list;
     }
 }

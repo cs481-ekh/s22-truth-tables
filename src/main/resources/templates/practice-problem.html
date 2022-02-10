@@ -1,0 +1,29 @@
+<!DOCTYPE HTML>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title>home</title>
+</head>
+<body>
+<p> Here is the student view page after submitting a question </p>
+
+<p> Question: <b th:text="${question.question}"/> added to chapter  </p>
+
+<table>
+    <tr>
+        <!-- print the input chars -->
+        <p> inputs</p>
+        <th:block th:each="char : ${inputChars.toCharArray()}">
+            <th th:text="${char}"></th>
+        </th:block>
+    </tr>
+    <!-- print the input values -->
+    <th:block th:each="i: ${#numbers.sequence(1, boxDepth)}">
+        <tr>
+            <th:block th:each="j : ${#numbers.sequence(1, inputChars.length())}">
+                <td th:text="${prefilled.charAt( i * inputChars.length() - inputChars.length() + j - 1)}"/>
+            </th:block>
+        </tr>
+    </th:block>
+</table>
+
+</body>

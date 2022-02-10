@@ -1,0 +1,15 @@
+<!DOCTYPE HTML>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title>Chapter questions</title>
+</head>
+<body>
+<p> Here is the student view page for a given chapter </p>
+
+
+<h3 th:text="'Here are your questions for Chapter ' + ${chapter}"/>
+<p th:each="q: ${listOfQuestions}" th:text="${q}">
+
+</p>
+
+</body>
