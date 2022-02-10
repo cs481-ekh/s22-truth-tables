@@ -9,7 +9,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -24,13 +23,13 @@ public class MainController {
     @Value("#{${prefilledBox}}")
     private Map<String,String> prefilledBox;
 
-    @GetMapping("/add")
+    @GetMapping("/admin")
     public String addForm(Model model) {
         model.addAttribute("question" , new Question());
-        return "add";
+        return "admin";
     }
 
-    @PostMapping("/add")
+    @PostMapping("/admin")
     public String addSubmit(@ModelAttribute Question question, Model model) {
         int numberOfInputs = parser.parseChars(question.getQuestion()).length();
         int boxDepth = (int) Math.round(Math.pow(2,numberOfInputs));
