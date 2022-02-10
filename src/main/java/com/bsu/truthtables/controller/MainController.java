@@ -23,14 +23,26 @@ public class MainController {
     @Value("#{${prefilledBox}}")
     private Map<String,String> prefilledBox;
 
+    @GetMapping("/")
+    public String home(Model model) {
+        model.addAttribute("question" , new Question());
+        return "home";
+    }
+
+    @PostMapping("/")
+    public String homeSubmit(@ModelAttribute Question question, Model model) {
+        model.addAttribute("q", question);
+        return "home-submit";
+    }
+
     @GetMapping("/admin")
-    public String addForm(Model model) {
+    public String admin(Model model) {
         model.addAttribute("question" , new Question());
         return "admin";
     }
 
     @PostMapping("/admin")
-    public String addSubmit(@ModelAttribute Question question, Model model) {
+    public String adminSubmit(@ModelAttribute Question question, Model model) {
         int numberOfInputs = parser.parseChars(question.getQuestion()).length();
         int boxDepth = (int) Math.round(Math.pow(2,numberOfInputs));
         String chars = parser.parseChars(question.getQuestion());
