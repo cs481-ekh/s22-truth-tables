@@ -6,7 +6,7 @@
 </head>
 <body>
 <h1>Add a new question</h1>
-<form action="#" th:action="@{/add}" th:object="${question}" method="post">
+<form action="#" th:action="@{/admin}" th:object="${question}" method="post">
     <p>chapter as number: <input type="text" th:field="*{chapter}" /></p>
     <p>question: <input type="text" th:field="*{question}" /></p>
     <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>

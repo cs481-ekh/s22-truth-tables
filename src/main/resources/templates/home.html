@@ -3,3 +3,14 @@
 <head>
     <title>home</title>
 </head>
+<body>
+
+
+<h1>Student View - Main Page</h1>
+<form action="#" th:action="@{/}" th:object="${question}" method="post">
+    <p>Enter a question: <input type="text" th:field="*{question}" /></p>
+    <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
+</form>
+
+</body>
+
