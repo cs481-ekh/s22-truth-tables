@@ -16,4 +16,8 @@
         SELECT QUESTION FROM QUESTIONS
                 WHERE CHAPTER = #{chapter}
     </select>
+    <select id="getChapters" resultType="Integer">
+                SELECT DISTINCT(CHAPTER)
+                FROM QUESTIONS
+    </select>
 </mapper>
