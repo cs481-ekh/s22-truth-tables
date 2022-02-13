@@ -30,12 +30,13 @@ public class MainController {
         return "home";
     }
 
-    @PostMapping("/practice-problem")
+    @PostMapping("/")
     public String practiceProblem(@ModelAttribute Question question, Model model) {
         int numberOfInputs = parser.parseChars(question.getQuestion()).length();
         int boxDepth = (int) Math.round(Math.pow(2,numberOfInputs));
         String chars = parser.parseChars(question.getQuestion());
         model.addAttribute("question", question);
+        model.addAttribute("chapters", dao.getChapters());
         model.addAttribute("prefilled", prefilledBox.get(String.valueOf(numberOfInputs)));
         model.addAttribute("numberOfInputs", numberOfInputs);
         model.addAttribute("inputChars", chars);
