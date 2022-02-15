@@ -89,13 +89,24 @@ a.article-title:hover {
     border: 1px solid #58a563;
 }
 
-select {
+.selectTF {
     outline: none;
     background-color: transparent;
     appearance: none;
     border-color: black;
     width: 20px;
     text-align: center;
+}
+.selectValidity {
+    outline: none;
+    background-color: transparent;
+    appearance: none;
+    border-color: black;
+    text-align: center;
+    padding-left: 2px;
+    padding-right: 2px;
+    padding-top: 0px;
+    padding-bottom: 0px;
 }
 
 .tablecenterheadCSS th{

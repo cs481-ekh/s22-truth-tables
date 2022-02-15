@@ -60,9 +60,6 @@
             <div class="container">
                 <div class="row">
                     <div class="col-sm">
-                        <div class="text-center center">
-                            <p> TF Generated </p>
-                        </div>
                         <!-- Center text in columns -->
                         <table class="tablecenterheadCSS tablecenterCSS table caption-top">
                             <caption>Inputs</caption>
@@ -83,10 +80,6 @@
                         </table>
                     </div>
                     <div class="col-sm">
-                        <div class="text-center center">
-                            <p> Student Fills Out </p>
-                        </div>
-                        <!-- Work here -->
                         <table class="tablecenterheadCSS dropdowntable table caption-top">
                             <caption>Statement</caption>
                             <thead>
@@ -94,11 +87,11 @@
                             <!-- MAY NEED TO CHANGE LATER -->
                             <th style="text-align: center" th:colspan="${inputChars.length()}" th:text="${question.question}"></th>
                             </thead>
-                            <!-- print the input values -->
+                            <!-- print the select boxes -->
                             <th:block th:each="i: ${#numbers.sequence(1, boxDepth)}">
                                 <tr class="tablecentercolCSS" >
                                     <td>
-                                        <select>
+                                        <select class="selectTF">
                                             <option></option>
                                             <option>T</option>
                                             <option>F</option>
@@ -109,9 +102,26 @@
                         </table>
                     </div>
                     <div class="col-sm">
-                        <div class="text-center center">
-                            <p> Validity Checks and Stuff </p>
-                        </div>
+                        <table class="tablecenterheadCSS dropdowntable table caption-top">
+                            <caption>Validity Test</caption>
+                            <thead>
+                            <th style="text-align: center" th:colspan="${inputChars.length()}">
+                                Shows Invalid?
+                            </th>
+                            </thead>
+                            <!-- print the select boxes -->
+                            <th:block th:each="i: ${#numbers.sequence(1, boxDepth)}">
+                                <tr class="tablecentercolCSS" >
+                                    <td>
+                                        <select class="selectValidity">
+                                            <option></option>
+                                            <option>Shows invalid</option>
+                                            <option>Shows valid</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                            </th:block>
+                        </table>
                     </div>
                 </div>
             </div>
