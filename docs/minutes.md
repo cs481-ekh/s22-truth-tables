@@ -1,3 +1,63 @@
+## Tuesday 2/15 - 3:50p - 4:20p
+
+Scribe: Kyle
+
+Present: Trevor, Berto, Josh, Kyle
+Absent: Zach
+
+Summary: Discussed current status of sprint 0 tasks and possible tasks for sprint 1. We also discussed meeting times to plan sprint 1.
+
+Action items: Zach and Kyle finish Sprint 0 tasks. Everyone else think about tasks for sprint 0. Also everyone submit BTC assignment if not already done.
+
+------
+## Sunday 2/13 - 12:30p - 1:45p
+
+Scribe: Berto
+
+Present: Trevor, Berto, Josh, Zach
+Absent: N/A
+
+Summary: Worked on front-end tasks and discussed UI design options.
+
+Action items: Work on sprint tasks and think about sprint goal
+
+------
+## Thursday 2/10 - 3:30p - 4:30p
+
+Scribe: Trevor
+
+Present: Trevor, Berto, Josh, Zach
+Absent: N/A
+
+Summary: Assigned and worked on front-end tasks. Finalized sprint 0 plan
+
+**Sprint goal: At the end of this sprint, we aim to have the basic layout and styling complete for the main page as well as the 'sandbox' page. Additionally, the input field should be properly reading in the question so that its information can be parsed for the front end to work with. At the end of this sprint, we should also have the first implementation of our parser which will be able to detect operators to give front-end more flexibility.**
+
+Action items: Work on sprint tasks and think about sprint goal
+
+------
+## Tuesday 2/8 - 3:30p - 4:50p
+
+Scribe: Trevor
+
+Present: Trevor, Berto, Josh, Zach, Kyle
+
+Summary: Created UI mockup and added some tasks to project board
+
+Action items: Work on sprint tasks and think about sprint goal
+
+------
+## Monday 2/7 - 8:45p - 9:00p
+
+Scribe: Kyle
+
+Present: Trevor, Berto, Josh, Zach, Kyle
+
+Summary: Finalized project plan and submitted
+
+Action items: None
+
+------
 ## Friday 2/4 - 7p - 8:30p
 
 Scribe: Berto
