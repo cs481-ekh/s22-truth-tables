@@ -44,20 +44,18 @@
     </nav>
 </header>
 <!-- Title -->
+<h1> Practice Problem </h1>
+<h3> Question: <b th:text="${question.question}"/> added to chapter  </h3>
 
-<form action="#" th:action="@{/}" th:object="${question}" method="post">
-    <p>Enter a question: <input type="text" th:field="*{question}" /></p>
-    <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
-</form>
-<h3>Chapter Questions</h3>
-<th:block th:each="chap : ${chapters}">
-    <a th:href="@{'/chapter-questions/'+${chap}}" th:text="'Chapter ' + ${chap}"></a>
-</th:block>
 <main role="main" class="container">
     <div class="row">
         <div class="col-md-8">
-            <h1> Practice Problem </h1>
-            <h3> Question: <b th:text="${question.question}"/> added to chapter  </h3>
+
+            <form action="#" th:action="@{/}" th:object="${question}" method="post">
+                <p>Enter a question: <input type="text" th:field="*{question}" /></p>
+                <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
+            </form>
+
             <!-- Putting tables into columns -->
             <div class="container">
                 <div class="row">
@@ -88,6 +86,27 @@
                         <div class="text-center center">
                             <p> Student Fills Out </p>
                         </div>
+                        <!-- Work here -->
+                        <table class="tablecenterheadCSS dropdowntable table caption-top">
+                            <caption>Statement</caption>
+                            <thead>
+                            <!-- print the input statement -->
+                            <!-- MAY NEED TO CHANGE LATER -->
+                            <th style="text-align: center" th:colspan="${inputChars.length()}" th:text="${question.question}"></th>
+                            </thead>
+                            <!-- print the input values -->
+                            <th:block th:each="i: ${#numbers.sequence(1, boxDepth)}">
+                                <tr class="tablecentercolCSS" >
+                                    <td>
+                                        <select>
+                                            <option></option>
+                                            <option>T</option>
+                                            <option>F</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                            </th:block>
+                        </table>
                     </div>
                     <div class="col-sm">
                         <div class="text-center center">
@@ -96,6 +115,12 @@
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="col-lg">
+            <h3>Chapter Questions</h3>
+            <th:block th:each="chap : ${chapters}">
+                <a th:href="@{'/chapter-questions/'+${chap}}" th:text="'Chapter ' + ${chap}"></a>
+            </th:block>
         </div>
     </div>
 </main>
