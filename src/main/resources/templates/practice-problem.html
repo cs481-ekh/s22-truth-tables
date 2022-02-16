@@ -13,7 +13,7 @@
 
     <title>Home</title>
 </head>
-<body>
+<body class="d-flex flex-column min-vh-100">
 
 <!-- NavBar -->
 <header class="site-header">
@@ -43,19 +43,50 @@
         </div>
     </nav>
 </header>
-<!-- Title -->
-<h1> Practice Problem </h1>
-<h3> Question: <b th:text="${question.question}"/> added to chapter  </h3>
+
+<section class="py-5 text-center container">
+    <div class="row py-lg-5">
+        <div class="col-lg-6 col-md-8 mx-auto">
+            <h1 class="fw-light">Student View-Practice Problem</h1>
+            <h2 class="fw-light" style="border: 2px solid black">We could place a banner here</h2>
+            <h3 class="fw-light" style="border: 2px solid black">Up to y'all though</h3>
+        </div>
+    </div>
+</section>
+
+<section class="py-5 text-center container">
+    <div class="row py-lg-5">
+        <div class="col">
+            <div class="col" style="border: 2px solid black">
+                <h3>Operators</h3>
+                <div class="container-sm" style="border-bottom: 2px solid black">
+                    <p>|, ->, <-, v, ^, *</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6 col-md-8 mx-auto">
+            <h1 class="fw-light">Practice Problem</h1>
+            <h3> Question: <b th:text="${question.question}"/> added to chapter  </h3>
+            <form action="#" th:action="@{/}" th:object="${question}" method="post">
+                <p>Enter a question: <input type="text" th:field="*{question}" /> <input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
+            </form>
+        </div>
+        <div class="col" style="border: 2px solid black">
+            <h3>Chapter Questions</h3>
+            <th:block th:each="chap : ${chapters}">
+                <div class="container-sm" style="border-bottom: 2px solid black">
+                    <a th:href="@{'/chapter-questions/'+${chap}}" th:text="'Chapter ' + ${chap}"></a>
+                </div>
+            </th:block>
+        </div>
+
+    </div>
+</section>
+
 
 <main role="main" class="container">
     <div class="row">
-        <div class="col-md-8">
-
-            <form action="#" th:action="@{/}" th:object="${question}" method="post">
-                <p>Enter a question: <input type="text" th:field="*{question}" /></p>
-                <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
-            </form>
-
+        <div class="col-lg-6 col-md-8 mx-auto">
             <!-- Putting tables into columns -->
             <div class="container">
                 <div class="row">
@@ -126,13 +157,15 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg">
-            <h3>Chapter Questions</h3>
-            <th:block th:each="chap : ${chapters}">
-                <a th:href="@{'/chapter-questions/'+${chap}}" th:text="'Chapter ' + ${chap}"></a>
-            </th:block>
-        </div>
     </div>
 </main>
+
+<footer class="mt-auto">
+    <p class="mb-1">lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ante mauris, malesuada at metus non, molestie tincidunt ligula. Suspendisse id semper nisl, pellentesque auctor erat.</p>
+    <p class="float-end mb-1">
+        <a href="#">Back to top</a>
+    </p>
+</footer>
+
 </body>
 
