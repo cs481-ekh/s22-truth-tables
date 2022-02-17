@@ -31,6 +31,7 @@ Action items: Zach and Kyle finish Sprint 0 tasks. Everyone else think about tas
 Scribe: Berto
 
 Present: Trevor, Berto, Josh, Zach
+
 Absent: N/A
 
 Summary: Worked on front-end tasks and discussed UI design options.
@@ -43,6 +44,7 @@ Action items: Work on sprint tasks and think about sprint goal
 Scribe: Trevor
 
 Present: Trevor, Berto, Josh, Zach
+
 Absent: N/A
 
 Summary: Assigned and worked on front-end tasks. Finalized sprint 0 plan
