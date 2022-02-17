@@ -20,4 +20,9 @@
                 SELECT DISTINCT(CHAPTER)
                 FROM QUESTIONS
     </select>
+    <delete id="removeQuestion" parameterType="java.util.Map">
+                DELETE FROM QUESTIONS
+                WHERE CHAPTER = #{chapter}
+                AND QUESTION = #{question}
+    </delete>
 </mapper>

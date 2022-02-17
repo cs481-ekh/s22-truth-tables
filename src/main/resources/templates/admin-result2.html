@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title>Add Question</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+<h3>Question Removed</h3>
+
+<a href="/admin">Add a new question</a>
+<br>
+<br>
+
+<table>
+    <!-- print the input values -->
+    <th:block th:each="q: ${listOfQuestions}">
+        <tr>
+
+        <th th:text="${q}"/>
+
+            <th>
+                <a th:href="@{'/removeQuestion/' + ${q} + '/' + ${chapter}}">DELETE</a>
+                <!--form action="#" th:action="@{/removeQuestion}" th:object="${question}" method="post" >
+                <input type="submit" value="delete" th:field="${question.setQuestion(q)}"/>
+                </form-->
+            </th>
+        </tr>
+    </th:block>
+
+</table>
+
+
+<!--p th:each="q: ${listOfQuestions}" th:text="${q}" >
+</p-->
+
+</body>
+</html>
+
