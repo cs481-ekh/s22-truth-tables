@@ -6,7 +6,10 @@
 </head>
 <body>
 <h1>Question added</h1>
-<p> Question: <b th:text="${question.question}"/> added to chapter <b th:text="${question.chapter}"/> </p>
+<p> Question: <b th:text="${question.question}"/> added to chapter <b th:text="${question.chapter}"/></p>
+<a href="/admin">Add a new question</a>
+<br>
+
 
 <table>
     <tr>
@@ -25,13 +28,19 @@
         </tr>
     </th:block>
 </table>
-
-
-<h3>Previously entered questions: </h3>
-<p th:each="q: ${listOfQuestions}" th:text="${q}">
-
-</p>
 <br>
-<a href="/admin">Add a new question</a>
+
+<table>
+    <th:block th:each="q: ${listOfQuestions}">
+        <tr>
+        <th th:text="${q}"/>
+            <th>
+                <a th:href="@{'/removeQuestion/' + ${q} + '/' + ${chapter}}">DELETE</a>
+            </th>
+        </tr>
+    </th:block>
+</table>
+
 </body>
 </html>
+

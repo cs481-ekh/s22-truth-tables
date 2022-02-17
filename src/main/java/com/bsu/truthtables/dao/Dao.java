@@ -1,5 +1,6 @@
 package com.bsu.truthtables.dao;
 
+import com.bsu.truthtables.domain.Question;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 
 import java.util.Collections;
@@ -24,5 +25,11 @@ public class Dao extends SqlSessionDaoSupport {
         List<Integer> list = getSqlSession().selectList("getChapters");
         Collections.sort(list);
         return list;
+    }
+    public void removeQuestion(String question, int chapter) {
+        Map<String, String> params = new HashMap<>();
+        params.put("chapter", String.valueOf(chapter));
+        params.put("question", question);
+        getSqlSession().delete("removeQuestion", params);
     }
 }

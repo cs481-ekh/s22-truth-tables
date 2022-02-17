@@ -73,7 +73,14 @@ public class MainController {
         model.addAttribute("numberOfInputs", numberOfInputs);
         model.addAttribute("inputChars", chars);
         model.addAttribute("boxDepth", boxDepth);
+        model.addAttribute("chapter", question.getChapter());
         dao.add(question.getQuestion(), question.getChapter(), chars);
         return "admin-result";
+    }
+    @GetMapping("/removeQuestion/{question}/{chapter}")
+    public String adminDelete(@PathVariable String question, @PathVariable int chapter, Model model) {
+       dao.removeQuestion(question, chapter);
+        model.addAttribute("listOfQuestions", dao.getAllByChapter(chapter));
+        return "admin-result2";
     }
 }
