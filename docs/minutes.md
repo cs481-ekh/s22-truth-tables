@@ -1,8 +1,24 @@
+## Wednesday 2/16 - 4:30p - 6:00p
+
+Scribe: Josh
+
+Present: Trevor, Berto, Josh, Zach
+
+Absent: Kyle
+
+Summary: Worked on planning sprint 1, assigned front end tasks.
+
+Action Items: Trevor, Zach, and Berto - begin working on/researching tasks. Kyle and Josh - Create tasks to add to board 
+
+**Sprint goal: By the end of this sprint, we should have the user interfaces complete for all pages of the application. Additionally, we should have some more advanced parser functionality. This means the ability to parse and separate a problem into sub groups based on the operators it contains. We should also have most of the error handling complete for all the input fields for a user. Lastly, we expect an admin user to be able to add/delete questions and chapters.**
+
+------
 ## Tuesday 2/15 - 3:50p - 4:20p
 
 Scribe: Kyle
 
 Present: Trevor, Berto, Josh, Kyle
+
 Absent: Zach
 
 Summary: Discussed current status of sprint 0 tasks and possible tasks for sprint 1. We also discussed meeting times to plan sprint 1.
