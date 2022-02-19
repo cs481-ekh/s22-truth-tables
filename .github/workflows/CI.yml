@@ -20,10 +20,10 @@ jobs:
         cache: maven
     - name: chmod mvn
       run: chmod +x ./mvnw
-    - name: Test with Maven
-      run:  bash test.sh - xe
-    - name: Build with Maven
-      run:  bash build.sh - xe
+    - name: build with Maven
+      run:  ./build.sh
+    - name: test with Maven
+      run:  ./test.sh
   deploy_to_heroku:
     runs-on: ubuntu-latest
     steps:
