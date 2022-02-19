@@ -1,3 +1,3 @@
 #!/bin/bash
-./mvnw test
+./mvnw -Dtest=TruthtablesApplicationTests surefire:test
 exit 0

@@ -1,3 +1,3 @@
 #!/bin/bash
-./mvnw spring-boot:run
+./mvnw install -DskipTests
 exit 0
