@@ -27,6 +27,7 @@ public class MainController {
     public String home(Model model) {
         model.addAttribute("question" , new Question());
         model.addAttribute("chapters", dao.getChapters());
+        model.addAttribute("pageTitle", "Home");
         return "home";
     }
 
@@ -41,6 +42,7 @@ public class MainController {
         model.addAttribute("numberOfInputs", numberOfInputs);
         model.addAttribute("inputChars", chars);
         model.addAttribute("boxDepth", boxDepth);
+        model.addAttribute("pageTitle", "Problem");
 
         return "practice-problem";
     }
@@ -53,12 +55,16 @@ public class MainController {
     public String getChapterQuestions2(@PathVariable("chapter") int chapter, Model model) {
         model.addAttribute("chapter", chapter);
         model.addAttribute("listOfQuestions", dao.getAllByChapter(chapter));
+        model.addAttribute("pageTitle", "Chapter Questions");
+
         return "chapter-questions";
     }
 
     @GetMapping("/admin")
     public String admin(Model model) {
         model.addAttribute("question" , new Question());
+        model.addAttribute("pageTitle", "Admin");
+
         return "admin";
     }
 
