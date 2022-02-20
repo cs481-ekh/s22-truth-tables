@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head th:fragment="html_head">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link th:href="@{/styles/cssandjs/main.css}" rel="stylesheet" />
+    <link th:href="@{/styles/cssandjs/bootstrap.min.css}" rel="stylesheet">
+    <script type="text/javascript">
+        function validate() {
+
+            var user = document.getElementById("question").value;
+            var user2 = document.getElementById("question");
+            var re = /([A-Za-z]{2,})|([\||\-|\>|\<|\*|\^]{2,})/;
+            var re2 = /(^\||^v|^\-|^\>|^\<|^\^|^\*)/;
+            var re3 = /(\|$|v$|\-$|\>$|\<$|\^$|\*$)/;
+            if (!re.test(user) && !re2.test(user) && !re3.test(user)) {
+                return true;
+            }
+            else {
+                user2.style.border = "red solid 3px";
+                alert("Submitted question does not follow proper format.");
+                return false;
+            }
+        }
+    </script>
+    <title th:text="${pageTitle}"></title>
+</head>
+<body>
+    <div th:fragment="menu">
+        <header class="site-header">
+            <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
+                <div class="container">
+                    <a class="navbar-brand mr-4" href="/">Interactive Truth Table</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarToggle">
+                        <div class="navbar-nav mr-auto">
+                            <a class="nav-item nav-link" href="/">Home</a>
+                            <a class="nav-item nav-link" href="/">Add Question</a>
+                        </div>
+                        <div class="mx-auto order-0">
+                            <a class="navbar-brand mx-auto"></a>
+                            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".dual-collapse2">
+                                <span class="navbar-toggler-icon"></span>
+                            </button>
+                        </div>
+                        <!-- Navbar Right Side -->
+                        <div class="navbar-nav ml-auto">
+                            <a class="nav-item nav-link" href="/admin">Login</a>
+                            <a class="nav-item nav-link" href="/admin">Register</a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </header>
+    </div>
+        <footer class="mt-auto" th:fragment="footer">
+            <p class="mb-1">Interactive Truth Table 2022</p>
+        </footer>
+</body>
+</html>
