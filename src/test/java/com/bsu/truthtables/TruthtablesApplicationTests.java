@@ -47,4 +47,25 @@ class TruthtablesApplicationTests {
 		System.out.println("stop");
 	}
 
+	@Test
+	void arrowStuff(){
+		String question1 = "A ^ B -> C";		//idk if this is right, I was working off the idea -> means if left is true then right is true
+		String question2 = "A ^ B <- C";		//same but revered
+		String question3 = "A ^ B <-> C";		//stmt only true if both are true
+		Map q1 =parser.parseQuestion(question1);
+		Map q2 =parser.parseQuestion(question2);
+		Map q3 =parser.parseQuestion(question3);
+
+		//todo add assertions
+		System.out.println("stop");
+
+	}
+	@Test
+	void commas(){
+		String question1 = "A ^ B , A v B";			//yea... idk what to do for this yet
+		Map q1 =parser.parseQuestion(question1);
+		System.out.println("stop");
+
+	}
+
 }

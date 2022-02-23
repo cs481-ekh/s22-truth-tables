@@ -26,6 +26,7 @@ public class Parser {
                 .replaceAll("\\(", "")
                 .replaceAll("\\)", "")
                 .replaceAll(" ", "")
+                .replaceAll(",", "")
                 .chars()
                 .distinct()
                 .mapToObj(c -> String.valueOf((char) c)).collect(Collectors.joining());
@@ -52,16 +53,16 @@ public class Parser {
 
     public Object stmt() {
         Object obj = t0();
-        if (more() && peek() == ',') {
+        while (more() && peek() == ',') {
             eat(',');
             Object obj2 = stmt();
-            return comma(obj, obj2);  //handle questions with a comma
+            obj = comma(obj, obj2);  //handle questions with a comma
         }
-        if (more() && peek() == ':') {
+        while (more() && peek() == ':' && doublePeek() == '.') {
             eat(':');
             eat('.');
             Object obj2 = stmt();
-            return therefore(obj, obj2);  //handle therefore
+            obj = therefore(obj, obj2);  //handle therefore
         }
         return obj;
     }
@@ -80,7 +81,7 @@ public class Parser {
 
     public Object t1() {
         Object obj = t2();
-        if (more() && peek() == '<' && doublePeek() == '-') {
+        if (more() && peek() == '<' && doublePeek() == '-' && triplePeek() != '>') {
             eat('<');
             eat('-');
             Object obj2 = t2();
@@ -225,15 +226,39 @@ public class Parser {
     }
 
     public Object rightArrow(Object o1, Object o2) {
-        return null;
+        String name = "(" + o1 + ")";
+        put(name, get(o1));
+        map.remove(o1);
+        String retVal = "";
+        for(int i = 0; i < get(name).length(); i++){
+            retVal += get(name).charAt(i) == 'T' ? "T" : "F";
+        }
+        put(name + "->" + o2, retVal);
+        return name;
     }
 
     public Object leftArrow(Object o1, Object o2) {
-        return null;
+        String name = "(" + o1 + ")";
+        put(name, get(o1));
+        map.remove(o1);
+        String retVal = "";
+        for(int i = 0; i < get(name).length(); i++){
+            retVal += get(o2).charAt(i) == 'T' ? "T" : "F";
+        }
+        put(name + "<-" + o2, retVal);
+        return name;
     }
 
     public Object doubleArrow(Object o1, Object o2) {
-        return null;
+        String name = "(" + o1 + ")";
+        put(name, get(o1));
+        map.remove(o1);
+        String retVal = "";
+        for(int i = 0; i < get(name).length(); i++){
+            retVal += get(name).charAt(i) == 'T' && get(o2).charAt(i) == 'T' ? "T" : "F";
+        }
+        put(name + "<->" + o2, retVal);
+        return name;
     }
 
     public Object therefore(Object o1, Object o2) {
@@ -241,6 +266,12 @@ public class Parser {
     }
 
     public Object comma(Object o1, Object o2) {
+        String name = "(" + o1 + ")";
+        put(name, get(o1));
+        map.remove(o1);
+        name = "(" + o2 + ")";
+        put(name, get(o2));
+        map.remove(o2);
         return null;
     }
 
