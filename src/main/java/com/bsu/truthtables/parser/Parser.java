@@ -19,6 +19,8 @@ public class Parser {
     @Value("#{${prefilledBox}}")
     private Map<String, String> prefilledBox;
     private HashMap<String, String> map = null;
+    private boolean validity = false;
+    private boolean logical = false;
 
 
     public String parseChars(String question) {
@@ -63,6 +65,12 @@ public class Parser {
             eat('.');
             Object obj2 = stmt();
             obj = therefore(obj, obj2);  //handle therefore
+        }
+        while (more() && peek() == ':' && doublePeek() == ':') {
+            eat(':');
+            eat(':');
+            Object obj2 = stmt();
+            obj = valid(obj, obj2);  //handle therefore
         }
         return obj;
     }
@@ -192,6 +200,11 @@ public class Parser {
         return name;
     }
 
+    public Object valid(Object o1, Object o2) {
+        validity = true;
+        return null;
+    }
+
     public Object equal(Object o1, Object o2) {
         return null;
     }
@@ -262,6 +275,7 @@ public class Parser {
     }
 
     public Object therefore(Object o1, Object o2) {
+        logical = true;
         return null;
     }
 
