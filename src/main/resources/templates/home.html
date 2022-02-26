@@ -7,46 +7,102 @@
 <!-- NavBar -->
 <div th:replace="fragments :: menu"></div>
 
-<section class="py-5 text-center container">
-    <div class="row py-lg-5">
-        <div class="col-lg-6 col-md-8 mx-auto">
-            <h1 class="fw-light">Student View-Main Page</h1>
-            <h2 class="fw-light" style="border: 2px solid black">We could place a banner here</h2>
-            <h3 class="fw-light" style="border: 2px solid black">Up to y'all though</h3>
+<section style="margin-top: 5%;" class="py-3 text-center container">
+    <div class="row py-0">
+        <div>
+            <h1>Interactive Truth Table</h1>
+            <p></p>
+            <p class="lead text-muted">
+                This tool exists to allow students to enter propositional logic formulas with the ability to actively test
+                and evaluate their formula's truth tables. Additionally, students of Dr. Cortens will have the ability to access and practice
+                questions created in chapters. To enter a propositional formula use upper case letters (A, B, C, etc) and the included
+                operators below (ex. C v (~A > D)).
+            </p>
+
+<!--            <div class="col" >-->
+<!--                <h3>Operators</h3>-->
+<!--                <div class="container-sm">-->
+<!--                    <p> ^   v  >       ~</p>-->
+<!--                    <p>and or if-then not</p>-->
+<!--                </div>-->
+<!--            </div>-->
         </div>
     </div>
-</section>
 
-<section class="py-5 text-center container">
-    <div class="row py-lg-5">
-        <div class="col">
-            <div class="col" style="border: 2px solid black">
-                <h3>Operators</h3>
-                <div class="container-sm" style="border-bottom: 2px solid black">
-                    <p>|, ->, <-, v, ^, *</p>
+    <section class="py-sm-0 text-center container">
+        <div class="row py-lg-5">
+            <div class="col">
+                <div class="col" style="border: 2px solid black">
+                    <h3>Operators</h3>
+                    <div class="container-sm">
+                        <div class="row">
+                            <div class="col" style="border-bottom: 2px solid black">
+                                ^
+                            </div>
+                            <div class="col" style="border-bottom: 2px solid black">
+                                v
+                            </div>
+                            <div class="col" style="border-bottom: 2px solid black">
+                                >
+                            </div>
+                            <div class="col" style="border-bottom: 2px solid black">
+                                ~
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                and
+                            </div>
+                            <div class="col">
+                                or
+                            </div>
+                            <div class="col">
+                                if then
+                            </div>
+                            <div class="col">
+                                not
+                            </div>
+                        </div>
+                    </div>
                 </div>
+
+            </div>
+            <div class="col-6">
+                <p></p>
+                <!--            <p class="lead text-muted"> Replace me </p>-->
+                <form action="#" th:action="@{/}" th:object="${question}" method="post">
+                    <p>Enter a question: <input type="text" id="question" th:field="*{question}" /> <input type="submit" onclick="return validate()" value="Submit" /> <input type="reset" value="Reset"/></p>
+
+                </form>
             </div>
 
-        </div>
-        <div class="col-6">
-            <p></p>
-            <p class="lead text-muted"> Replace me </p>
-            <form action="#" th:action="@{/}" th:object="${question}" method="post">
-                <p>Enter a question: <input type="text" id="question" th:field="*{question}" /> <input type="submit" onclick="return validate()" value="Submit" /> <input type="reset" value="Reset"/></p>
-
-            </form>
-        </div>
-
-        <div class="col" style="border: 2px solid black">
-            <h3>Chapter Questions</h3>
-            <th:block th:each="chap : ${chapters}">
-                <div class="container-sm" style="border-bottom: 2px solid black">
-                    <a th:href="@{'/chapter-questions/'+${chap}}" th:text="'Chapter ' + ${chap}"></a>
+            <div class="col">
+                <h3>Chapter Questions</h3>
+                <!--            <th:block th:each="chap : ${chapters}">-->
+                <!--                <div class="container-sm" style="border-bottom: 2px solid black">-->
+                <!--                    <a th:href="@{'/chapter-questions/'+${chap}}" th:text="'Chapter ' + ${chap}"></a>-->
+                <!--                </div>-->
+                <!--            </th:block>-->
+                <div class="list-group">
+                    <th:block th:each="chap : ${chapters}">
+                        <a th:href="@{'/chapter-questions/'+${chap}}" th:text="'Chapter ' + ${chap}" class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
+                            <img src="https://github.com/twbs.png" alt="twbs" width="32" height="32" class="rounded-circle flex-shrink-0">
+<!--                            <div class="d-flex gap-2 w-100 justify-content-between">-->
+<!--                                <div>-->
+<!--                                    <h6 class="mb-0">List group item heading</h6>-->
+<!--                                    <p class="mb-0 opacity-75">Some placeholder content in a paragraph.</p>-->
+<!--                                </div>-->
+<!--                                <small class="opacity-50 text-nowrap">now</small>-->
+<!--                            </div>-->
+                        </a>
+                    </th:block>
                 </div>
-            </th:block>
+
+            </div>
         </div>
-    </div>
+    </section>
 </section>
+
 
 <footer th:replace="fragments :: footer"></footer>
 
