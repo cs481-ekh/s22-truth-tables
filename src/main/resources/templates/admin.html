@@ -1,15 +1,34 @@
 <!DOCTYPE HTML>
 <html xmlns:th="https://www.thymeleaf.org">
-<head>
-    <title>Add a new question</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-</head>
-<body>
+<head th:replace="fragments :: html_head"></head>
+<body class="d-flex flex-column min-vh-100">
+<!-- NavBar -->
+<div th:replace="fragments :: menu"></div>
 <h1>Add a new question</h1>
 <form action="#" th:action="@{/admin}" th:object="${question}" method="post">
-    <p>chapter as number: <input type="text" th:field="*{chapter}" /></p>
-    <p>question: <input type="text" th:field="*{question}" /></p>
-    <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
+<!--    <p>chapter as number: <input type="text" th:field="*{chapter}" /></p>-->
+    <div class="center-questions">
+        <div class="row justify-content-md-center">
+            <div class="col-md-auto">
+                <div class="dropdown">
+                    <button class="dropbtn">Chapter As Number<i class="arrow down"></i></button>
+                    <div class="dropdown-content">
+                        <!-- TODO replace links below with chapter questions-->
+                        <a href="#">Link 1</a>
+                        <a href="#">Link 2</a>
+                        <a href="#">Link 3</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-auto">
+                <p>Question: <input type="text" th:field="*{question}" /></p>
+            </div>
+            <div class="col-md-auto">
+                <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
+            </div>
+        </div>
+    </div>
 </form>
+<footer th:replace="fragments :: footer"></footer>
 </body>
 </html>
