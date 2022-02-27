@@ -10,14 +10,14 @@
     <div class="center-questions">
         <div class="row justify-content-md-center">
             <div class="col-md-auto">
+                <p>Chapter:</p>
+            </div>
+            <div class="col-md-auto">
                 <div class="dropdown">
-                    <button class="dropbtn">Chapter As Number<i class="arrow down"></i></button>
-                    <div class="dropdown-content">
-                        <!-- TODO replace links below with chapter questions-->
-                        <a href="#">Link 1</a>
-                        <a href="#">Link 2</a>
-                        <a href="#">Link 3</a>
-                    </div>
+                    <input list="chapters" class="form-control1" id="nameinput" name="chap"  th:field="${question.chapter}">  </input>
+                    <datalist id="chapters">
+                        <option th:each="row : ${chapters}" th:value="${row}" th:label="${row}">
+                    </datalist>
                 </div>
             </div>
             <div class="col-md-auto">
