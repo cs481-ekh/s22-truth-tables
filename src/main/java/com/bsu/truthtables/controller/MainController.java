@@ -64,12 +64,13 @@ public class MainController {
     public String admin(Model model) {
         model.addAttribute("question" , new Question());
         model.addAttribute("pageTitle", "Admin");
-
+        model.addAttribute("chapters", dao.getChapters());
         return "admin";
     }
 
     @PostMapping("/admin")
     public String adminSubmit(@ModelAttribute Question question, Model model) {
+
         int numberOfInputs = parser.parseChars(question.getQuestion()).length();
         int boxDepth = (int) Math.round(Math.pow(2,numberOfInputs));
         String chars = parser.parseChars(question.getQuestion());

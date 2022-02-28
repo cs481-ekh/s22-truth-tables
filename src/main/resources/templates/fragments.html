@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="https://www.thymeleaf.org">
+<html xmlns:th="https://www.thymeleaf.org"
+        xmlns:sec="https://www.thymeleaf.org/extras/spring-security">
 <head th:fragment="html_head">
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -51,8 +52,9 @@
                         </div>
                         <!-- Navbar Right Side -->
                         <div class="navbar-nav ml-auto">
-                            <a class="nav-item nav-link" href="/admin">Login</a>
-                            <a class="nav-item nav-link" href="/admin">Register</a>
+                                <a sec:authorize="isAnonymous()" class="nav-item nav-link" href="/admin">Login</a>
+                                <a sec:authorize="isAnonymous()" class="nav-item nav-link" href="/admin">Register</a>
+                                <a sec:authorize="isAuthenticated()" class="nav-item nav-link" href="/admin">Log Out</a>
                         </div>
                     </div>
                 </div>
