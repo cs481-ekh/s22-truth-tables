@@ -1,3 +1,42 @@
+## Sunday 2/27 - 11:45a - 12:15p
+
+Scribe: Zach
+
+Present: Josh and Zach
+
+Absent: N/A
+
+Summary: Discussion on design choices
+
+Action Items: N/A
+
+------
+## Thursday 2/24 - 3:00p - 4:40p
+
+Scribe: Trevor
+
+Present: Trevor, Berto, Josh, Zach, Kyle
+
+Absent: N/A
+
+Summary: Further discussion on interaction between front end and parser. Also discussed formatting for how we want the columns printed on the table. 
+
+Action Items: Everyone continue work on tasks, Kyle email Cortens to discuss his preference on table format
+
+------
+## Tuesday 2/22 - 3:00p - 3:45p
+
+Scribe: Trevor
+
+Present: Trevor, Berto, Josh, Zach
+
+Absent: Kyle
+
+Summary: Discussed current status of sprint tasks. Specifically talked about the interaction between the parser and the front end. 
+
+Action Items: Continue working on tasks
+
+------
 ## Wednesday 2/16 - 4:30p - 6:00p
 
 Scribe: Josh
@@ -8,7 +47,7 @@ Absent: Kyle
 
 Summary: Worked on planning sprint 1, assigned front end tasks.
 
-Action Items: Trevor, Zach, and Berto - begin working on/researching tasks. Kyle and Josh - Create tasks to add to board 
+Action Items: Trevor, Zach, and Berto - begin working on/researching tasks. Kyle and Josh - Create tasks to add to board
 
 **Sprint goal: By the end of this sprint, we should have the user interfaces complete for all pages of the application. Additionally, we should have some more advanced parser functionality. This means the ability to parse and separate a problem into sub groups based on the operators it contains. We should also have most of the error handling complete for all the input fields for a user. Lastly, we expect an admin user to be able to add/delete questions and chapters.**
 
