@@ -1,46 +1,56 @@
 <!DOCTYPE HTML>
 <html xmlns:th="https://www.thymeleaf.org">
-<head>
+<head th:replace="fragments :: html_head">
     <title>Add Question</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 </head>
-<body>
+<body class="d-flex flex-column min-vh-100">
+    <!-- NavBar -->
+    <div th:replace="fragments :: menu"></div>
 <h1>Question added</h1>
 <p> Question: <b th:text="${question.question}"/> added to chapter <b th:text="${question.chapter}"/></p>
 <a href="/admin">Add a new question</a>
 <br>
 
-
-<table>
-    <tr>
-        <!-- print the input chars -->
-        <p> inputs</p>
-        <th:block th:each="char : ${inputChars.toCharArray()}">
-            <th th:text="${char}"></th>
-        </th:block>
-    </tr>
-    <!-- print the input values -->
-    <th:block th:each="i: ${#numbers.sequence(1, boxDepth)}">
-        <tr>
-            <th:block th:each="j : ${#numbers.sequence(1, inputChars.length())}">
-                <td th:text="${prefilled.charAt( i * inputChars.length() - inputChars.length() + j - 1)}"/>
-            </th:block>
-        </tr>
-    </th:block>
-</table>
+<div class="container">
+    <div class="row">
+        <div class="col-sm">
+            <!-- Center text in columns -->
+            <table class="tablecenterheadCSS tablecenterCSS table caption-top">
+                <caption>Inputs</caption>
+                <thead>
+                    <!-- print the input chars -->
+                    <th:block th:each="char : ${inputChars.toCharArray()}">
+                        <th th:text="${char}"></th>
+                    </th:block>
+                </thead>
+                <!-- print the input values -->
+                <th:block th:each="i: ${#numbers.sequence(1, boxDepth)}">
+                    <tr class="tablecentercolCSS">
+                        <th:block th:each="j : ${#numbers.sequence(1, inputChars.length())}">
+                            <td
+                                th:text="${prefilled.charAt( i * inputChars.length() - inputChars.length() + j - 1)}" />
+                        </th:block>
+                    </tr>
+                </th:block>
+            </table>
+        </div>
+    </div>
+</div>
 <br>
 
+<h3>Other questions in this chapter</h3>
 <table>
     <th:block th:each="q: ${listOfQuestions}">
         <tr>
         <th th:text="${q}"/>
             <th>
-                <a th:href="@{'/removeQuestion/' + ${q} + '/' + ${chapter}}">DELETE</a>
+                <button class="button4"><a style="text-decoration: none; color: white; font-family: 'Ubuntu', sans-serif;" th:href="@{'/removeQuestion/' + ${q} + '/' + ${chapter}}">Delete</a></button>
             </th>
         </tr>
     </th:block>
 </table>
-
+<footer th:replace="fragments :: footer"></footer>
 </body>
 </html>
 

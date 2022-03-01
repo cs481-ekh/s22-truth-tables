@@ -8,18 +8,21 @@
     <!-- NavBar -->
     <div th:replace="fragments :: menu"></div>
 
-<section style="margin-top: 5%;" class="py-3 text-center container">
-    <div class="row py-0">
-        <div>
-            <h1>Interactive Truth Table</h1>
-            <p></p>
-            <p class="lead text-muted">
-                This tool exists to allow students to enter propositional logic formulas with the ability to actively test
-                and evaluate their formula's truth tables. Additionally, students of Dr. Cortens will have the ability to access and practice
-                questions created in chapters. To enter a propositional formula use upper case letters (A, B, C, etc) and the included
-                operators below (ex. C v (~A > D)).
-            </p>
-        </div>
+    <section style="margin-top: 5%;" class="py-3 text-center container">
+        <div class="row py-0">
+            <div>
+                <h1>Interactive Truth Table</h1>
+                <p></p>
+                <p class="lead text-muted">
+                    This tool exists to allow students to enter propositional logic formulas with the ability to
+                    actively test
+                    and evaluate their formula's truth tables. Additionally, students of Dr. Cortens will have the
+                    ability to access and practice
+                    questions created in chapters. To enter a propositional formula use upper case letters (A, B, C,
+                    etc) and the included
+                    operators below (ex. C v (~A > D)).
+                </p>
+            </div>
     </section>
 
     <section class="py-5 text-center container">
@@ -71,10 +74,10 @@
                                 </thead>
                                 <!-- print the input values -->
                                 <th:block th:each="i: ${#numbers.sequence(1, boxDepth)}">
-                                    <tr class="tablecentercolCSS">
+                                    <tr class="tablecenterCSS">
+                                        <!-- need to figure out how to set specific height like for other columns -->
                                         <th:block th:each="j : ${#numbers.sequence(1, inputChars.length())}">
-                                            <td
-                                                th:text="${prefilled.charAt( i * inputChars.length() - inputChars.length() + j - 1)}" />
+                                            <td th:text="${prefilled.charAt( i * inputChars.length() - inputChars.length() + j - 1)}"></td>
                                         </th:block>
                                     </tr>
                                 </th:block>
@@ -91,13 +94,15 @@
                                 </thead>
                                 <!-- print the select boxes -->
                                 <th:block th:each="i: ${#numbers.sequence(1, boxDepth)}">
-                                    <tr class="tablecentercolCSS">
+                                    <tr class="tablecenterCSS">
                                         <td>
-                                            <select class="selectTF">
-                                                <option></option>
-                                                <option>T</option>
-                                                <option>F</option>
-                                            </select>
+                                            <div style="height:25px">
+                                                <select class="selectTF">
+                                                    <option></option>
+                                                    <option>T</option>
+                                                    <option>F</option>
+                                                </select>
+                                            </div>
                                         </td>
                                     </tr>
                                 </th:block>
@@ -113,13 +118,15 @@
                                 </thead>
                                 <!-- print the select boxes -->
                                 <th:block th:each="i: ${#numbers.sequence(1, boxDepth)}">
-                                    <tr class="tablecentercolCSS">
+                                    <tr class="tablecenterCSS">
                                         <td>
-                                            <select class="selectValidity">
-                                                <option></option>
-                                                <option>Shows invalid</option>
-                                                <option>Shows valid</option>
-                                            </select>
+                                            <div style="height:25px">
+                                                <select class="selectValidity">
+                                                    <option></option>
+                                                    <option>Shows invalid</option>
+                                                    <option>Shows valid</option>
+                                                </select>
+                                            </div>
                                         </td>
                                     </tr>
                                 </th:block>
