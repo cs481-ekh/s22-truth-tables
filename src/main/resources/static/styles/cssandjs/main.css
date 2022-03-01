@@ -115,14 +115,14 @@ a.article-title:hover {
 
 .tablecenterCSS td{
     text-align:center;
-    height: 30px;
+    height: 10px;
  }
 
  .dropdowntable td{
     text-align:center;
-    height: 30px;
-    padding-bottom: 6.5px;
-    padding-top: 6.5px;
+    height: 10px;
+    padding-bottom: 2.5px;
+    padding-top: 2.5px;
  }
 
 .b-example-divider {
@@ -351,8 +351,12 @@ form.form1 {
     box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);
 }
 
-a {
+.a {
     text-shadow: 0px 0px 3px rgba(117, 117, 117, 0.12);
     color: #58a563;
     text-decoration: none
+}
+
+.button4 {
+    background-color: #919191;
 }
