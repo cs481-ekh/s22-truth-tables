@@ -1,3 +1,42 @@
+## Sunday 2/27 - 11:45a - 12:15p
+
+Scribe: Zach
+
+Present: Josh and Zach
+
+Absent: N/A
+
+Summary: Discussion on design choices
+
+Action Items: N/A
+
+------
+## Thursday 2/24 - 3:00p - 4:40p
+
+Scribe: Trevor
+
+Present: Trevor, Berto, Josh, Zach, Kyle
+
+Absent: N/A
+
+Summary: Further discussion on interaction between front end and parser. Also discussed formatting for how we want the columns printed on the table. 
+
+Action Items: Everyone continue work on tasks, Kyle email Cortens to discuss his preference on table format
+
+------
+## Tuesday 2/22 - 3:00p - 3:45p
+
+Scribe: Trevor
+
+Present: Trevor, Berto, Josh, Zach
+
+Absent: Kyle
+
+Summary: Discussed current status of sprint tasks. Specifically talked about the interaction between the parser and the front end. 
+
+Action Items: Continue working on tasks
+
+------
 ## Wednesday 2/16 - 4:30p - 6:00p
 
 Scribe: Josh
