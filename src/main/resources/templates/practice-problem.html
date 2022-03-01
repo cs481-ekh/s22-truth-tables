@@ -77,7 +77,7 @@
                                     <tr class="tablecenterCSS">
                                         <!-- need to figure out how to set specific height like for other columns -->
                                         <th:block th:each="j : ${#numbers.sequence(1, inputChars.length())}">
-                                            <td th:text="${prefilled.charAt( i * inputChars.length() - inputChars.length() + j - 1)}"></td>
+                                            <td> <div style="height:25px" th:text="${prefilled.charAt( i * inputChars.length() - inputChars.length() + j - 1)}"></div></td>
                                         </th:block>
                                     </tr>
                                 </th:block>
