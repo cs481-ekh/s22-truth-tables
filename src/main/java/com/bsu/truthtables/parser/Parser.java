@@ -19,6 +19,8 @@ public class Parser {
     @Value("#{${prefilledBox}}")
     private Map<String, String> prefilledBox;
     private HashMap<String, String> map = null;
+    private boolean validity = false;
+    private boolean logical = false;
 
 
     public String parseChars(String question) {
