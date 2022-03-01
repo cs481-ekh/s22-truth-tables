@@ -53,17 +53,12 @@ public class Parser {
 
     public Object stmt() {
         Object obj = t0();
-        while (more() && peek() == ',') {
-            eat(',');
-            Object obj2 = stmt();
-            obj = comma(obj, obj2);  //handle questions with a comma
-        }
-        while (more() && peek() == ':' && doublePeek() == '.') {
-            eat(':');
-            eat('.');
-            Object obj2 = stmt();
-            obj = therefore(obj, obj2);  //handle therefore
-        }
+//        while (more() && peek() == ':' && doublePeek() == '.') {
+//            eat(':');
+//            eat('.');
+//            Object obj2 = stmt();
+//            obj = therefore(obj, obj2);  //handle therefore
+//        }
         return obj;
     }
 
@@ -74,24 +69,18 @@ public class Parser {
             eat('-');
             eat('>');
             Object obj2 = t1();
-            return doubleArrow(obj, obj2);
+            return ifAndOnlyIf(obj, obj2);
         }
         return obj;
     }
 
     public Object t1() {
         Object obj = t2();
-        if (more() && peek() == '<' && doublePeek() == '-' && triplePeek() != '>') {
-            eat('<');
-            eat('-');
-            Object obj2 = t2();
-            return leftArrow(obj, obj2);
-        }
         if (more() && peek() == '-' && doublePeek() == '>') {
             eat('-');
             eat('>');
             Object obj2 = t2();
-            return rightArrow(obj, obj2);
+            return ifThen(obj, obj2);
         }
         return obj;
     }
@@ -118,11 +107,6 @@ public class Parser {
 
     public Object t4() {
         Object obj = t5();
-        while (more() && peek() == '=') {
-            eat('=');
-            Object obj2 = t5();
-            obj = equal(obj, obj2);
-        }
         return obj;
     }
 
@@ -192,10 +176,6 @@ public class Parser {
         return name;
     }
 
-    public Object equal(Object o1, Object o2) {
-        return null;
-    }
-
     public Object and(Object o1, Object o2) {
 
         String retVal = "";
@@ -225,7 +205,7 @@ public class Parser {
         return name;
     }
 
-    public Object rightArrow(Object o1, Object o2) {
+    public Object ifThen(Object o1, Object o2) {
         String name = "(" + o1 + ")";
         put(name, get(o1));
         map.remove(o1);
@@ -237,19 +217,7 @@ public class Parser {
         return name;
     }
 
-    public Object leftArrow(Object o1, Object o2) {
-        String name = "(" + o1 + ")";
-        put(name, get(o1));
-        map.remove(o1);
-        String retVal = "";
-        for(int i = 0; i < get(name).length(); i++){
-            retVal += get(o2).charAt(i) == 'T' ? "T" : "F";
-        }
-        put(name + "<-" + o2, retVal);
-        return name;
-    }
-
-    public Object doubleArrow(Object o1, Object o2) {
+    public Object ifAndOnlyIf(Object o1, Object o2) {
         String name = "(" + o1 + ")";
         put(name, get(o1));
         map.remove(o1);
@@ -260,21 +228,6 @@ public class Parser {
         put(name + "<->" + o2, retVal);
         return name;
     }
-
-    public Object therefore(Object o1, Object o2) {
-        return null;
-    }
-
-    public Object comma(Object o1, Object o2) {
-        String name = "(" + o1 + ")";
-        put(name, get(o1));
-        map.remove(o1);
-        name = "(" + o2 + ")";
-        put(name, get(o2));
-        map.remove(o2);
-        return null;
-    }
-
 
     //helper methods for parser
     private char peek() {
