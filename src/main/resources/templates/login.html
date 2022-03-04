@@ -8,9 +8,6 @@
 
 <body class="d-flex flex-column min-vh-100">
     <div th:replace="fragments :: menu"></div>
-    <div th:if="${param.error}">
-        Invalid username and password.
-    </div>
     <div th:if="${param.logout}">
         You have been logged out.
     </div>
@@ -19,6 +16,9 @@
         <form th:action="@{/login}" method="post" class="form1">
             <input class="un" type="text" align="center" name="username" placeholder="Username">
             <input class="pass" type="password" name="password" align="center" placeholder="Password">
+            <div class="loginerror" th:if="${param.error}">
+                Invalid username and password.
+            </div>
             <div style="padding-top: 30px;"><input class="submit" type="submit" value="Sign In" /></div>
         </form>
     </div>
