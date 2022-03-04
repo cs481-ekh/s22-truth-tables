@@ -5,71 +5,81 @@
 
 <body class="d-flex flex-column min-vh-100">
 
-    <!-- NavBar -->
-    <div th:replace="fragments :: menu"></div>
+<!-- NavBar -->
+<div th:replace="fragments :: menu"></div>
 
-    <section style="margin-top: 5%;" class="py-3 text-center container">
-        <div class="row py-0">
-            <div>
-                <h1>Interactive Truth Table</h1>
-                <p></p>
-                <p class="lead text-muted">
-                    This tool exists to allow students to enter propositional logic formulas with the ability to
-                    actively test
-                    and evaluate their formula's truth tables. Additionally, students of Dr. Cortens will have the
-                    ability to access and practice
-                    questions created in chapters. To enter a propositional formula use upper case letters (A, B, C,
-                    etc) and the included
-                    operators below (ex. C v (~A > D)).
-                </p>
-            </div>
-    </section>
+<section style="margin-top: 5%;" class="py-3 text-center container">
+    <div class="row py-0">
+        <div>
+            <h1>Interactive Truth Table</h1>
+            <p></p>
+            <p class="lead text-muted">
+                This tool exists to allow students to enter propositional logic formulas with the ability to
+                actively test
+                and evaluate their formula's truth tables. Additionally, students of Dr. Cortens will have the
+                ability to access and practice
+                questions created in chapters. To enter a propositional formula use upper case letters (A, B, C,
+                etc) and the included
+                operators below (ex. C v (~A > D)).
+            </p>
+        </div>
+</section>
 
-    <section class="py-5 text-center container">
-        <div class="row py-lg-5">
-            <div class="col">
-                <div class="col" style="border: 2px solid black">
-                    <h3>Operators</h3>
-                    <div class="container-sm" style="border-bottom: 2px solid black">
-                        <p>|, ->, <-, v, ^, *</p>
-                    </div>
+<section class="py-5 text-center container">
+    <div class="row py-lg-5">
+        <div class="col">
+            <div class="col" style="border: 2px solid black">
+                <h3>Operators</h3>
+                <div class="container-sm" style="border-bottom: 2px solid black">
+                    <p>|, ->, <-, v, ^, *</p>
                 </div>
             </div>
-            <div class="col-lg-6 col-md-8 mx-auto">
-                <h1 class="fw-light">Practice Problem</h1>
-                <form action="#" th:action="@{/}" th:object="${question}" method="post">
-                    <p>Enter a question: <input type="text" id="question" th:field="*{question}" /> <input type="submit"
-                            onclick="return validate()" value="Submit" /> <input type="reset" value="Reset" /></p>
-                </form>
-                <h3 id="idk"></h3>
-            </div>
-            <div class="col" style="border: 2px solid black">
-                <h3>Chapter Questions</h3>
-                <th:block th:each="chap : ${chapters}">
-                    <div class="container-sm" style="border-bottom: 2px solid black">
-                        <a th:href="@{'/chapter-questions/'+${chap}}" th:text="'Chapter ' + ${chap}"></a>
-                    </div>
-                </th:block>
-            </div>
-
         </div>
-    </section>
+        <div class="col-lg-6 col-md-8 mx-auto">
+            <h1 class="fw-light">Practice Problem</h1>
+            <form action="#" th:action="@{/}" th:object="${question}" method="post">
+                <p>Enter a question: <input type="text" id="question" th:field="*{question}"/> <input type="submit"
+                                                                                                      onclick="return validate()"
+                                                                                                      value="Submit"/>
+                    <input type="reset" value="Reset"/></p>
+            </form>
+            <h3 id="idk"></h3>
+        </div>
+        <div class="col" style="border: 2px solid black">
+            <h3>Chapter Questions</h3>
+            <th:block th:each="chap : ${chapters}">
+                <div class="container-sm" style="border-bottom: 2px solid black">
+                    <a th:href="@{'/chapter-questions/'+${chap}}" th:text="'Chapter ' + ${chap}"></a>
+                </div>
+            </th:block>
+        </div>
+
+    </div>
+</section>
 
 
-    <main role="main" class="container">
-        <div class="row">
-            <div class="col-lg-6 col-md-8 mx-auto">
-                <!-- Putting tables into columns -->
-                <div class="container">
-                    <div class="row">
-                        <div class="col-sm">
-                            <!-- Center text in columns -->
-                            <table class="tablecenterheadCSS tablecenterCSS table caption-top">
-                                <caption>Inputs</caption>
-                                <thead>
-                                    <!-- print the input chars -->
-                                    <th:block th:each="char : ${inputChars.toCharArray()}">
-                                        <th th:text="${char}"></th>
+<main role="main" class="container">
+    <div class="row">
+        <div class="col-lg-6 col-md-8 mx-auto">
+            <!-- Putting tables into columns -->
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm">
+                        <!-- Center text in columns -->
+                        <table class="tablecenterheadCSS tablecenterCSS table caption-top">
+                            <caption>Inputs</caption>
+                            <thead>
+                            <!-- print the input chars -->
+                            <th:block th:each="char : ${inputChars.toCharArray()}">
+                                <th th:text="${char}"></th>
+                            </th:block>
+                            </thead>
+                            <!-- print the input values -->
+                            <th:block th:each="i: ${#numbers.sequence(1, boxDepth)}">
+                                <tr class="tablecenterCSS">
+                                    <!-- need to figure out how to set specific height like for other columns -->
+                                    <th:block th:each="j : ${#numbers.sequence(1, inputChars.length())}">
+                                        <td th:text="${prefilled.charAt( i * inputChars.length() - inputChars.length() + j - 1)}"></td>
                                     </th:block>
                                 </thead>
                                 <!-- print the input values -->
@@ -79,66 +89,59 @@
                                         <th:block th:each="j : ${#numbers.sequence(1, inputChars.length())}">
                                             <td> <div style="height:25px" th:text="${prefilled.charAt( i * inputChars.length() - inputChars.length() + j - 1)}"></div></td>
                                         </th:block>
-                                    </tr>
-                                </th:block>
-                            </table>
-                        </div>
-                        <div class="col-sm">
-                            <table class="tablecenterheadCSS dropdowntable table caption-top">
-                                <caption>Statement</caption>
-                                <thead>
-                                    <!-- print the input statement -->
-                                    <!-- MAY NEED TO CHANGE LATER -->
-                                    <th style="text-align: center" th:colspan="${inputChars.length()}"
-                                        th:text="${question.question}"></th>
-                                </thead>
-                                <!-- print the select boxes -->
-                                <th:block th:each="i: ${#numbers.sequence(1, boxDepth)}">
-                                    <tr class="tablecenterCSS">
-                                        <td>
-                                            <div style="height:25px">
-                                                <select class="selectTF">
-                                                    <option></option>
-                                                    <option>T</option>
-                                                    <option>F</option>
-                                                </select>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </th:block>
-                            </table>
-                        </div>
-                        <div class="col-sm">
-                            <table class="tablecenterheadCSS dropdowntable table caption-top">
-                                <caption>Validity Test</caption>
-                                <thead>
-                                    <th style="text-align: center" th:colspan="${inputChars.length()}">
-                                        Shows Invalid?
-                                    </th>
-                                </thead>
-                                <!-- print the select boxes -->
-                                <th:block th:each="i: ${#numbers.sequence(1, boxDepth)}">
-                                    <tr class="tablecenterCSS">
-                                        <td>
-                                            <div style="height:25px">
-                                                <select class="selectValidity">
-                                                    <option></option>
-                                                    <option>Shows invalid</option>
-                                                    <option>Shows valid</option>
-                                                </select>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </th:block>
-                            </table>
-                        </div>
+                                        <th:block th:if="${pair.getValue1().length() == 0}">
+                                            <td></td>
+                                        </th:block>
+                                    </th:block>
+                                </tr>
+                            </th:block>
+
+                            <!--th:block th:each="i: ${#numbers.sequence(1, boxDepth)}">
+                                <tr class="tablecenterCSS">
+                                    <td>
+                                        <div style="height:25px">
+                                            <select class="selectTF">
+                                                <option></option>
+                                                <option>T</option>
+                                                <option>F</option>
+                                            </select>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </th:block-->
+                        </table>
+                    </div>
+                    <div class="col-sm">
+                        <table class="tablecenterheadCSS dropdowntable table caption-top">
+                            <caption>Validity Test</caption>
+                            <thead>
+                            <th style="text-align: center" th:colspan="${inputChars.length()}">
+                                Shows Invalid?
+                            </th>
+                            </thead>
+                            <!-- print the select boxes -->
+                            <th:block th:each="i: ${#numbers.sequence(1, boxDepth)}">
+                                <tr class="tablecenterCSS">
+                                    <td>
+                                        <div style="height:25px">
+                                            <select class="selectValidity">
+                                                <option></option>
+                                                <option>Shows invalid</option>
+                                                <option>Shows valid</option>
+                                            </select>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </th:block>
+                        </table>
                     </div>
                 </div>
             </div>
         </div>
-    </main>
+    </div>
+</main>
 
-    <footer th:replace="fragments :: footer"></footer>
+<footer th:replace="fragments :: footer"></footer>
 
 </body>
 

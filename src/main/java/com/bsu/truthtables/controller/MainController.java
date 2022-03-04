@@ -43,7 +43,7 @@ public class MainController {
         model.addAttribute("inputChars", chars);
         model.addAttribute("boxDepth", boxDepth);
         model.addAttribute("pageTitle", "Problem");
-
+        model.addAttribute("results", parser.parseQuestion(question.getQuestion()));
         return "practice-problem";
     }
     @PostMapping("/chapter-questions")

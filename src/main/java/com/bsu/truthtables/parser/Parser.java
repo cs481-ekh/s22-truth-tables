@@ -1,10 +1,11 @@
 package com.bsu.truthtables.parser;
 
+import groovyjarjarantlr4.v4.runtime.misc.MultiMap;
+import org.javatuples.Pair;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 
@@ -15,16 +16,19 @@ public class Parser {
     private String operators;   //loaded from applicaiton properties, this is all the known operators
     private int rows;
     private String stmt;
+    private String originalStmt;
     private String chars;
     @Value("#{${prefilledBox}}")
     private Map<String, String> prefilledBox;
     private HashMap<String, String> map = null;
     private boolean validity = false;
     private boolean logical = false;
+    private Map map1;
+    private ArrayList<Pair<String, String>> list;
 
 
     public String parseChars(String question) {
-        return  question.replaceAll("[" + operators + "]", "")
+        return question.replaceAll("[" + operators + "]", "")
                 .replaceAll("\\(", "")
                 .replaceAll("\\)", "")
                 .replaceAll(" ", "")
@@ -34,9 +38,10 @@ public class Parser {
                 .mapToObj(c -> String.valueOf((char) c)).collect(Collectors.joining());
     }
 
-    public HashMap parseQuestion(String question) {
+    public ArrayList<Pair<String, String>> parseQuestion(String question) {
         map = new HashMap<>();
         this.stmt = question.replaceAll(" ", "");
+        originalStmt = stmt;
         this.chars = parseChars(question);
         String values = prefilledBox.get(String.valueOf(chars.length()));
         int i = 0;
@@ -50,17 +55,97 @@ public class Parser {
             i++;
         }
         stmt();
-        return map;
+        list = new ArrayList<>();
+        format();
+        return list;
+    }
+
+    public void format() {
+        for (int i = 0; i < originalStmt.length(); i++) {
+            if (!operators.contains(String.valueOf(originalStmt.charAt(i)))) {
+                list.add( new Pair(String.valueOf(originalStmt.charAt(i)), ""));
+            } else {
+                //we have an operator
+                //for nots
+                if (map.containsKey(originalStmt.charAt(i) + originalStmt.charAt(i + 1))) {
+                    list.add( new Pair(String.valueOf(originalStmt.charAt(i)), map.get(originalStmt.charAt(i) + originalStmt.charAt(i + 1))));
+                } else {
+                    //and or, build up
+                    String search = "";
+                    String searchL = "";
+                    String searchR = "";
+                    String searchL2 = "";
+                    String searchR2 = "";
+                    try{
+                     search = String.valueOf(originalStmt.charAt(i));
+                    } catch (StringIndexOutOfBoundsException ignored) {
+                    } try{
+                     searchL = String.valueOf(originalStmt.charAt(i)) + String.valueOf(originalStmt.charAt(i+1));
+                    } catch (StringIndexOutOfBoundsException ignored) {
+                    } try{
+                     searchR = String.valueOf(originalStmt.charAt(i-1)) + String.valueOf(originalStmt.charAt(i));;
+                    } catch (StringIndexOutOfBoundsException ignored) {
+                    }
+                    try{
+                        searchL2 = String.valueOf(originalStmt.charAt(i)) + String.valueOf(originalStmt.charAt(i-1)) + String.valueOf(originalStmt.charAt(i-2)) +String.valueOf(originalStmt.charAt(i-3));
+                    } catch (StringIndexOutOfBoundsException ignored) {
+                    } try{
+                        searchR2 = String.valueOf(originalStmt.charAt(i-3)) + String.valueOf(originalStmt.charAt(i-2)) + String.valueOf(originalStmt.charAt(i-1)) + String.valueOf(originalStmt.charAt(i));;
+                    } catch (StringIndexOutOfBoundsException ignored) {
+                    }
+                    for (int j = 1; j < originalStmt.length(); j++) {
+                        try {
+                            search = originalStmt.charAt(i - j) + search + originalStmt.charAt(i + j);
+                            if (map.containsKey(search)) {
+                                list.add( new Pair(String.valueOf(originalStmt.charAt(i)), map.get(search)));
+                                break;
+                            }
+                        } catch (StringIndexOutOfBoundsException ignored) {
+                        }
+                        try {
+                            searchL = originalStmt.charAt(i - j) + searchL;
+                            if (map.containsKey(searchL)) {
+                                list.add( new Pair(String.valueOf(originalStmt.charAt(i)), map.get(searchL)));
+                                break;
+                            }
+                        } catch (StringIndexOutOfBoundsException ignored) {
+                        }
+                        try {
+                            searchR = searchR + originalStmt.charAt(i + j);
+                            if (map.containsKey(searchR)) {
+                                list.add( new Pair(String.valueOf(originalStmt.charAt(i)), map.get(searchR)));
+                                break;
+                            }
+                        } catch (StringIndexOutOfBoundsException ignored) {
+                        }
+                        try {
+                            searchR2 = searchR2 + originalStmt.charAt(i + j);
+                            if (map.containsKey(searchR2)) {
+                                list.add( new Pair(String.valueOf(originalStmt.charAt(i)), map.get(searchR2)));
+                                break;
+                            }
+                        } catch (StringIndexOutOfBoundsException ignored) {
+                        }
+                        try {
+                            searchL2 = searchL2 + originalStmt.charAt(i + j);
+                            if (map.containsKey(searchL2)) {
+                                list.add( new Pair(String.valueOf(originalStmt.charAt(i)), map.get(searchL2)));
+                                break;
+                            }
+                        } catch (StringIndexOutOfBoundsException ignored) {
+                        }
+
+                    }
+                }
+            }
+
+        }
+
     }
 
     public Object stmt() {
         Object obj = t0();
-//        while (more() && peek() == ':' && doublePeek() == '.') {
-//            eat(':');
-//            eat('.');
-//            Object obj2 = stmt();
-//            obj = therefore(obj, obj2);  //handle therefore
-//        }
+
         return obj;
     }
 
@@ -114,11 +199,11 @@ public class Parser {
 
     public Object t5() {
         int numOfNots = 0;
-        while(peek() == '!') {
+        while (peek() == '!') {
             eat('!');
             numOfNots++;
         }
-        if (numOfNots != 0 && numOfNots %2 == 1) {          //idk what the char is for not so I am using ! temporarily
+        if (numOfNots != 0 && numOfNots % 2 == 1) {          //idk what the char is for not so I am using ! temporarily
             Object obj = t6();
             return not(obj);
         }
@@ -130,7 +215,7 @@ public class Parser {
             eat('(');
             Object s = stmt();
             eat(')');
-             return paren(s);
+            return paren(s);
         }
         return t7();
     }
@@ -141,35 +226,36 @@ public class Parser {
 
 
     //evaluate
-    public Object paren(Object o1){
+    public Object paren(Object o1) {
         String name = "(" + o1 + ")";
         put(name, get(o1));
         map.remove(o1);
-        if(stmt.length() == 0) {
+        if (stmt.length() == 0) {
             return name;
         }
         char op = next();
         Object o2 = stmt();
         String retval = "";
-        if(op == '^') {
-            retval = (String) and(name,o2);
+        if (op == '^') {
+            retval = (String) and(name, o2);
             name = name + "^" + o2;
         }
-        if(op == 'v') {
-            retval = (String) or(name,o2);
+        if (op == 'v') {
+            retval = (String) or(name, o2);
             name = name + "v" + o2;
         }
         put(name, get(retval));
         return name;
 
     }
+
     public Object not(Object o1) {
         String retVal = "";
         String name = "!" + o1;
-        for (int i = 0 ; i < get(o1).length(); i++) {
-            if(get(o1).charAt(i) == 'T') {
+        for (int i = 0; i < get(o1).length(); i++) {
+            if (get(o1).charAt(i) == 'T') {
                 retVal += "F";
-            } else{
+            } else {
                 retVal += "T";
             }
 
@@ -182,7 +268,7 @@ public class Parser {
 
         String retVal = "";
         String name = o1 + "^" + o2;
-        for (int i = 0 ; i < get(o1).length(); i++) {
+        for (int i = 0; i < get(o1).length(); i++) {
             if (get(o1).charAt(i) == 'T' && get(o2).charAt(i) == 'T') {
                 retVal += "T";
             } else {
@@ -196,7 +282,7 @@ public class Parser {
     public Object or(Object o1, Object o2) {
         String retVal = "";
         String name = o1 + "v" + o2;
-        for (int i = 0 ; i < get(o1).length(); i++) {
+        for (int i = 0; i < get(o1).length(); i++) {
             if (get(o1).charAt(i) == 'T' || get(o2).charAt(i) == 'T') {
                 retVal += "T";
             } else {
@@ -204,6 +290,7 @@ public class Parser {
             }
         }
         map.put(name, retVal);
+//        list.
         return name;
     }
 
@@ -212,7 +299,7 @@ public class Parser {
         put(name, get(o1));
         map.remove(o1);
         String retVal = "";
-        for(int i = 0; i < get(name).length(); i++){
+        for (int i = 0; i < get(name).length(); i++) {
             retVal += get(name).charAt(i) == 'T' ? "T" : "F";
         }
         put(name + "->" + o2, retVal);
@@ -224,7 +311,7 @@ public class Parser {
         put(name, get(o1));
         map.remove(o1);
         String retVal = "";
-        for(int i = 0; i < get(name).length(); i++){
+        for (int i = 0; i < get(name).length(); i++) {
             retVal += get(name).charAt(i) == 'T' && get(o2).charAt(i) == 'T' ? "T" : "F";
         }
         put(name + "<->" + o2, retVal);
@@ -271,15 +358,17 @@ public class Parser {
     private boolean more() {
         return stmt.length() > 0;
     }
-    public String get(Object o){
-        if(o instanceof String) {
+
+    public String get(Object o) {
+        if (o instanceof String) {
             return map.get(o);
         } else {
             return map.get(String.valueOf(o));
         }
     }
-    public String put(Object o, String val){
-        if(o instanceof String) {
+
+    public String put(Object o, String val) {
+        if (o instanceof String) {
 
             return map.put(o.toString(), val);
         } else {
