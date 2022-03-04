@@ -38,10 +38,8 @@
         <div class="col-lg-6 col-md-8 mx-auto">
             <h1 class="fw-light">Practice Problem</h1>
             <form action="#" th:action="@{/}" th:object="${question}" method="post">
-                <p>Enter a question: <input type="text" id="question" th:field="*{question}"/> <input type="submit"
-                                                                                                      onclick="return validate()"
-                                                                                                      value="Submit"/>
-                    <input type="reset" value="Reset"/></p>
+                <p>Enter a question: <input type="text" id="question" th:field="*{question}" /> <input type="submit"
+                                                                                                       onclick="return validate()" value="Submit" /> <input type="reset" value="Reset" /></p>
             </form>
             <h3 id="idk"></h3>
         </div>
@@ -79,23 +77,39 @@
                                 <tr class="tablecenterCSS">
                                     <!-- need to figure out how to set specific height like for other columns -->
                                     <th:block th:each="j : ${#numbers.sequence(1, inputChars.length())}">
-                                        <td th:text="${prefilled.charAt( i * inputChars.length() - inputChars.length() + j - 1)}"></td>
-                                    </th:block>
-                                </thead>
-                                <!-- print the input values -->
-                                <th:block th:each="i: ${#numbers.sequence(1, boxDepth)}">
-                                    <tr class="tablecenterCSS">
-                                        <!-- need to figure out how to set specific height like for other columns -->
-                                        <th:block th:each="j : ${#numbers.sequence(1, inputChars.length())}">
-                                            <td> <div style="height:25px" th:text="${prefilled.charAt( i * inputChars.length() - inputChars.length() + j - 1)}"></div></td>
-                                        </th:block>
-                                        <th:block th:if="${pair.getValue1().length() == 0}">
-                                            <td></td>
-                                        </th:block>
+                                        <td> <div style="height:25px" th:text="${prefilled.charAt( i * inputChars.length() - inputChars.length() + j - 1)}"></div></td>
                                     </th:block>
                                 </tr>
                             </th:block>
+                        </table>
+                    </div>
+                    <div class="col-sm">
+                        <table class="tablecenterheadCSS dropdowntable table caption-top">
+                            <caption>Statement</caption>
+                            <thead>
+                            <!-- print the input statement -->
+                            <!-- MAY NEED TO CHANGE LATER -->
 
+                            <th:block th:each="pair: ${results}">
+                                <th th:text="${pair.getValue0()}">
+                                </th:block>
+                            </thead>
+                            <!-- print the test, use a switch to display this later -->
+                            <th:block th:each="i: ${#numbers.sequence(0, boxDepth -1)}">
+                                <tr class="tablecenterCSS">
+                                <!-- print the question values -->
+                                <th:block th:each="pair: ${results}">
+                                     <th:block th:if="${pair.getValue1().length() != 0}">
+                                            <td> <div style="height:25px" th:text="${pair.getValue1().charAt(i)}"></div></td>
+                                        </th:block>
+                                        <th:block th:if="${pair.getValue1().length() == 0}">
+                                            <td> <div style="height:25px" ></div></td>
+                                        </th:block>
+                                </th:block>
+                                    </tr>
+
+                            </th:block>
+                            <!-- print the select boxes -->
                             <!--th:block th:each="i: ${#numbers.sequence(1, boxDepth)}">
                                 <tr class="tablecenterCSS">
                                     <td>
