@@ -339,7 +339,7 @@ form.form1 {
 }
 
 .submit {
-  cursor: pointer;
+    cursor: pointer;
     border-radius: 5em;
     color: #fff;
     background: linear-gradient(to right, #58a563, #58a563);
@@ -362,4 +362,21 @@ form.form1 {
 
 .button4 {
     background-color: #919191;
+}
+
+.solution {
+    cursor: pointer;
+    border-radius: 5em;
+    color: #fff;
+    background: linear-gradient(to right, #58a563, #58a563);
+    border: 0;
+    padding-left: 40px;
+    padding-right: 40px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    font-family: 'Ubuntu', sans-serif;
+    margin-left: 35%;
+    margin-right: 35%;
+    font-size: 18px;
+    box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);
 }
