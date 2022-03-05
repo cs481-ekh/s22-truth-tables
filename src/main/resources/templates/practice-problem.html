@@ -104,6 +104,8 @@
                             <!-- print the test, use a switch to display this later -->
 
                             <!-- print the select boxes -->
+                            <!-- add form for submissions-->
+                            <form th:action="@{/submitted}" method="post" th:object="${submit}">
                             <th:block th:each="i: ${#numbers.sequence(0, boxDepth -1)}">
                                 <tr class="tablecenterCSS">
 
@@ -112,11 +114,13 @@
                                         <th:block th:if="${pair.getValue1().length() != 0}">
                                             <td>
                                                 <div style="height:25px">
-                                                    <select class="selectTF">
-                                                        <option></option>
-                                                        <option>T</option>
-                                                        <option>F</option>
-                                                    </select>
+
+
+                                                    <input list="idk1" class="form-control1" th:field="${submit.answer}">   </input>
+                                                    <datalist id="idk1">
+                                                        <option  th:value="T" th:label="T">
+                                                        <option  th:value="F" th:label="F">
+                                                    </datalist>
                                                 </div>
                                             </td>
                                         </th:block>
@@ -128,7 +132,9 @@
                                     </th:block>
                                 </tr>
                             </th:block>
+                                <div style="padding-top: 30px;"><input class="submit" type="submit" value="check" /></div>
 
+                            </form>
                         </table>
                     </div>
 
@@ -152,6 +158,7 @@
                                         <th:block th:if="${pair.getValue1().length() != 0}">
                                             <td>
                                                 <div style="height:25px" th:text="${pair.getValue1().charAt(i)}"></div>
+
                                             </td>
                                         </th:block>
                                         <th:block th:if="${pair.getValue1().length() == 0}">

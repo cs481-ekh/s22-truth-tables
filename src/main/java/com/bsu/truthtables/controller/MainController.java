@@ -2,6 +2,7 @@ package com.bsu.truthtables.controller;
 
 import com.bsu.truthtables.dao.Dao;
 import com.bsu.truthtables.domain.Question;
+import com.bsu.truthtables.domain.Submission;
 import com.bsu.truthtables.parser.Parser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -44,7 +45,13 @@ public class MainController {
         model.addAttribute("boxDepth", boxDepth);
         model.addAttribute("pageTitle", "Problem");
         model.addAttribute("results", parser.parseQuestion(question.getQuestion()));
+        model.addAttribute("submit", new Submission());
         return "practice-problem";
+    }
+    @PostMapping("/submitted")
+    public String grade(@ModelAttribute Submission submission, Model model) {
+        System.out.println("test");
+        return "";
     }
     @PostMapping("/chapter-questions")
     public String getChapterQuestions(@ModelAttribute Question question, Model model) {
