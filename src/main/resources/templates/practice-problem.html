@@ -105,7 +105,8 @@
 
                             <!-- print the select boxes -->
                             <!-- add form for submissions-->
-                            <form th:action="@{/submitted}" method="post" th:object="${submit}">
+                            <form th:action="@{/submitted}" method="post">
+                                <input hidden type="text" th:field="${submit.parsedAnswers}" th:value="${submit.getParsedAnswers()}" >
                             <th:block th:each="i: ${#numbers.sequence(0, boxDepth -1)}">
                                 <tr class="tablecenterCSS">
 
@@ -114,10 +115,8 @@
                                         <th:block th:if="${pair.getValue1().length() != 0}">
                                             <td>
                                                 <div style="height:25px">
-
-
-                                                    <input list="idk1" class="form-control1" th:field="${submit.answer}">   </input>
-                                                    <datalist id="idk1">
+                                                    <input list="grading" class="form-control1" th:field="${submit.answer}">   </input>
+                                                    <datalist id="grading">
                                                         <option  th:value="T" th:label="T">
                                                         <option  th:value="F" th:label="F">
                                                     </datalist>

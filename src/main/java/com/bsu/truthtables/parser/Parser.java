@@ -1,5 +1,6 @@
 package com.bsu.truthtables.parser;
 
+import com.bsu.truthtables.domain.Submission;
 import groovyjarjarantlr4.v4.runtime.misc.MultiMap;
 import org.javatuples.Pair;
 import org.springframework.beans.factory.annotation.Value;
@@ -26,7 +27,33 @@ public class Parser {
     private Map map1;
     private ArrayList<Pair<String, String>> list;
 
+    public ArrayList<Integer> grade(Submission submission) {
+        ArrayList<Integer> wrongQuestions = new ArrayList<>();
+        for(int i = 0; i < submission.answers.size(); i++ ) {
+            if(submission.answers.get(0).charAt(i) != submission.parsedAnswers.charAt(i)) {
+                wrongQuestions.add(i);
+            }
+        }
+        return wrongQuestions;
+    }
 
+public String orderResults(ArrayList<Pair<String, String>> r) {
+    int max = 0;
+    for(Pair<String,String> p : r){
+        if(p.getValue1().length() > max) {
+            max = p.getValue1().length();
+        }
+    }
+    String res = "";
+    for(int i = 0; i < max; i++) {
+        for(Pair<String,String> p : r){
+            if(p.getValue1().length() != 0) {
+                res += p.getValue1().charAt(i);
+            }
+        }
+    }
+    return res;
+}
     public String parseChars(String question) {
         return question.replaceAll("[" + operators + "]", "")
                 .replaceAll("\\(", "")
