@@ -104,9 +104,6 @@
                             <!-- print the test, use a switch to display this later -->
 
                             <!-- print the select boxes -->
-                            <!-- add form for submissions-->
-                            <form th:action="@{/submitted}" method="post">
-                                <input hidden type="text" th:field="${submit.parsedAnswers}" th:value="${submit.getParsedAnswers()}" >
                             <th:block th:each="i: ${#numbers.sequence(0, boxDepth -1)}">
                                 <tr class="tablecenterCSS">
 
@@ -114,12 +111,12 @@
                                     <th:block th:each="pair: ${results}">
                                         <th:block th:if="${pair.getValue1().length() != 0}">
                                             <td>
-                                                <div style="height:25px">
-                                                    <input list="grading" class="form-control1" th:field="${submit.answer}">   </input>
-                                                    <datalist id="grading">
-                                                        <option  th:value="T" th:label="T">
-                                                        <option  th:value="F" th:label="F">
-                                                    </datalist>
+                                                <div  style="height:25px">
+                                                    <select th:id="${submit.getCount()}" class="selectTF">
+                                                        <option></option>
+                                                        <option value="T">T</option>
+                                                        <option value="F">F</option>
+                                                    </select>
                                                 </div>
                                             </td>
                                         </th:block>
@@ -131,9 +128,7 @@
                                     </th:block>
                                 </tr>
                             </th:block>
-                                <div style="padding-top: 30px;"><input class="submit" type="submit" value="check" /></div>
 
-                            </form>
                         </table>
                     </div>
 
@@ -157,7 +152,6 @@
                                         <th:block th:if="${pair.getValue1().length() != 0}">
                                             <td>
                                                 <div style="height:25px" th:text="${pair.getValue1().charAt(i)}"></div>
-
                                             </td>
                                         </th:block>
                                         <th:block th:if="${pair.getValue1().length() == 0}">
@@ -199,7 +193,8 @@
         </div>
     </div>
 </main>
-<button onclick="myFunction()">Show Solution</button>
+<button class="solution" onclick="myFunction()">Show Solution</button>
+<button class="grade" onclick="grade()">Check</button>
 <footer th:replace="fragments :: footer"></footer>
 <script>
     function myFunction() {
@@ -211,6 +206,21 @@
         }
     }
 </script>
+<script th:inline="javascript">
+    function grade() {
+        var count = /*[[${submit.getCount()}]]*/ 'default';
+        var answer = /*[[${submit.getParsedAnswers()}]]*/ 'default';
+        for (let i = 0; i < count; i++) {
+            var x = document.getElementById(i);
+            if(answer.charAt(i) != x.value) {
+                x.style.color = "red";
+            } else {
+                x.style.color = "black";
+            }
+        }
+    }
+</script>
+
 </body>
 
 </html>

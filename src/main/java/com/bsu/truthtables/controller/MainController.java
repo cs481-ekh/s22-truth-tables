@@ -40,9 +40,6 @@ public class MainController {
         int numberOfInputs = parser.parseChars(question.getQuestion()).length();
         int boxDepth = (int) Math.round(Math.pow(2,numberOfInputs));
         ArrayList<Pair<String,String>> results = parser.parseQuestion(question.getQuestion());
-Submission s = new Submission(parser.orderResults(results));
-
-
         String chars = parser.parseChars(question.getQuestion());
         model.addAttribute("question", question);
         model.addAttribute("chapters", dao.getChapters());
@@ -52,16 +49,10 @@ Submission s = new Submission(parser.orderResults(results));
         model.addAttribute("boxDepth", boxDepth);
         model.addAttribute("pageTitle", "Problem");
         model.addAttribute("results", results);
-        model.addAttribute("submit",s);
+        model.addAttribute("submit", new Submission(parser.orderResults(results)));
         return "practice-problem";
     }
-    @PostMapping("/submitted")
-    public String grade(@ModelAttribute Submission submission,
-                        Model model) {
-        System.out.println("test");
-        ArrayList<Integer> wrong = parser.grade(submission);
-        return "/";
-    }
+
     @PostMapping("/chapter-questions")
     public String getChapterQuestions(@ModelAttribute Question question, Model model) {
         //this is where we would grade and check stuff then load resulting page

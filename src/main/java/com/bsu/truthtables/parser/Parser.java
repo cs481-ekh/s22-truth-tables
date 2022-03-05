@@ -1,7 +1,6 @@
 package com.bsu.truthtables.parser;
 
-import com.bsu.truthtables.domain.Submission;
-import groovyjarjarantlr4.v4.runtime.misc.MultiMap;
+
 import org.javatuples.Pair;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -24,18 +23,8 @@ public class Parser {
     private HashMap<String, String> map = null;
     private boolean validity = false;
     private boolean logical = false;
-    private Map map1;
     private ArrayList<Pair<String, String>> list;
 
-    public ArrayList<Integer> grade(Submission submission) {
-        ArrayList<Integer> wrongQuestions = new ArrayList<>();
-        for(int i = 0; i < submission.answers.size(); i++ ) {
-            if(submission.answers.get(0).charAt(i) != submission.parsedAnswers.charAt(i)) {
-                wrongQuestions.add(i);
-            }
-        }
-        return wrongQuestions;
-    }
 
 public String orderResults(ArrayList<Pair<String, String>> r) {
     int max = 0;
