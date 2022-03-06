@@ -113,8 +113,8 @@ public class Parser {
 
     public Object t5() {
         int numOfNots = 0;
-        while(peek() == '!') {
-            eat('!');
+        while(peek() == '~') {
+            eat('~');
             numOfNots++;
         }
         if (numOfNots != 0 && numOfNots %2 == 1) {          //idk what the char is for not so I am using ! temporarily
@@ -172,7 +172,7 @@ public class Parser {
     }
     public Object not(Object o1) {
         String retVal = "";
-        String name = "!" + o1;
+        String name = "~" + o1;
         for (int i = 0 ; i < get(o1).length(); i++) {
             if(get(o1).charAt(i) == 'T') {
                 retVal += "F";

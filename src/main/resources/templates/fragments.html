@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="https://www.thymeleaf.org">
+<html xmlns:th="https://www.thymeleaf.org"
+        xmlns:sec="https://www.thymeleaf.org/extras/spring-security">
 <head th:fragment="html_head">
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -14,7 +15,7 @@
 
             var user = document.getElementById("question").value;
             var user2 = document.getElementById("question");
-            var re = /([A-Za-z]{2,})|([\||\-|\>|\<|\*|\^]{2,})/;
+            var re = /([A-Za-z]{2,})|([\||\-|\>|\<|\*|\^]{2,})|(\|)|(!)/;
             var re2 = /(^\||^v|^\-|^\>|^\<|^\^|^\*)/;
             var re3 = /(\|$|v$|\-$|\>$|\<$|\^$|\*$)/;
             if (!re.test(user) && !re2.test(user) && !re3.test(user)) {
@@ -41,7 +42,7 @@
                     <div class="collapse navbar-collapse" id="navbarToggle">
                         <div class="navbar-nav mr-auto">
                             <a class="nav-item nav-link" href="/">Home</a>
-                            <a class="nav-item nav-link" href="/">Add Question</a>
+                            <a class="nav-item nav-link" href="/admin">Add Question</a>
                         </div>
                         <div class="mx-auto order-0">
                             <a class="navbar-brand mx-auto"></a>
@@ -51,8 +52,8 @@
                         </div>
                         <!-- Navbar Right Side -->
                         <div class="navbar-nav ml-auto">
-                            <a class="nav-item nav-link" href="/admin">Login</a>
-                            <a class="nav-item nav-link" href="/admin">Register</a>
+                                <a sec:authorize="isAnonymous()" class="nav-item nav-link" href="/admin">Login</a>
+                                <a sec:authorize="isAuthenticated()" class="nav-item nav-link" href="/logout"  >Log Out</a>
                         </div>
                     </div>
                 </div>

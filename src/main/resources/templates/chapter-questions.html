@@ -1,15 +1,292 @@
 <!DOCTYPE HTML>
 <html xmlns:th="https://www.thymeleaf.org">
-<head>
-    <title>Chapter questions</title>
+<head th:replace="fragments :: html_head">
+
 </head>
-<body>
+<body class="d-flex flex-column min-vh-100">
+<div th:replace="fragments :: menu"></div>
 <p> Here is the student view page for a given chapter </p>
+
+<section style="margin-top: 5%;" class="py-3 text-center container">
+    <div class="row py-0">
+        <div>
+            <h1>Interactive Truth Table</h1>
+            <p></p>
+            <p class="lead text-muted">
+                On this View, we will show a dropdown display of each question. Upon picking that specific problem,
+                the page will be populated with a template of the practice problem page (of course pertaining to that
+                question)
+            </p>
+        </div>
+    </div>
+
+<!--    <section class="py-sm-0 text-center container">-->
+<!--        <div class="row py-lg-5">-->
+<!--            <div class="col">-->
+<!--                <div class="col" style="border: 2px solid black">-->
+<!--                    <h3>Operators</h3>-->
+<!--                    <div class="container-sm">-->
+<!--                        <div class="row">-->
+<!--                            <div class="col" style="border-bottom: 2px solid black">-->
+<!--                                ^-->
+<!--                            </div>-->
+<!--                            <div class="col" style="border-bottom: 2px solid black">-->
+<!--                                v-->
+<!--                            </div>-->
+<!--                            <div class="col" style="border-bottom: 2px solid black">-->
+<!--                                >-->
+<!--                            </div>-->
+<!--                            <div class="col" style="border-bottom: 2px solid black">-->
+<!--                                ~-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="row">-->
+<!--                            <div class="col">-->
+<!--                                and-->
+<!--                            </div>-->
+<!--                            <div class="col">-->
+<!--                                or-->
+<!--                            </div>-->
+<!--                            <div class="col">-->
+<!--                                if then-->
+<!--                            </div>-->
+<!--                            <div class="col">-->
+<!--                                not-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+
+<!--            </div>-->
+<!--            <div class="col-6">-->
+<!--                <p></p>-->
+<!--                &lt;!&ndash;            <p class="lead text-muted"> Replace me </p>&ndash;&gt;-->
+<!--                <form action="#" th:action="@{/}" th:object="${question}" method="post">-->
+<!--                    <p>Enter a question: <input type="text" id="question" th:field="*{question}" /> <input type="submit" onclick="return validate()" value="Submit" /> <input type="reset" value="Reset"/></p>-->
+
+<!--                </form>-->
+<!--            </div>-->
+
+<!--            <div class="col">-->
+<!--                <h3>Chapter Questions</h3>-->
+<!--                &lt;!&ndash;            <th:block th:each="chap : ${chapters}">&ndash;&gt;-->
+<!--                &lt;!&ndash;                <div class="container-sm" style="border-bottom: 2px solid black">&ndash;&gt;-->
+<!--                &lt;!&ndash;                    <a th:href="@{'/chapter-questions/'+${chap}}" th:text="'Chapter ' + ${chap}"></a>&ndash;&gt;-->
+<!--                &lt;!&ndash;                </div>&ndash;&gt;-->
+<!--                &lt;!&ndash;            </th:block>&ndash;&gt;-->
+<!--                <div class="list-group">-->
+<!--                    <th:block th:each="chap : ${chapters}">-->
+<!--                        <a th:href="@{'/chapter-questions/'+${chap}}" th:text="'Chapter ' + ${chap}" class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">-->
+<!--                            <img src="https://github.com/twbs.png" alt="twbs" width="32" height="32" class="rounded-circle flex-shrink-0">-->
+<!--                            &lt;!&ndash;                            <div class="d-flex gap-2 w-100 justify-content-between">&ndash;&gt;-->
+<!--                            &lt;!&ndash;                                <div>&ndash;&gt;-->
+<!--                            &lt;!&ndash;                                    <h6 class="mb-0">List group item heading</h6>&ndash;&gt;-->
+<!--                            &lt;!&ndash;                                    <p class="mb-0 opacity-75">Some placeholder content in a paragraph.</p>&ndash;&gt;-->
+<!--                            &lt;!&ndash;                                </div>&ndash;&gt;-->
+<!--                            &lt;!&ndash;                                <small class="opacity-50 text-nowrap">now</small>&ndash;&gt;-->
+<!--                            &lt;!&ndash;                            </div>&ndash;&gt;-->
+<!--                        </a>-->
+<!--                    </th:block>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </section>-->
+
+
 
 
 <h3 th:text="'Here are your questions for Chapter ' + ${chapter}"/>
-<p th:each="q: ${listOfQuestions}" th:text="${q}">
+    <p th:each="q: ${listOfQuestions}" th:text="${q}"></p>
+</section>
 
-</p>
+
+
+<!--&lt;!&ndash;<main role="main" class="container">&ndash;&gt;-->
+<!--    <div class="row">-->
+<!--        <div class="col-lg-6 col-md-8 mx-auto">-->
+<!--            &lt;!&ndash; Putting tables into columns &ndash;&gt;-->
+<!--            <div class="container">-->
+<!--                <div class="row">-->
+<!--                    <div class="col-sm">-->
+<!--                        &lt;!&ndash; Center text in columns &ndash;&gt;-->
+<!--                        <table class="tablecenterheadCSS tablecenterCSS table caption-top">-->
+<!--                            <caption>Inputs</caption>-->
+<!--                            <thead>-->
+<!--                            &lt;!&ndash; print the input chars &ndash;&gt;-->
+<!--                            <th:block th:each="char : ${inputChars.toCharArray()}">-->
+<!--                                <th th:text="${char}"></th>-->
+<!--                            </th:block>-->
+<!--                            </thead>-->
+<!--                            &lt;!&ndash; print the input values &ndash;&gt;-->
+<!--                            <th:block th:each="i: ${#numbers.sequence(1, boxDepth)}">-->
+<!--                                <tr class="tablecentercolCSS">-->
+<!--                                    <th:block th:each="j : ${#numbers.sequence(1, inputChars.length())}">-->
+<!--                                        <td th:text="${prefilled.charAt( i * inputChars.length() - inputChars.length() + j - 1)}"/>-->
+<!--                                    </th:block>-->
+<!--                                </tr>-->
+<!--                            </th:block>-->
+<!--                        </table>-->
+<!--                    </div>-->
+<!--                    <div class="col-sm">-->
+<!--                        <table class="tablecenterheadCSS dropdowntable table caption-top">-->
+<!--                            <caption>Statement</caption>-->
+<!--                            <thead>-->
+<!--                            &lt;!&ndash; print the input statement &ndash;&gt;-->
+<!--                            &lt;!&ndash; MAY NEED TO CHANGE LATER &ndash;&gt;-->
+<!--                            <th style="text-align: center" th:colspan="${inputChars.length()}" th:text="${question.question}"></th>-->
+<!--                            </thead>-->
+<!--                            &lt;!&ndash; print the select boxes &ndash;&gt;-->
+<!--                            <th:block th:each="i: ${#numbers.sequence(1, boxDepth)}">-->
+<!--                                <tr class="tablecentercolCSS" >-->
+<!--                                    <td>-->
+<!--                                        <select class="selectTF">-->
+<!--                                            <option></option>-->
+<!--                                            <option>T</option>-->
+<!--                                            <option>F</option>-->
+<!--                                        </select>-->
+<!--                                    </td>-->
+<!--                                </tr>-->
+<!--                            </th:block>-->
+<!--                        </table>-->
+<!--                    </div>-->
+<!--                    <div class="col-sm">-->
+<!--                        <table class="tablecenterheadCSS dropdowntable table caption-top">-->
+<!--                            <caption>Validity Test</caption>-->
+<!--                            <thead>-->
+<!--                            <th style="text-align: center" th:colspan="${inputChars.length()}">-->
+<!--                                Shows Invalid?-->
+<!--                            </th>-->
+<!--                            </thead>-->
+<!--                            &lt;!&ndash; print the select boxes &ndash;&gt;-->
+<!--                            <th:block th:each="i: ${#numbers.sequence(1, boxDepth)}">-->
+<!--                                <tr class="tablecentercolCSS" >-->
+<!--                                    <td>-->
+<!--                                        <select class="selectValidity">-->
+<!--                                            <option></option>-->
+<!--                                            <option>Shows invalid</option>-->
+<!--                                            <option>Shows valid</option>-->
+<!--                                        </select>-->
+<!--                                    </td>-->
+<!--                                </tr>-->
+<!--                            </th:block>-->
+<!--                        </table>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--&lt;!&ndash;</main>&ndash;&gt;-->
+
 
 </body>
+
+<!--<!DOCTYPE HTML>-->
+<!--<html xmlns:th="https://www.thymeleaf.org">-->
+<!--<head th:replace="fragments :: html_head"></head>-->
+
+<!--<body class="d-flex flex-column min-vh-100">-->
+
+<!--&lt;!&ndash; NavBar &ndash;&gt;-->
+<!--<div th:replace="fragments :: menu"></div>-->
+
+<!--<section style="margin-top: 5%;" class="py-3 text-center container">-->
+<!--    <div class="row py-0">-->
+<!--        <div>-->
+<!--            <h1>Interactive Truth Table</h1>-->
+<!--            <p></p>-->
+<!--            <p class="lead text-muted">-->
+<!--                This tool exists to allow students to enter propositional logic formulas with the ability to actively test-->
+<!--                and evaluate their formula's truth tables. Additionally, students of Dr. Cortens will have the ability to access and practice-->
+<!--                questions created in chapters. To enter a propositional formula use upper case letters (A, B, C, etc) and the included-->
+<!--                operators below (ex. C v (~A > D)).-->
+<!--            </p>-->
+
+<!--            &lt;!&ndash;            <div class="col" >&ndash;&gt;-->
+<!--            &lt;!&ndash;                <h3>Operators</h3>&ndash;&gt;-->
+<!--            &lt;!&ndash;                <div class="container-sm">&ndash;&gt;-->
+<!--            &lt;!&ndash;                    <p> ^   v  >       ~</p>&ndash;&gt;-->
+<!--            &lt;!&ndash;                    <p>and or if-then not</p>&ndash;&gt;-->
+<!--            &lt;!&ndash;                </div>&ndash;&gt;-->
+<!--            &lt;!&ndash;            </div>&ndash;&gt;-->
+<!--        </div>-->
+<!--    </div>-->
+
+<!--    <section class="py-sm-0 text-center container">-->
+<!--        <div class="row py-lg-5">-->
+<!--            <div class="col">-->
+<!--                <div class="col" style="border: 2px solid black">-->
+<!--                    <h3>Operators</h3>-->
+<!--                    <div class="container-sm">-->
+<!--                        <div class="row">-->
+<!--                            <div class="col" style="border-bottom: 2px solid black">-->
+<!--                                ^-->
+<!--                            </div>-->
+<!--                            <div class="col" style="border-bottom: 2px solid black">-->
+<!--                                v-->
+<!--                            </div>-->
+<!--                            <div class="col" style="border-bottom: 2px solid black">-->
+<!--                                >-->
+<!--                            </div>-->
+<!--                            <div class="col" style="border-bottom: 2px solid black">-->
+<!--                                ~-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="row">-->
+<!--                            <div class="col">-->
+<!--                                and-->
+<!--                            </div>-->
+<!--                            <div class="col">-->
+<!--                                or-->
+<!--                            </div>-->
+<!--                            <div class="col">-->
+<!--                                if then-->
+<!--                            </div>-->
+<!--                            <div class="col">-->
+<!--                                not-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+
+<!--            </div>-->
+<!--            <div class="col-6">-->
+<!--                <p></p>-->
+<!--                &lt;!&ndash;            <p class="lead text-muted"> Replace me </p>&ndash;&gt;-->
+<!--                <form action="#" th:action="@{/}" th:object="${question}" method="post">-->
+<!--                    <p>Enter a question: <input type="text" id="question" th:field="*{question}" /> <input type="submit" onclick="return validate()" value="Submit" /> <input type="reset" value="Reset"/></p>-->
+
+<!--                </form>-->
+<!--            </div>-->
+
+<!--            <div class="col">-->
+<!--                <h3>Chapter Questions</h3>-->
+<!--                &lt;!&ndash;            <th:block th:each="chap : ${chapters}">&ndash;&gt;-->
+<!--                &lt;!&ndash;                <div class="container-sm" style="border-bottom: 2px solid black">&ndash;&gt;-->
+<!--                &lt;!&ndash;                    <a th:href="@{'/chapter-questions/'+${chap}}" th:text="'Chapter ' + ${chap}"></a>&ndash;&gt;-->
+<!--                &lt;!&ndash;                </div>&ndash;&gt;-->
+<!--                &lt;!&ndash;            </th:block>&ndash;&gt;-->
+<!--                <div class="list-group">-->
+<!--                    <th:block th:each="chap : ${chapters}">-->
+<!--                        <a th:href="@{'/chapter-questions/'+${chap}}" th:text="'Chapter ' + ${chap}" class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">-->
+<!--                            <img src="https://github.com/twbs.png" alt="twbs" width="32" height="32" class="rounded-circle flex-shrink-0">-->
+<!--                            &lt;!&ndash;                            <div class="d-flex gap-2 w-100 justify-content-between">&ndash;&gt;-->
+<!--                            &lt;!&ndash;                                <div>&ndash;&gt;-->
+<!--                            &lt;!&ndash;                                    <h6 class="mb-0">List group item heading</h6>&ndash;&gt;-->
+<!--                            &lt;!&ndash;                                    <p class="mb-0 opacity-75">Some placeholder content in a paragraph.</p>&ndash;&gt;-->
+<!--                            &lt;!&ndash;                                </div>&ndash;&gt;-->
+<!--                            &lt;!&ndash;                                <small class="opacity-50 text-nowrap">now</small>&ndash;&gt;-->
+<!--                            &lt;!&ndash;                            </div>&ndash;&gt;-->
+<!--                        </a>-->
+<!--                    </th:block>-->
+<!--                </div>-->
+
+<!--            </div>-->
+<!--        </div>-->
+<!--    </section>-->
+<!--</section>-->
+
+
+<!--<footer th:replace="fragments :: footer"></footer>-->
+
+<!--<script src="../assets/dist/js/bootstrap.bundle.min.js"></script>-->
+<!--</body>-->
