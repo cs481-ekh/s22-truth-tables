@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -53,6 +54,22 @@ public class MainController {
     }
     @GetMapping("/chapter-questions/{chapter}")
     public String getChapterQuestions2(@PathVariable("chapter") int chapter, Model model) {
+
+        List<String> list = dao.getAllByChapter(chapter);
+        for(int i = 0; i < list.size(); i++) {
+            String question = list.get(i);
+            int numberOfInputs = parser.parseChars(question).length();
+            int boxDepth = (int) Math.round(Math.pow(2,numberOfInputs));
+            String chars = parser.parseChars(question);
+            model.addAttribute("question" + i, question);
+            model.addAttribute("chapters"+ i, dao.getChapters());
+            model.addAttribute("prefilled"+ i, prefilledBox.get(String.valueOf(numberOfInputs)));
+            model.addAttribute("numberOfInputs"+ i, numberOfInputs);
+            model.addAttribute("inputChars"+ i, chars);
+            model.addAttribute("boxDepth"+ i, boxDepth);
+            model.addAttribute("pageTitle"+ i, "Problem");
+        }
+
         model.addAttribute("chapter", chapter);
         model.addAttribute("listOfQuestions", dao.getAllByChapter(chapter));
         model.addAttribute("pageTitle", "Chapter Questions");
