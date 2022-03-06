@@ -113,7 +113,7 @@
                                             <td>
                                                 <div  style="height:25px">
                                                     <select th:id="${submit.getCount()}" class="selectTF">
-                                                        <option></option>
+                                                        <option value=" "></option>
                                                         <option value="T">T</option>
                                                         <option value="F">F</option>
                                                     </select>
@@ -212,7 +212,8 @@
         var answer = /*[[${submit.getParsedAnswers()}]]*/ 'default';
         for (let i = 0; i < count; i++) {
             var x = document.getElementById(i);
-            if(answer.charAt(i) != x.value) {
+            console.log(x.value);
+            if(answer.charAt(i) != x.value && x.value != " ") {
                 x.style.color = "red";
             } else {
                 x.style.color = "black";
