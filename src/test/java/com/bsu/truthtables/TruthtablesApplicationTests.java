@@ -1,6 +1,7 @@
 package com.bsu.truthtables;
 
 import com.bsu.truthtables.parser.Parser;
+import org.javatuples.Pair;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -69,45 +70,33 @@ class TruthtablesApplicationTests {
 		System.out.println(q1.toString());
 		System.out.println(q2.toString());
 	}
-//	@Test
-//	void commas(){
-//		String question1 = "A ^ B , A v B";			//yea... idk what to do for this yet
-//		Map q1 =parser.parseQuestion(question1);
-//		System.out.println(q1.toString());
-//
-//	}
+
 	@Test
 	void kyleStuff() {
-		String question = "C ^ (!A v B)";
+		String question = "A v (B ->C)";
 		Map q1 =parser.parseQuestion(question);
-		ArrayList<ArrayList<String>> data = parser.getData();
-		ArrayList<String> ops = data.get(0);
-		ArrayList<String> values = data.get(1);
+		ArrayList<Pair<String, String>> data = parser.getData();
 		System.out.println(question);
 		System.out.println(q1.toString());
-		System.out.println(ops.toString());
-		System.out.println(values.toString());
+		System.out.println(data.toString());
 
 		System.out.println();
 
 		String question2 = "!((!A v B) ^ C)";
 		Map q2 =parser.parseQuestion(question2);
 		data = parser.getData();
-		ops = data.get(0);
-		values = data.get(1);
 		System.out.println(question2);
 		System.out.println(q2.toString());
-		System.out.println(ops.toString());
-		System.out.println(values.toString());
+		System.out.println(data.toString());
 
-		String question3 = "A v (B v (C v D))";
-		Map q3 =parser.parseQuestion(question3);
-		data = parser.getData();
-		ops = data.get(0);
-		values = data.get(1);
-		System.out.println(question3);
-		System.out.println(q3.toString());
-		System.out.println(ops.toString());
-		System.out.println(values.toString());
+//		String question3 = "A v (B v (C v D))";
+//		Map q3 =parser.parseQuestion(question3);
+//		data = parser.getData();
+//		ops = data.get(0);
+//		values = data.get(1);
+//		System.out.println(question3);
+//		System.out.println(q3.toString());
+//		System.out.println(ops.toString());
+//		System.out.println(values.toString());
 	}
 }

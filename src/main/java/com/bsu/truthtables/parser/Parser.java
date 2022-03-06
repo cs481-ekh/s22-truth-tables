@@ -8,6 +8,7 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
+import org.javatuples.Pair;
 
 
 @Component
@@ -59,12 +60,6 @@ public class Parser {
 
     public Object stmt() {
         Object obj = t0();
-//        while (more() && peek() == ':' && doublePeek() == '.') {
-//            eat(':');
-//            eat('.');
-//            Object obj2 = stmt();
-//            obj = therefore(obj, obj2);  //handle therefore
-//        }
         return obj;
     }
 
@@ -163,6 +158,14 @@ public class Parser {
             retval = (String) or(name,o2);
             name = name + "v" + o2;
         }
+        if(op == '-') {
+            retval = (String) ifThen(name,o2);
+            name = name + "->" + o2;
+        }
+        if(op == '<') {
+            retval = (String) ifAndOnlyIf(name,o2);
+            name = name + "<->" + o2;
+        }
         put(name, get(retval));
         return name;
 
@@ -212,26 +215,26 @@ public class Parser {
     }
 
     public Object ifThen(Object o1, Object o2) {
-        String name = "(" + o1 + ")";
+        String name = "" + o1;
         put(name, get(o1));
-        map.remove(o1);
         String retVal = "";
         for(int i = 0; i < get(name).length(); i++){
-            retVal += get(name).charAt(i) == 'T' ? "T" : "F";
+            retVal += get(name).charAt(i) == 'T' && get(o2).charAt(i) == 'F' ? "F" : "T";
         }
-        put(name + "->" + o2, retVal);
+        name = name + "->" + o2;
+        put(name, retVal);
         return name;
     }
 
     public Object ifAndOnlyIf(Object o1, Object o2) {
-        String name = "(" + o1 + ")";
+        String name = "" + o1;
         put(name, get(o1));
-        map.remove(o1);
         String retVal = "";
         for(int i = 0; i < get(name).length(); i++){
-            retVal += get(name).charAt(i) == 'T' && get(o2).charAt(i) == 'T' ? "T" : "F";
+            retVal += get(name).charAt(i) == get(o2).charAt(i) ? "T" : "F";
         }
-        put(name + "<->" + o2, retVal);
+        name = name + "<->" + o2;
+        put(name, retVal);
         return name;
     }
 
@@ -291,8 +294,7 @@ public class Parser {
         }
     }
 
-    public ArrayList<ArrayList<String>> getData() {
-        ArrayList<ArrayList<String>> ret = new ArrayList<>();
+    public ArrayList<Pair<String, String>> getData() {
         ArrayList<String> ops = new ArrayList<>();
         ArrayList<String> values = new ArrayList<>();
         ArrayList<String> keys = new ArrayList<>();
@@ -319,8 +321,18 @@ public class Parser {
                 ops.add(op);
             }
         }
-        ret.add(ops);
-        ret.add(values);
+        ArrayList<Pair<String, String>> ret = new ArrayList<>();
+        int count = 0;
+        for(int i = 0; i < question.length(); i++) {
+            String s = "" + question.charAt(i);
+            if(count < ops.size() && s.equals(ops.get(count))) {
+                ret.add(new Pair<>(s, values.get(count)));
+                count++;
+            }
+            else {
+                ret.add(new Pair<>(s, ""));
+            }
+        }
         return ret;
     }
 
