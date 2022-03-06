@@ -3,6 +3,8 @@ package com.bsu.truthtables.parser;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -19,6 +21,7 @@ public class Parser {
     @Value("#{${prefilledBox}}")
     private Map<String, String> prefilledBox;
     private HashMap<String, String> map = null;
+    public ArrayList<ArrayList<String>> data;
     private boolean validity = false;
     private boolean logical = false;
 
@@ -50,6 +53,7 @@ public class Parser {
             i++;
         }
         stmt();
+        getData();
         return map;
     }
 
@@ -284,6 +288,85 @@ public class Parser {
             return map.put(o.toString(), val);
         } else {
             return map.put(String.valueOf(o), val);
+        }
+    }
+
+    public ArrayList<ArrayList<String>> getData() {
+        ArrayList<ArrayList<String>> ret = new ArrayList<>();
+        ArrayList<String> ops = new ArrayList<>();
+        ArrayList<String> values = new ArrayList<>();
+        ArrayList<String> keys = new ArrayList<>();
+        int len = 1;
+        String question = "";
+        for(String key: map.keySet()) {
+            if(key.length() > 1) {
+                keys.add(key);
+                if (key.length() > len) {
+                    len = key.length();
+                    question = key;
+                }
+            }
+        }
+        keys.sort(new KeyComparator(question));
+        for(String key: keys) {
+            String val = map.get(key);
+            values.add(val);
+        }
+        for(int i = 0; i < question.length(); i++) {
+            char c = question.charAt(i);
+            if(c == '^' || c == 'v' || c == '!' || c == '-') {
+                String op = "" + c;
+                ops.add(op);
+            }
+        }
+        ret.add(ops);
+        ret.add(values);
+        return ret;
+    }
+
+    public class KeyComparator implements Comparator<String> {
+        public String question;
+        public KeyComparator(String question) {
+            this.question = question;
+        }
+        @Override
+        public int compare(String o1, String o2) {
+            int pos1 = findPos(o1, this.question);
+            int pos2 = findPos(o2, this.question);
+            if(pos1 < pos2) {
+                return -1;
+            }
+            else if(pos1 > pos2) {
+                return 1;
+            }
+            int len1 = o1.length();
+            int len2 = o2.length();
+            if(len1 < len2) {
+                return -1;
+            }
+            return 1;
+        }
+
+        public int findPos(String s, String question) {
+            int pos = 0;
+            boolean found = false;
+            for(; pos < question.length(); pos++) {
+                for(int i = 0; i < s.length(); i++) {
+                    if(!(s.charAt(i) == question.charAt(pos+i))) {
+                        break;
+                    }
+                    if(i == s.length()-1) {
+                        found = true;
+                    }
+                }
+                if(found) break;
+            }
+            int parenCheck = 0;
+            while(s.charAt(parenCheck) == '(') {
+                parenCheck++;
+                pos++;
+            }
+            return pos;
         }
     }
 }
