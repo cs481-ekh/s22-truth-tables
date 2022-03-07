@@ -82,7 +82,7 @@ class TruthtablesApplicationTests {
 
 		System.out.println();
 
-		String question2 = "!((!A v B) ^ C)";
+		String question2 = "C v (~A ^ B)";
 		Map q2 =parser.parseQuestion(question2);
 		data = parser.getData();
 		System.out.println(question2);
