@@ -331,7 +331,7 @@ public class Parser {
         }
         for(int i = 0; i < question.length(); i++) {
             char c = question.charAt(i);
-            if(c == '^' || c == 'v' || c == '!' || c == '-') {
+            if(c == '^' || c == 'v' || c == '!' || c == '-' || c == '~') {
                 String op = "" + c;
                 ops.add(op);
             }
