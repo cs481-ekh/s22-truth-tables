@@ -26,7 +26,23 @@ public class Parser {
     private boolean validity = false;
     private boolean logical = false;
 
-
+    public String orderResults(ArrayList<Pair<String, String>> r) {
+        int max = 0;
+        for(Pair<String,String> p : r){
+            if(p.getValue1().length() > max) {
+                max = p.getValue1().length();
+            }
+        }
+        String res = "";
+        for(int i = 0; i < max; i++) {
+            for(Pair<String,String> p : r){
+                if(p.getValue1().length() != 0) {
+                    res += p.getValue1().charAt(i);
+                }
+            }
+        }
+        return res;
+    }
     public String parseChars(String question) {
         return  question.replaceAll("[" + operators + "]", "")
                 .replaceAll("\\(", "")
@@ -38,7 +54,7 @@ public class Parser {
                 .mapToObj(c -> String.valueOf((char) c)).collect(Collectors.joining());
     }
 
-    public HashMap parseQuestion(String question) {
+    public ArrayList<Pair<String, String>> parseQuestion(String question) {
         map = new HashMap<>();
         this.stmt = question.replaceAll(" ", "");
         this.chars = parseChars(question);
@@ -54,8 +70,7 @@ public class Parser {
             i++;
         }
         stmt();
-        getData();
-        return map;
+        return getData();
     }
 
     public Object stmt() {
