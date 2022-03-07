@@ -143,7 +143,10 @@ public class Parser {
         if (more() && peek() == '(') {
             eat('(');
             Object s = stmt();
-            eat(')');
+            while(peek() == ')'){
+                eat(')');
+            }
+
              return paren(s);
         }
         return t7();
@@ -255,6 +258,9 @@ public class Parser {
 
     //helper methods for parser
     private char peek() {
+        if(stmt.length() == 0) {
+            return '0';
+        }
         return stmt.charAt(0);
     }
 
