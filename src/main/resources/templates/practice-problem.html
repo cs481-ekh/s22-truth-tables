@@ -193,8 +193,10 @@
         </div>
     </div>
 </main>
-<button class="solution" onclick="myFunction()">Show Solution</button>
-<button class="grade" onclick="grade()">Check</button>
+<div style="display: inline; margin-left: 37%;">
+    <button class="solution" style="margin-right: 30px;" onclick="myFunction()">Show Solution</button>
+    <button class="solution" onclick="grade()">Check</button>
+</div>
 <footer th:replace="fragments :: footer"></footer>
 <script>
     function myFunction() {
