@@ -53,7 +53,8 @@
                         <!-- Navbar Right Side -->
                         <div class="navbar-nav ml-auto">
                                 <a sec:authorize="isAnonymous()" class="nav-item nav-link" href="/admin">Login</a>
-                                <a sec:authorize="isAuthenticated()" class="nav-item nav-link" href="/admin">Manage Questions</a>
+                                <a sec:authorize="isAuthenticated()" class="nav-item nav-link" href="/manage">Manage Questions</a>
+                                <a sec:authorize="isAuthenticated()" class="nav-item nav-link" href="/admin">Add Questions</a>
                                 <a sec:authorize="isAuthenticated()" class="nav-item nav-link" href="/logout"  >Log Out</a>
                         </div>
                     </div>

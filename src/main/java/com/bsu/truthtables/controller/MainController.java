@@ -80,14 +80,18 @@ public class MainController {
 
         int numberOfInputs = parser.parseChars(question.getQuestion()).length();
         int boxDepth = (int) Math.round(Math.pow(2,numberOfInputs));
+        ArrayList<Pair<String,String>> results = parser.parseQuestion(question.getQuestion());
         String chars = parser.parseChars(question.getQuestion());
         model.addAttribute("question", question);
-        model.addAttribute("listOfQuestions", dao.getAllByChapter(Integer.parseInt(question.getChapter())));
+        model.addAttribute("chapters", dao.getChapters());
         model.addAttribute("prefilled", prefilledBox.get(String.valueOf(numberOfInputs)));
         model.addAttribute("numberOfInputs", numberOfInputs);
         model.addAttribute("inputChars", chars);
         model.addAttribute("boxDepth", boxDepth);
-        model.addAttribute("chapter", question.getChapter());
+        model.addAttribute("pageTitle", "Problem");
+        model.addAttribute("results", results);
+        model.addAttribute("submit", new Submission(parser.orderResults(results)));
+
         dao.add(question.getQuestion(), question.getChapter(), chars);
         return "admin-result";
     }
