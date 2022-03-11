@@ -1,5 +1,6 @@
 package com.bsu.truthtables.parser;
 
+import com.bsu.truthtables.domain.ParsedQuestion;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -23,8 +24,8 @@ public class Parser {
     private Map<String, String> prefilledBox;
     private HashMap<String, String> map = null;
     public ArrayList<ArrayList<String>> data;
-    private boolean validity = false;
-    private boolean logical = false;
+    private ParsedQuestion parsedQuestion = null;
+
 
     public String orderResults(ArrayList<Pair<String, String>> r) {
         int max = 0;
@@ -48,13 +49,16 @@ public class Parser {
                 .replaceAll("\\(", "")
                 .replaceAll("\\)", "")
                 .replaceAll(" ", "")
+                .replaceAll("\\:", "")
+                .replaceAll("\\.", "")
                 .replaceAll(",", "")
                 .chars()
                 .distinct()
                 .mapToObj(c -> String.valueOf((char) c)).collect(Collectors.joining());
     }
 
-    public ArrayList<Pair<String, String>> parseQuestion(String question) {
+    public ParsedQuestion parseQuestion(String question) {
+        parsedQuestion = new ParsedQuestion();
         map = new HashMap<>();
         this.stmt = question.replaceAll(" ", "");
         this.chars = parseChars(question);
@@ -69,8 +73,26 @@ public class Parser {
             }
             i++;
         }
-        stmt();
-        return getData();
+        determineType();
+        parsedQuestion.setResultList( getData());
+        return parsedQuestion;
+    }
+
+
+    public Object determineType() {
+        if (stmt.contains("::")) {
+            parsedQuestion.setEquivalence(true);
+            return stmt();
+        }
+        else if(stmt.contains(":.")) {
+            parsedQuestion.setArgument(true);
+            return stmt();
+        }
+        else if (stmt.contains(",")) {
+            parsedQuestion.setConsistency(true);
+            return stmt();
+        }
+        return stmt();
     }
 
     public Object stmt() {

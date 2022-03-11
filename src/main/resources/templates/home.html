@@ -71,18 +71,13 @@
                 <p></p>
                 <!--            <p class="lead text-muted"> Replace me </p>-->
                 <form action="#" th:action="@{/}" th:object="${question}" method="post">
-                    <p>Enter a question: <input type="text" id="question" th:field="*{question}" /> <input type="submit" onclick="return validate()" value="Submit" /> <input type="reset" value="Reset"/></p>
+                    <p>Enter a question: <input type="text" id="question" th:field="*{question}" /> <input type="submit" onclick="return validate()" value="Submit" /> </p>
 
                 </form>
             </div>
 
             <div class="col">
                 <h3>Chapter Questions</h3>
-                <!--            <th:block th:each="chap : ${chapters}">-->
-                <!--                <div class="container-sm" style="border-bottom: 2px solid black">-->
-                <!--                    <a th:href="@{'/chapter-questions/'+${chap}}" th:text="'Chapter ' + ${chap}"></a>-->
-                <!--                </div>-->
-                <!--            </th:block>-->
                 <div class="list-group">
                     <th:block th:each="chap : ${chapters}">
                         <a th:href="@{'/chapter-questions/'+${chap}}" th:text="'Chapter ' + ${chap}" class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
