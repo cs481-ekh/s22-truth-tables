@@ -51,6 +51,12 @@
                         </div>
                         <!-- Navbar Right Side -->
                         <div class="navbar-nav ml-auto">
+                            <div class="chapter dropdown">
+                                <select class="form-control" onchange="window.location = this.value;"  id="dropOperator">
+                                    <option value="0">Go To Chapter</option>
+                                    <option th:each="chapter : ${chapters}" th:value=" ${chapter}" th:text="${chapter}"></option>
+                                </select>
+                            </div>
                                 <a sec:authorize="isAnonymous()" class="nav-item nav-link" href="/admin">Login</a>
                                 <a sec:authorize="isAuthenticated()" class="nav-item nav-link" href="/manage">Manage Questions</a>
                                 <a sec:authorize="isAuthenticated()" class="nav-item nav-link" href="/admin">Add Questions</a>
