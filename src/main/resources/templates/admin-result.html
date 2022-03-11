@@ -5,41 +5,113 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 </head>
 <body class="d-flex flex-column min-vh-100">
-    <!-- NavBar -->
-    <div th:replace="fragments :: menu"></div>
+<!-- NavBar -->
+<div th:replace="fragments :: menu"></div>
 <h1>Question added</h1>
 <p> Question: <b th:text="${question.question}"/> added to chapter <b th:text="${question.chapter}"/></p>
-<a href="/admin">Add a new question</a>
-<br>
 
-<div class="container">
-    <div class="row">
-        <div class="col-sm">
-            <!-- Center text in columns -->
-            <table class="tablecenterheadCSS tablecenterCSS table caption-top">
-                <caption>Inputs</caption>
-                <thead>
-                    <!-- print the input chars -->
-                    <th:block th:each="char : ${inputChars.toCharArray()}">
-                        <th th:text="${char}"></th>
-                    </th:block>
-                </thead>
-                <!-- print the input values -->
-                <th:block th:each="i: ${#numbers.sequence(1, boxDepth)}">
-                    <tr class="tablecentercolCSS">
-                        <th:block th:each="j : ${#numbers.sequence(1, inputChars.length())}">
-                            <td
-                                th:text="${prefilled.charAt( i * inputChars.length() - inputChars.length() + j - 1)}" />
-                        </th:block>
-                    </tr>
-                </th:block>
-            </table>
+
+<form action="#" th:action="@{/admin}" th:object="${question}" method="post">
+    <div class="center-questions">
+        <div class="row justify-content-md-center">
+            <div class="col-md-auto">
+                <p>Chapter:</p>
+            </div>
+            <div class="col-md-auto">
+                <div class="dropdown">
+                    <input list="chapters" class="form-control1" id="nameinput" name="chap"
+                           th:field="${question.chapter}"> </input>
+                    <datalist id="chapters">
+                        <option th:each="row : ${chapters}" th:value="${row}" th:label="${row}">
+                    </datalist>
+                </div>
+            </div>
+            <div class="col-md-auto">
+                <p>Question: <input type="text" th:field="*{question}"/></p>
+            </div>
+            <div class="col-md-auto">
+                <p><input type="submit" value="Add Question" onclick="return validate()"/>
+                </p>
+            </div>
         </div>
     </div>
-</div>
+</form>
+
+<main role="main" class="container">
+    <div class="row">
+        <div class="col-lg-6 col-md-8 mx-auto">
+            <!-- Putting tables into columns -->
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm">
+                        <!-- Center text in columns -->
+                        <table class="tablecenterheadCSS tablecenterCSS table caption-top">
+                            <caption>Inputs</caption>
+                            <thead>
+                            <!-- print the input chars -->
+                            <th:block th:each="char : ${inputChars.toCharArray()}">
+                                <th th:text="${char}"></th>
+                            </th:block>
+                            </thead>
+                            <!-- print the input values -->
+                            <th:block th:each="i: ${#numbers.sequence(1, boxDepth)}">
+                                <tr class="tablecenterCSS">
+                                    <!-- need to figure out how to set specific height like for other columns -->
+                                    <th:block th:each="j : ${#numbers.sequence(1, inputChars.length())}">
+                                        <td>
+                                            <div style="height:25px"
+                                                 th:text="${prefilled.charAt( i * inputChars.length() - inputChars.length() + j - 1)}"></div>
+                                        </td>
+                                    </th:block>
+                                </tr>
+                            </th:block>
+                        </table>
+                    </div>
+
+
+                    <div id="answers" class="col-sm">
+                        <table class="tablecenterheadCSS dropdowntable table caption-top">
+                            <caption>Answers</caption>
+                            <thead>
+                            <!-- print the input statement -->
+                            <!-- MAY NEED TO CHANGE LATER -->
+
+                            <th:block th:each="pair: ${results}">
+                                <th th:text="${pair.getValue0()}">
+                            </th:block>
+                            </thead>
+                            <!-- print the test, use a switch to display this later -->
+                            <th:block th:each="i: ${#numbers.sequence(0, boxDepth -1)}">
+                                <tr class="tablecenterCSS">
+
+                                    <!-- print the question values -->
+                                    <th:block th:each="pair: ${results}">
+                                        <th:block th:if="${pair.getValue1().length() != 0}">
+                                            <td>
+                                                <div style="height:25px" th:text="${pair.getValue1().charAt(i)}"></div>
+                                            </td>
+                                        </th:block>
+                                        <th:block th:if="${pair.getValue1().length() == 0}">
+                                            <td>
+                                                <div style="height:25px"></div>
+                                            </td>
+                                        </th:block>
+                                    </th:block>
+                                </tr>
+                            </th:block>
+                        </table>
+                    </div>
+
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</main>
 <br>
 
-<h3>Other questions in this chapter</h3>
+<!--h3>Other questions in this chapter</h3>
 <table>
     <th:block th:each="q: ${listOfQuestions}">
         <tr>
@@ -49,7 +121,7 @@
             </th>
         </tr>
     </th:block>
-</table>
+</table-->
 <footer th:replace="fragments :: footer"></footer>
 </body>
 </html>
