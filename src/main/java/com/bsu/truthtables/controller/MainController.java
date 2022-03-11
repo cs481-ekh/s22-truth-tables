@@ -9,10 +9,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 @Controller
@@ -25,11 +29,11 @@ public class MainController {
     private Parser parser;
 
     @Value("#{${prefilledBox}}")
-    private Map<String,String> prefilledBox;
+    private Map<String, String> prefilledBox;
 
     @GetMapping("/")
     public String home(Model model) {
-        model.addAttribute("question" , new Question());
+        model.addAttribute("question", new Question());
         model.addAttribute("chapters", dao.getChapters());
         model.addAttribute("pageTitle", "Home");
         return "home";
@@ -38,8 +42,8 @@ public class MainController {
     @PostMapping("/")
     public String practiceProblem(@ModelAttribute Question question, Model model, RedirectAttributes ra) {
         int numberOfInputs = parser.parseChars(question.getQuestion()).length();
-        int boxDepth = (int) Math.round(Math.pow(2,numberOfInputs));
-        ArrayList<Pair<String,String>> results = parser.parseQuestion(question.getQuestion());
+        int boxDepth = (int) Math.round(Math.pow(2, numberOfInputs));
+        ArrayList<Pair<String, String>> results = parser.parseQuestion(question.getQuestion());
         String chars = parser.parseChars(question.getQuestion());
         model.addAttribute("question", question);
         model.addAttribute("chapters", dao.getChapters());
@@ -58,6 +62,7 @@ public class MainController {
         //this is where we would grade and check stuff then load resulting page
         return "graded";
     }
+
     @GetMapping("/chapter-questions/{chapter}")
     public String getChapterQuestions2(@PathVariable("chapter") int chapter, Model model) {
         model.addAttribute("chapter", chapter);
@@ -69,7 +74,7 @@ public class MainController {
 
     @GetMapping("/admin")
     public String admin(Model model) {
-        model.addAttribute("question" , new Question());
+        model.addAttribute("question", new Question());
         model.addAttribute("pageTitle", "Admin");
         model.addAttribute("chapters", dao.getChapters());
         return "admin";
@@ -79,8 +84,8 @@ public class MainController {
     public String adminSubmit(@ModelAttribute Question question, Model model) {
 
         int numberOfInputs = parser.parseChars(question.getQuestion()).length();
-        int boxDepth = (int) Math.round(Math.pow(2,numberOfInputs));
-        ArrayList<Pair<String,String>> results = parser.parseQuestion(question.getQuestion());
+        int boxDepth = (int) Math.round(Math.pow(2, numberOfInputs));
+        ArrayList<Pair<String, String>> results = parser.parseQuestion(question.getQuestion());
         String chars = parser.parseChars(question.getQuestion());
         model.addAttribute("question", question);
         model.addAttribute("chapters", dao.getChapters());
@@ -95,10 +100,22 @@ public class MainController {
         dao.add(question.getQuestion(), question.getChapter(), chars);
         return "admin-result";
     }
+
     @GetMapping("/removeQuestion/{question}/{chapter}")
     public String adminDelete(@PathVariable String question, @PathVariable int chapter, Model model) {
         dao.removeQuestion(question, chapter);
         model.addAttribute("listOfQuestions", dao.getAllByChapter(chapter));
-        return "admin-result2";
+        return manage(model);
+    }
+
+    @GetMapping("/manage")
+    public String manage(Model model) {
+        HashMap map = new HashMap();
+        for (int chapter : dao.getChapters()) {
+            map.put(chapter, dao.getAllByChapter(chapter));
+
+        }
+        model.addAttribute("map", map);
+        return "manage";
     }
 }
