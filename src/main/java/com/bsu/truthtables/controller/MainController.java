@@ -36,6 +36,8 @@ public class MainController {
         model.addAttribute("question", new Question());
         model.addAttribute("chapters", dao.getChapters());
         model.addAttribute("pageTitle", "Home");
+        model.addAttribute("chapters", dao.getChapters());
+
         return "home";
     }
 
@@ -63,11 +65,12 @@ public class MainController {
         return "graded";
     }
 
-    @GetMapping("/chapter-questions/{chapter}")
+    @GetMapping("/{chapter}")
     public String getChapterQuestions2(@PathVariable("chapter") int chapter, Model model) {
         model.addAttribute("chapter", chapter);
         model.addAttribute("listOfQuestions", dao.getAllByChapter(chapter));
         model.addAttribute("pageTitle", "Chapter Questions");
+        model.addAttribute("chapters", dao.getChapters());
 
         return "chapter-questions";
     }
@@ -96,7 +99,7 @@ public class MainController {
         model.addAttribute("pageTitle", "Problem");
         model.addAttribute("results", results);
         model.addAttribute("submit", new Submission(parser.orderResults(results)));
-
+        model.addAttribute("pageTitle", "Admin");
         dao.add(question.getQuestion(), question.getChapter(), chars);
         return "admin-result";
     }
@@ -116,6 +119,8 @@ public class MainController {
 
         }
         model.addAttribute("map", map);
+        model.addAttribute("pageTitle", "manage");
+
         return "manage";
     }
 }
