@@ -92,6 +92,7 @@ public class Parser {
             parsedQuestion.setConsistency(true);
             return stmt();
         }
+        parsedQuestion.setLogical(true);
         return stmt();
     }
 
