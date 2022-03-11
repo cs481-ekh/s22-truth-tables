@@ -1,8 +1,6 @@
 package com.bsu.truthtables.domain;
 
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 import org.javatuples.Pair;
 
 import java.util.ArrayList;
