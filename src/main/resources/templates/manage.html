@@ -1,32 +1,38 @@
 <!DOCTYPE HTML>
 <html xmlns:th="https://www.thymeleaf.org">
+
 <head th:replace="fragments :: html_head">
     <title>Add Question</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
+
 <body class="d-flex flex-column min-vh-100">
-<!-- NavBar -->
-<div th:replace="fragments :: menu"></div>
+    <!-- NavBar -->
+    <div th:replace="fragments :: menu"></div>
 
-select a chapter
+    select a chapter
 
 
-<h3>Other questions in this chapter</h3>
-<table>
-    <th:block th:each="chapter: ${map.keySet()}">
-        <th th:text=" 'Questions for chapter '+ ${chapter}"/>
-    <th:block th:each="question: ${map.get(chapter)}">
+    <h3>Other questions in this chapter</h3>
+    <table>
+        <th:block th:each="chapter: ${map.keySet()}">
+            <th class="chapterText" th:text=" 'Chapter '+ ${chapter} + ' questions'"></th>
+        
+            <th:block th:each="question: ${map.get(chapter)}">
 
-        <tr>
-        <th th:text="${question}"/>
-            <th>
-                <button class="button4"><a style="text-decoration: none; color: white; font-family: 'Ubuntu', sans-serif;" th:href="@{'/removeQuestion/' + ${question} + '/' + ${chapter}}">Delete</a></button>
-            </th>
-        </tr>
-    </th:block>
-    </th:block>
-</table>
-<footer th:replace="fragments :: footer"></footer>
+                <tr>
+                    <th th:text="${question}" />
+                    <th>
+                        <button class="button4"><a
+                                style="text-decoration: none; color: white; font-family: 'Ubuntu', sans-serif;"
+                                th:href="@{'/removeQuestion/' + ${question} + '/' + ${chapter}}">Delete</a></button>
+                    </th>
+                </tr>
+            </th:block>
+        </th:block>
+  
+    </table>
+    <footer th:replace="fragments :: footer"></footer>
 </body>
-</html>
 
+</html>
