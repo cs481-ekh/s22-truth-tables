@@ -65,7 +65,7 @@ public class MainController {
         return "graded";
     }
 
-    @GetMapping("/{chapter}")
+    @GetMapping("/chapter/{chapter}")
     public String getChapterQuestions2(@PathVariable("chapter") int chapter, Model model) {
         model.addAttribute("chapter", chapter);
         model.addAttribute("listOfQuestions", dao.getAllByChapter(chapter));

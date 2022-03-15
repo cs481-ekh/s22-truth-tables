@@ -52,7 +52,7 @@
                         <!-- Navbar Right Side -->
                         <div class="navbar-nav ml-auto">
                             <div class="chapter dropdown">
-                                <select class="form-control" onchange="window.location = this.value;"  id="dropOperator">
+                                <select class="form-control" onchange="window.location = 'http://' + window.location.hostname + ':666/chapter/' + this.value;"  id="dropOperator1">
                                     <option value="0">Go To Chapter</option>
                                     <option th:each="chapter : ${chapters}" th:value=" ${chapter}" th:text="${chapter}"></option>
                                 </select>
