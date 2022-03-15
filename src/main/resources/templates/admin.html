@@ -1,11 +1,26 @@
 <!DOCTYPE HTML>
 <html xmlns:th="https://www.thymeleaf.org">
-<head th:replace="fragments :: html_head"></head>
+<head th:replace="fragments :: html_head">
+    <script type="text/javascript">
+        function validateForm() {
+            let x = document.forms["questionForm"]["chap"].value;
+            let y = document.forms["questionForm"]["ques"].value;
+            if( x == "" ) {
+                alert( "Please provide your name!" );
+                return false;
+            }
+            if( y == "" ) {
+                alert( "Please provide your Email!" );
+                return false;
+            }
+        }
+    </script>
+</head>
 <body class="d-flex flex-column min-vh-100">
 <!-- NavBar -->
 <div th:replace="fragments :: menu"></div>
 <h1>Add a new question</h1>                                                           <!-- this is missing -->
-<form action="#" th:action="@{/admin}" th:object="${question}" method="post">
+<form name="questionForm" action="#" th:action="@{/admin}" th:object="${question}" method="post">
 <!--    <p>chapter as number: <input type="text" th:field="*{chapter}" /></p>-->
     <div class="center-questions">
         <div class="row justify-content-md-center">
@@ -14,7 +29,7 @@
             </div>
             <div class="col-md-auto">
                 <div class="dropdown">
-                    <input list="chapters" class="form-control1" id="nameinput" name="chap"  th:field="${question.chapter}">  </input>
+                    <input type="number" list="chapters" class="form-control1" id="nameinput" name="chap" onsubmit="return validateForm()" th:field="${question.chapter}">  </input>
                     <datalist id="chapters">
                         <option th:each="row : ${chapters}" th:value="${row}" th:label="${row}">
                     </datalist>
@@ -24,7 +39,7 @@
                 <p>Question: <input type="text" th:field="*{question}" /></p>
             </div>
             <div class="col-md-auto">
-                <p><input type="submit" value="Submit" onclick="return validate()" /> <input type="reset" value="Reset" /></p>
+                <p><input type="submit" name="ques" value="Submit" onsubmit="return validateForm()" /> <input type="reset" value="Reset" /></p>
             </div>
         </div>
     </div>
