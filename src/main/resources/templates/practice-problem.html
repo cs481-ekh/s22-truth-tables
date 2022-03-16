@@ -139,7 +139,7 @@
                             </th:block>
                         </table>
                     </div>
-                    <div id="myDIV" class="col-sm">
+                    <div id="selections" style="display: block;" class="col-sm">
                         <table class="tablecenterheadCSS dropdowntable table caption-top">
                             <caption>Statement</caption>
                             <thead>
@@ -253,10 +253,16 @@
 <script>
     function myFunction() {
         var x = document.getElementById("answers");
+        var y = document.getElementById("selections");
         if (x.style.display === "none") {
             x.style.display = "block";
         } else {
             x.style.display = "none";
+        }
+        if (y.style.display === "none") {
+            y.style.display = "block";
+        } else {
+            y.style.display = "none";
         }
     }
 </script>
