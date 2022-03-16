@@ -1,21 +1,6 @@
 <!DOCTYPE HTML>
 <html xmlns:th="https://www.thymeleaf.org">
-<head th:replace="fragments :: html_head">
-    <script type="text/javascript">
-        function validateForm() {
-            let x = document.forms["questionForm"]["chap"].value;
-            let y = document.forms["questionForm"]["ques"].value;
-            if( x == "" ) {
-                alert( "Please provide your name!" );
-                return false;
-            }
-            if( y == "" ) {
-                alert( "Please provide your Email!" );
-                return false;
-            }
-        }
-    </script>
-</head>
+<head th:replace="fragments :: html_head"></head>
 <body class="d-flex flex-column min-vh-100">
 <!-- NavBar -->
 <div th:replace="fragments :: menu"></div>
@@ -36,7 +21,7 @@
             <div class="col-md-auto">
                 <div class="dropdown">
                     <input type="number" list="chapters" class="form-control1" placeholder="Must be a digit(s)" id="nameinput" name="chap"
-                           onsubmit="return validateForm()" th:field="${question.chapter}">  </input>
+                            th:field="${question.chapter}">  </input>
                     <datalist id="chapters">
                         <option th:each="row : ${chapters}" th:value="${row}" th:label="${row}">
                     </datalist>
@@ -46,7 +31,7 @@
                 <p>Question: <input type="text" th:field="*{question}" /></p>
             </div>
             <div class="col-md-auto">
-                <p><input type="submit" name="ques" value="Submit" onsubmit="return validateForm()" /> <input type="reset" value="Reset" /></p>
+                <p><input type="submit" name="ques" value="Submit" onclick="return validate()" /> <input type="reset" value="Reset" /></p>
             </div>
         </div>
     </div>
