@@ -215,11 +215,12 @@
                         </table>
                     </div>
                     <div class="col-sm-auto">
+                        <th:block th:if="${consistency}">
                         <table class="tablecenterheadCSS dropdowntable table caption-top">
-                            <caption>Validity Test</caption>
+                            <caption>Consistency Test</caption>
                             <thead>
                             <th style="text-align: center" th:colspan="${inputChars.length()}">
-                                Shows Invalid?
+                                Shows Consistency?
                             </th>
                             </thead>
                             <!-- print the select boxes -->
@@ -229,14 +230,15 @@
                                         <div style="height:25px">
                                             <select class="selectValidity">
                                                 <option></option>
-                                                <option>Shows invalid</option>
-                                                <option>Shows valid</option>
+                                                <option>Shows Consistent</option>
+                                                <option>Shows Inconsistent</option>
                                             </select>
                                         </div>
                                     </td>
                                 </tr>
                             </th:block>
                         </table>
+                        </th:block>
                     </div>
         </div>
     </div>
