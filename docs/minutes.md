@@ -1,3 +1,70 @@
+## Thursday 3/10 - 3:00p - 4:00p
+
+Scribe: Trevor
+
+Present: All
+
+Absent: N/A
+
+Summary: Met with Henderson for review of our sprint, also met as a team separately to discuss new prioritization of tasks following feedback from Cortens.
+
+Action Items: Work on tasks 
+
+------
+## Tuesday 3/08 - 12:30p - 1:40p
+
+Scribe: Trevor and Zach
+
+Present: All
+
+Absent: N/A
+
+Summary: Met with Dr. Cortens to show what we currently have and to get an update on his priorities for a completed product
+
+Action Items: Review resources showing different problem types that we will need to implement. 
+
+------
+## Sunday 3/06 - 12:30p - 2:15p
+
+Scribe: Trevor
+
+Present: Kyle, Trevor, Josh, and Zach
+
+Absent: Berto
+
+Summary: Compared parser implementations and discussed integration of them. also discussed current status on some tasks and thngs we still need to get done
+
+Action Items: Work on tasks
+
+------
+## Thursday 3/03 - 3:00p - 4:00p
+
+Scribe: Trevor
+
+Present: All
+
+Absent: N/A
+
+Summary: Planned sprint 2.
+
+**Sprint goal: By the end of this sprint we are expecting to have our minimum viable product. This includes basic truth table problem generation with solution feedback. Students will be able to fill out a truth table and see the full solution to compare to their own. In addition, students should be able to access chapter questions that the professor adds. Styling should also be complete on a basic level, having at least minimal styling for every page on the site. Professor should also be able to easily add and delete questions to chapters.**
+
+Action Items: Work on tasks
+
+------
+## Tuesday 3/01 - 3:30p - 4:20p
+
+Scribe: Trevor
+
+Present: All
+
+Absent: N/A
+
+Summary: Discussed possible sprint 2 tasks and had further discussion on format of data being passed from parser to front end. Talked about the possibility of the front end having to do some parsing. 
+
+Action Items: Everyone think about possible tasks. Kyle email Cortens to set up meeting for end of this week or beginning of next 
+
+------
 ## Sunday 2/27 - 11:45a - 12:15p
 
 Scribe: Zach

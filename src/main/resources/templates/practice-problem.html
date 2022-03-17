@@ -12,7 +12,6 @@
 <section style="margin-top: 5%;" class="py-3 text-center container">
     <div class="row py-0">
         <div>
-            <h1>Interactive Truth Table</h1>
             <p></p>
             <p class="lead text-muted">
                 This tool exists to allow students to enter propositional logic formulas with the ability to
@@ -26,45 +25,96 @@
         </div>
 </section>
 
-<section class="py-5 text-center container">
+<!--<section class="py-5 text-center container">-->
+<!--    <div class="row py-lg-5">-->
+<!--        <div class="col">-->
+<!--            <div class="col" style="border: 2px solid black">-->
+<!--                <h3>Operators</h3>-->
+<!--                <div class="container-sm" style="border-bottom: 2px solid black">-->
+<!--                    <p>|, ->, <-, v, ^, *</p>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        <div class="col-lg-6 col-md-8 mx-auto">-->
+<!--            <h1 class="fw-light">Practice Problem</h1>-->
+<!--            <form action="#" th:action="@{/}" th:object="${question}" method="post">-->
+<!--                <p>Enter a question: <input type="text" id="question" th:field="*{question}"/> <input type="submit"-->
+<!--                                                                                                      onclick="return validate()"-->
+<!--                                                                                                      value="Add question"/>-->
+<!--                    </p>-->
+<!--            </form>-->
+<!--            <h3 id="idk"></h3>-->
+<!--        </div>-->
+<!--        <div class="col" style="border: 2px solid black">-->
+<!--            <h3>Chapter Questions</h3>-->
+<!--            <th:block th:each="chap : ${chapters}">-->
+<!--                <div class="container-sm" style="border-bottom: 2px solid black">-->
+<!--                    <a th:href="@{'/chapter-questions/'+${chap}}" th:text="'Chapter ' + ${chap}"></a>-->
+<!--                </div>-->
+<!--            </th:block>-->
+<!--        </div>-->
+
+<!--    </div>-->
+<!--</section>-->
+
+<section class="py-sm-0 text-center container">
     <div class="row py-lg-5">
         <div class="col">
             <div class="col" style="border: 2px solid black">
                 <h3>Operators</h3>
-                <div class="container-sm" style="border-bottom: 2px solid black">
-                    <p>|, ->, <-, v, ^, *</p>
+                <div class="container-sm">
+                    <div class="row">
+                        <div class="col" style="border-bottom: 2px solid black">
+                            ^
+                        </div>
+                        <div class="col" style="border-bottom: 2px solid black">
+                            v
+                        </div>
+                        <div class="col" style="border-bottom: 2px solid black">
+                            >
+                        </div>
+                        <div class="col" style="border-bottom: 2px solid black">
+                            ~
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            and
+                        </div>
+                        <div class="col">
+                            or
+                        </div>
+                        <div class="col">
+                            if then
+                        </div>
+                        <div class="col">
+                            not
+                        </div>
+                    </div>
                 </div>
             </div>
+
         </div>
-        <div class="col-lg-6 col-md-8 mx-auto">
-            <h1 class="fw-light">Practice Problem</h1>
+        <div class="col-6">
+            <p></p>
+            <!--            <p class="lead text-muted"> Replace me </p>-->
             <form action="#" th:action="@{/}" th:object="${question}" method="post">
-                <p>Enter a question: <input type="text" id="question" th:field="*{question}"/> <input type="submit"
-                                                                                                      onclick="return validate()"
-                                                                                                      value="Submit"/>
-                    </p>
+                <p>Enter a question: <input type="text" id="question" th:field="*{question}" /> <input type="submit" onclick="return validate()" value="Submit" /> <input type="reset" value="Reset"/></p>
+
             </form>
-            <h3 id="idk"></h3>
-        </div>
-        <div class="col" style="border: 2px solid black">
-            <h3>Chapter Questions</h3>
-            <th:block th:each="chap : ${chapters}">
-                <div class="container-sm" style="border-bottom: 2px solid black">
-                    <a th:href="@{'/chapter-questions/'+${chap}}" th:text="'Chapter ' + ${chap}"></a>
-                </div>
-            </th:block>
         </div>
 
+        <div class="col"></div>
     </div>
+</section>
 </section>
 
 
 
 <main role="main" class="container">
     <div class="row">
-        <div class="col-lg-6 col-md-8 mx-auto">
+        <div class="col-xl-auto mx-auto">
             <!-- Putting tables into columns -->
-            <div class="container">
                 <div class="row">
                     <div class="col-sm">
                         <!-- Center text in columns -->
@@ -90,7 +140,7 @@
                             </th:block>
                         </table>
                     </div>
-                    <div id="myDIV" class="col-sm">
+                    <div id="selections" style="display: block;" class="col-sm">
                         <table class="tablecenterheadCSS dropdowntable table caption-top">
                             <caption>Statement</caption>
                             <thead>
@@ -164,7 +214,7 @@
                             </th:block>
                         </table>
                     </div>
-                    <div class="col-sm">
+                    <div class="col-sm-auto">
                         <table class="tablecenterheadCSS dropdowntable table caption-top">
                             <caption>Validity Test</caption>
                             <thead>
@@ -188,23 +238,32 @@
                             </th:block>
                         </table>
                     </div>
-                </div>
-            </div>
         </div>
     </div>
 </main>
-<div style="display: inline; margin-left: 37%;">
-    <button class="solution" style="margin-right: 30px;" onclick="myFunction()">Show Solution</button>
-    <button class="solution" onclick="grade()">Check</button>
-</div>
+
+
+<section class="py-3 text-center container">
+    <div style="display: inline;">
+        <button class="solution" style="margin-right: 30px;" onclick="myFunction()">Show Solution</button>
+        <button class="solution" onclick="grade()">Check</button>
+    </div>
+</section>
+
 <footer th:replace="fragments :: footer"></footer>
 <script>
     function myFunction() {
         var x = document.getElementById("answers");
+        var y = document.getElementById("selections");
         if (x.style.display === "none") {
             x.style.display = "block";
         } else {
             x.style.display = "none";
+        }
+        if (y.style.display === "none") {
+            y.style.display = "block";
+        } else {
+            y.style.display = "none";
         }
     }
 </script>

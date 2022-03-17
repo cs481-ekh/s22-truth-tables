@@ -5,16 +5,23 @@
 <!-- NavBar -->
 <div th:replace="fragments :: menu"></div>
 <h1>Add a new question</h1>                                                           <!-- this is missing -->
-<form action="#" th:action="@{/admin}" th:object="${question}" method="post">
+<form name="questionForm" action="#" th:action="@{/admin}" th:object="${question}" method="post">
 <!--    <p>chapter as number: <input type="text" th:field="*{chapter}" /></p>-->
     <div class="center-questions">
-        <div class="row justify-content-md-center">
+<!--        <div class="row justify-content-md-around gy-0 g-0">-->
+<!--            <div class="col-md-auto"></div>-->
+<!--            <div class="col-md-auto"><p style="font-size:11px;font-family:verdana;color:gray">&nbsp &nbsp Must be a digit(s) - Ex. 12</p></div>-->
+<!--            <div class="col-md-auto"></div>-->
+<!--            <div class="col-md-auto"></div>-->
+<!--        </div>-->
+        <div class="row justify-content-md-center gy-0">
             <div class="col-md-auto">
                 <p>Chapter:</p>
             </div>
             <div class="col-md-auto">
                 <div class="dropdown">
-                    <input list="chapters" class="form-control1" id="nameinput" name="chap"  th:field="${question.chapter}">  </input>
+                    <input type="number" list="chapters" class="form-control1" placeholder="Must be a digit(s)" id="nameinput" name="chap"
+                            th:field="${question.chapter}">  </input>
                     <datalist id="chapters">
                         <option th:each="row : ${chapters}" th:value="${row}" th:label="${row}">
                     </datalist>
@@ -24,7 +31,7 @@
                 <p>Question: <input type="text" th:field="*{question}" /></p>
             </div>
             <div class="col-md-auto">
-                <p><input type="submit" value="Submit" onclick="return validate()" /> <input type="reset" value="Reset" /></p>
+                <p><input type="submit" name="ques" value="Submit" onclick="return validate()" /> <input type="reset" value="Reset" /></p>
             </div>
         </div>
     </div>
