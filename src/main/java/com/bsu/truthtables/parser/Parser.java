@@ -4,10 +4,7 @@ import com.bsu.truthtables.domain.ParsedQuestion;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 import org.javatuples.Pair;
 
@@ -60,7 +57,7 @@ public class Parser {
 
     public ParsedQuestion parseQuestion(String question) {
         parsedQuestion = new ParsedQuestion();
-        map = new HashMap<>();
+        map = new LinkedHashMap<>();
         this.stmt = question.replaceAll(" ", "");
         this.original=stmt;
         this.chars = parseChars(question);
@@ -77,7 +74,25 @@ public class Parser {
         }
         determineType();
         parsedQuestion.setResultList( getData());
+        if(parsedQuestion.isConsistency()) {
+            evalConsistency();
+        }
         return parsedQuestion;
+    }
+
+    public void evalConsistency() {
+        List<String> list = Arrays.asList(original.split(","));
+        String consistent = "";
+        for(int i = 0; i < map.get(list.get(0)).length(); i++) {
+            String tmp = "T";
+            for (String s : list) {
+                if (map.get(s).charAt(i) == 'F') {
+                    tmp = "F";
+                }
+            }
+            consistent += tmp;
+        }
+        parsedQuestion.setValidity(consistent);
     }
 
 
