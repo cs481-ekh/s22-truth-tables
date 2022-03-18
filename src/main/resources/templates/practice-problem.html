@@ -228,10 +228,10 @@
                                 <tr class="tablecenterCSS">
                                     <td>
                                         <div style="height:25px">
-                                            <select class="selectValidity">
-                                                <option></option>
-                                                <option>Shows Consistent</option>
-                                                <option>Shows Inconsistent</option>
+                                            <select th:id="'valid' + ${submit.getCount2()}" class="selectValidity">
+                                                <option value = " "></option>
+                                                <option value="T">Shows Consistent</option>
+                                                <option value="F">Shows Inconsistent</option>
                                             </select>
                                         </div>
                                     </td>
@@ -240,6 +240,7 @@
                         </table>
                         </th:block>
                     </div>
+                </div>
         </div>
     </div>
 </main>
@@ -272,6 +273,7 @@
 <script th:inline="javascript">
     function grade() {
         var count = /*[[${submit.getCount()}]]*/ 'default';
+        var list = /*[[${validity}]]*/ 'default';
         var answer = /*[[${submit.getParsedAnswers()}]]*/ 'default';
         for (let i = 0; i < count; i++) {
             var x = document.getElementById(i);
@@ -280,6 +282,16 @@
                 x.style.color = "red";
             } else {
                 x.style.color = "black";
+            }
+        }
+        for(let i = 0; i < list.length; i++) {
+            var y = document.getElementById("valid" + i);
+            console.log("hey " + y.value);
+            console.log("is " + list[i].value );
+            if(list.charAt(i) != y.value && y.value != " ") {
+                y.style.color = "red";
+            } else {
+                y.style.color = "black";
             }
         }
     }

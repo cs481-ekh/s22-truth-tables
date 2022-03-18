@@ -52,7 +52,7 @@ public class MainController {
         model.addAttribute("consistency", parsedQuestion.isConsistency());
         model.addAttribute("equivalence", parsedQuestion.isEquivalence());
         model.addAttribute("logical", parsedQuestion.isLogical());
-
+        model.addAttribute("validity", parsedQuestion.getValidity());
         model.addAttribute("question", question);
         model.addAttribute("chapters", dao.getChapters());
         model.addAttribute("prefilled", prefilledBox.get(String.valueOf(numberOfInputs)));
