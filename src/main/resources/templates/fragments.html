@@ -59,7 +59,7 @@
                         <div class="navbar-nav ml-auto">
                             <th:block th:if="${pageTitle != null}">
                             <div class="chapter dropdown">
-                                <select class="form-control" onchange="window.location = 'http://' + window.location.hostname + ':666/chapter/' + this.value;"  id="dropOperator1">
+                                <select class="form-control" onchange="window.location = 'http://' + window.location.hostname + ':8080/chapter/' + this.value;"  id="dropOperator1">
                                     <option value="0">Go To Chapter</option>
                                     <option th:each="chapter : ${chapters}" th:value=" ${chapter}" th:text="${chapter}"></option>
                                 </select>
