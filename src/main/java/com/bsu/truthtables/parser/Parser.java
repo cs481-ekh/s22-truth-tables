@@ -1,12 +1,10 @@
 package com.bsu.truthtables.parser;
 
+import com.bsu.truthtables.domain.ParsedQuestion;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 import org.javatuples.Pair;
 
@@ -18,13 +16,14 @@ public class Parser {
     private String operators;   //loaded from applicaiton properties, this is all the known operators
     private int rows;
     private String stmt;
+    private String original;
     private String chars;
     @Value("#{${prefilledBox}}")
     private Map<String, String> prefilledBox;
     private HashMap<String, String> map = null;
     public ArrayList<ArrayList<String>> data;
-    private boolean validity = false;
-    private boolean logical = false;
+    private ParsedQuestion parsedQuestion = null;
+
 
     public String orderResults(ArrayList<Pair<String, String>> r) {
         int max = 0;
@@ -48,15 +47,19 @@ public class Parser {
                 .replaceAll("\\(", "")
                 .replaceAll("\\)", "")
                 .replaceAll(" ", "")
+                .replaceAll("\\:", "")
+                .replaceAll("\\.", "")
                 .replaceAll(",", "")
                 .chars()
                 .distinct()
                 .mapToObj(c -> String.valueOf((char) c)).collect(Collectors.joining());
     }
 
-    public ArrayList<Pair<String, String>> parseQuestion(String question) {
-        map = new HashMap<>();
+    public ParsedQuestion parseQuestion(String question) {
+        parsedQuestion = new ParsedQuestion();
+        map = new LinkedHashMap<>();
         this.stmt = question.replaceAll(" ", "");
+        this.original=stmt;
         this.chars = parseChars(question);
         String values = prefilledBox.get(String.valueOf(chars.length()));
         int i = 0;
@@ -69,8 +72,46 @@ public class Parser {
             }
             i++;
         }
-        stmt();
-        return getData();
+        determineType();
+        parsedQuestion.setResultList( getData());
+        if(parsedQuestion.isConsistency()) {
+            evalConsistency();
+        }
+        return parsedQuestion;
+    }
+
+    public void evalConsistency() {
+        List<String> list = Arrays.asList(original.split(","));
+        String consistent = "";
+        for(int i = 0; i < map.get(list.get(0)).length(); i++) {
+            String tmp = "T";
+            for (String s : list) {
+                if (map.get(s).charAt(i) == 'F') {
+                    tmp = "F";
+                }
+            }
+            consistent += tmp;
+        }
+        parsedQuestion.setValidity(consistent);
+    }
+
+
+    public Object determineType() {
+        if (stmt.contains("::")) {
+            parsedQuestion.setEquivalence(true);
+        }
+        else if(stmt.contains(":.")) {
+            parsedQuestion.setArgument(true);
+        }
+        else if (stmt.contains(",")) {
+            parsedQuestion.setConsistency(true);
+        }
+        parsedQuestion.setLogical(true);
+        while(stmt.contains(",")) {
+            stmt();
+            map.put(",","");
+        }
+        return stmt();
     }
 
     public Object stmt() {
@@ -330,22 +371,22 @@ public class Parser {
                 }
             }
         }
-        keys.sort(new KeyComparator(question));
+        keys.sort(new KeyComparator(original));
         for(String key: keys) {
             String val = map.get(key);
             values.add(val);
         }
-        for(int i = 0; i < question.length(); i++) {
-            char c = question.charAt(i);
-            if(c == '^' || c == 'v' || c == '!' || c == '-' || c == '~') {
+        for(int i = 0; i < original.length(); i++) {
+            char c = original.charAt(i);
+            if(c == '^' || c == 'v' || c == '!' || c == '-' || c == '~' ) {
                 String op = "" + c;
                 ops.add(op);
             }
         }
         ArrayList<Pair<String, String>> ret = new ArrayList<>();
         int count = 0;
-        for(int i = 0; i < question.length(); i++) {
-            String s = "" + question.charAt(i);
+        for(int i = 0; i < original.length(); i++) {
+            String s = "" + original.charAt(i);
             if(count < ops.size() && s.equals(ops.get(count))) {
                 ret.add(new Pair<>(s, values.get(count)));
                 count++;

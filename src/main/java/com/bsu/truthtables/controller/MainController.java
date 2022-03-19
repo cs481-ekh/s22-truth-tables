@@ -1,6 +1,7 @@
 package com.bsu.truthtables.controller;
 
 import com.bsu.truthtables.dao.Dao;
+import com.bsu.truthtables.domain.ParsedQuestion;
 import com.bsu.truthtables.domain.Question;
 import com.bsu.truthtables.domain.Submission;
 import com.bsu.truthtables.parser.Parser;
@@ -45,8 +46,13 @@ public class MainController {
     public String practiceProblem(@ModelAttribute Question question, Model model, RedirectAttributes ra) {
         int numberOfInputs = parser.parseChars(question.getQuestion()).length();
         int boxDepth = (int) Math.round(Math.pow(2, numberOfInputs));
-        ArrayList<Pair<String, String>> results = parser.parseQuestion(question.getQuestion());
+        ParsedQuestion parsedQuestion = parser.parseQuestion(question.getQuestion());
         String chars = parser.parseChars(question.getQuestion());
+        model.addAttribute("argument", parsedQuestion.isArgument());
+        model.addAttribute("consistency", parsedQuestion.isConsistency());
+        model.addAttribute("equivalence", parsedQuestion.isEquivalence());
+        model.addAttribute("logical", parsedQuestion.isLogical());
+        model.addAttribute("validity", parsedQuestion.getValidity());
         model.addAttribute("question", question);
         model.addAttribute("chapters", dao.getChapters());
         model.addAttribute("prefilled", prefilledBox.get(String.valueOf(numberOfInputs)));
@@ -54,8 +60,8 @@ public class MainController {
         model.addAttribute("inputChars", chars);
         model.addAttribute("boxDepth", boxDepth);
         model.addAttribute("pageTitle", "Problem");
-        model.addAttribute("results", results);
-        model.addAttribute("submit", new Submission(parser.orderResults(results)));
+        model.addAttribute("results", parsedQuestion.getResultList());
+        model.addAttribute("submit", new Submission(parser.orderResults(parsedQuestion.getResultList())));
         return "practice-problem";
     }
 
@@ -88,7 +94,7 @@ public class MainController {
 
         int numberOfInputs = parser.parseChars(question.getQuestion()).length();
         int boxDepth = (int) Math.round(Math.pow(2, numberOfInputs));
-        ArrayList<Pair<String, String>> results = parser.parseQuestion(question.getQuestion());
+        ParsedQuestion parsedQuestion = parser.parseQuestion(question.getQuestion());
         String chars = parser.parseChars(question.getQuestion());
         model.addAttribute("question", question);
         model.addAttribute("chapters", dao.getChapters());
@@ -97,8 +103,8 @@ public class MainController {
         model.addAttribute("inputChars", chars);
         model.addAttribute("boxDepth", boxDepth);
         model.addAttribute("pageTitle", "Problem");
-        model.addAttribute("results", results);
-        model.addAttribute("submit", new Submission(parser.orderResults(results)));
+        model.addAttribute("results", parsedQuestion.getResultList());
+        model.addAttribute("submit", new Submission(parser.orderResults(parsedQuestion.getResultList())));
         model.addAttribute("pageTitle", "Admin");
         dao.add(question.getQuestion(), question.getChapter(), chars);
         return "admin-result";
