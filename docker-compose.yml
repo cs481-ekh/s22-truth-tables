@@ -9,6 +9,8 @@ services:
       - truthtables-mysql
     depends_on:
       - mysqldb
+    volumes:
+      - test:/test
 
   mysqldb:
     image: mysql:8
@@ -20,7 +22,9 @@ services:
     volumes:
       - .:/docker-entrypoint-initdb.d
       - data:/var/lib/mysql
+      - test:/docker-entrypoint-initdb.d
 volumes:
   data:
+  test:
 networks:
   truthtables-mysql:
