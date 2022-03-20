@@ -240,6 +240,32 @@
                         </table>
                         </th:block>
                     </div>
+                    <div class="col-sm-auto">
+                        <th:block th:if="${argument}">
+                        <table class="tablecenterheadCSS dropdowntable table caption-top">
+                            <caption>Validity Test</caption>
+                            <thead>
+                            <th style="text-align: center" th:colspan="${inputChars.length()}">
+                                Row Shows?
+                            </th>
+                            </thead>
+                            <!-- print the select boxes -->
+                            <th:block th:each="i: ${#numbers.sequence(1, boxDepth)}">
+                                <tr class="tablecenterCSS">
+                                    <td>
+                                        <div style="height:25px">
+                                            <select th:id="'valid' + ${submit.getCount2()}" class="selectValidity">
+                                                <option value = " "></option>
+                                                <option value="T">Valid</option>
+                                                <option value="F">Invalid</option>
+                                            </select>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </th:block>
+                        </table>
+                        </th:block>
+                    </div>
                 </div>
         </div>
     </div>
