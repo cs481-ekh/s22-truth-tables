@@ -99,12 +99,27 @@ public class Parser {
     public Object determineType() {
         if (stmt.contains("::")) {
             parsedQuestion.setEquivalence(true);
+            while(stmt.contains(",")) {
+                stmt();
+                map.put(",","");
+            }
+            return stmt();
         }
         else if(stmt.contains(":.")) {
             parsedQuestion.setArgument(true);
+            while(stmt.contains(",")) {
+                stmt();
+                map.put(",","");
+            }
+            return stmt();
         }
         else if (stmt.contains(",")) {
             parsedQuestion.setConsistency(true);
+            while(stmt.contains(",")) {
+                stmt();
+                map.put(",","");
+            }
+            return stmt();
         }
         parsedQuestion.setLogical(true);
         while(stmt.contains(",")) {

@@ -129,4 +129,11 @@ public class MainController {
 
         return "manage";
     }
+
+    @GetMapping("/help")
+    public String about(Model model) {
+        model.addAttribute("pageTitle", "Help");
+
+        return "help";
+    }
 }
