@@ -4,6 +4,7 @@ import lombok.Data;
 import org.javatuples.Pair;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Data
 public class ParsedQuestion {

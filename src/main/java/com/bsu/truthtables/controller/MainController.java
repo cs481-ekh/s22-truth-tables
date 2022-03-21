@@ -52,7 +52,7 @@ public class MainController {
         model.addAttribute("consistency", parsedQuestion.isConsistency());
         model.addAttribute("equivalence", parsedQuestion.isEquivalence());
         model.addAttribute("logical", parsedQuestion.isLogical());
-
+        model.addAttribute("validity", parsedQuestion.getValidity());
         model.addAttribute("question", question);
         model.addAttribute("chapters", dao.getChapters());
         model.addAttribute("prefilled", prefilledBox.get(String.valueOf(numberOfInputs)));
@@ -71,7 +71,7 @@ public class MainController {
         return "graded";
     }
 
-    @GetMapping("/{chapter}")
+    @GetMapping("/chapter/{chapter}")
     public String getChapterQuestions2(@PathVariable("chapter") int chapter, Model model) {
         model.addAttribute("chapter", chapter);
         model.addAttribute("listOfQuestions", dao.getAllByChapter(chapter));
@@ -128,5 +128,12 @@ public class MainController {
         model.addAttribute("pageTitle", "manage");
 
         return "manage";
+    }
+
+    @GetMapping("/help")
+    public String about(Model model) {
+        model.addAttribute("pageTitle", "Help");
+
+        return "help";
     }
 }

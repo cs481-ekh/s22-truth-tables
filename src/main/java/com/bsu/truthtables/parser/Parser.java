@@ -4,10 +4,7 @@ import com.bsu.truthtables.domain.ParsedQuestion;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 import org.javatuples.Pair;
 
@@ -19,6 +16,7 @@ public class Parser {
     private String operators;   //loaded from applicaiton properties, this is all the known operators
     private int rows;
     private String stmt;
+    private String original;
     private String chars;
     @Value("#{${prefilledBox}}")
     private Map<String, String> prefilledBox;
@@ -59,8 +57,9 @@ public class Parser {
 
     public ParsedQuestion parseQuestion(String question) {
         parsedQuestion = new ParsedQuestion();
-        map = new HashMap<>();
+        map = new LinkedHashMap<>();
         this.stmt = question.replaceAll(" ", "");
+        this.original=stmt;
         this.chars = parseChars(question);
         String values = prefilledBox.get(String.valueOf(chars.length()));
         int i = 0;
@@ -75,24 +74,58 @@ public class Parser {
         }
         determineType();
         parsedQuestion.setResultList( getData());
+        if(parsedQuestion.isConsistency()) {
+            evalConsistency();
+        }
         return parsedQuestion;
+    }
+
+    public void evalConsistency() {
+        List<String> list = Arrays.asList(original.split(","));
+        String consistent = "";
+        for(int i = 0; i < map.get(list.get(0)).length(); i++) {
+            String tmp = "T";
+            for (String s : list) {
+                if (map.get(s).charAt(i) == 'F') {
+                    tmp = "F";
+                }
+            }
+            consistent += tmp;
+        }
+        parsedQuestion.setValidity(consistent);
     }
 
 
     public Object determineType() {
         if (stmt.contains("::")) {
             parsedQuestion.setEquivalence(true);
+            while(stmt.contains(",")) {
+                stmt();
+                map.put(",","");
+            }
             return stmt();
         }
         else if(stmt.contains(":.")) {
             parsedQuestion.setArgument(true);
+            while(stmt.contains(",")) {
+                stmt();
+                map.put(",","");
+            }
             return stmt();
         }
         else if (stmt.contains(",")) {
             parsedQuestion.setConsistency(true);
+            while(stmt.contains(",")) {
+                stmt();
+                map.put(",","");
+            }
             return stmt();
         }
         parsedQuestion.setLogical(true);
+        while(stmt.contains(",")) {
+            stmt();
+            map.put(",","");
+        }
         return stmt();
     }
 
@@ -353,22 +386,22 @@ public class Parser {
                 }
             }
         }
-        keys.sort(new KeyComparator(question));
+        keys.sort(new KeyComparator(original));
         for(String key: keys) {
             String val = map.get(key);
             values.add(val);
         }
-        for(int i = 0; i < question.length(); i++) {
-            char c = question.charAt(i);
-            if(c == '^' || c == 'v' || c == '!' || c == '-' || c == '~') {
+        for(int i = 0; i < original.length(); i++) {
+            char c = original.charAt(i);
+            if(c == '^' || c == 'v' || c == '!' || c == '-' || c == '~' ) {
                 String op = "" + c;
                 ops.add(op);
             }
         }
         ArrayList<Pair<String, String>> ret = new ArrayList<>();
         int count = 0;
-        for(int i = 0; i < question.length(); i++) {
-            String s = "" + question.charAt(i);
+        for(int i = 0; i < original.length(); i++) {
+            String s = "" + original.charAt(i);
             if(count < ops.size() && s.equals(ops.get(count))) {
                 ret.add(new Pair<>(s, values.get(count)));
                 count++;
