@@ -9,6 +9,11 @@ import java.util.List;
 @Data
 public class ParsedQuestion {
 
+    //Will remove once I change the implementation in the Parser, but for now they need to stay
+    //so they don't break the build
+    private String validity = "";
+    private ArrayList<Pair<String, String>> resultList;
+
     //Front end will iterate through each statement in this list in order to grab
     //that statement's resultList
     private ArrayList<ArrayList<Pair<String, String>>> statementList;
