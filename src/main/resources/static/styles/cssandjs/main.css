@@ -396,5 +396,6 @@ form.form1 {
     width: 100%;
     height: 50px;
     border-top: 5px solid #3e8e41;
-    display: inline;
+    display: flex;
+    color: white;
 }
