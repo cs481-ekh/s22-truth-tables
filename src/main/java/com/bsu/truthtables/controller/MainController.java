@@ -43,24 +43,17 @@ public class MainController {
     }
 
     @PostMapping("/")
-    public String practiceProblem(@ModelAttribute Question question, Model model, RedirectAttributes ra) {
+    public String practiceProblem(@ModelAttribute Question question, Model model) {
         int numberOfInputs = parser.parseChars(question.getQuestion()).length();
-        int boxDepth = (int) Math.round(Math.pow(2, numberOfInputs));
         ParsedQuestion parsedQuestion = parser.parseQuestion(question.getQuestion());
-        String chars = parser.parseChars(question.getQuestion());
-        model.addAttribute("argument", parsedQuestion.isArgument());
-        model.addAttribute("consistency", parsedQuestion.isConsistency());
-        model.addAttribute("equivalence", parsedQuestion.isEquivalence());
-        model.addAttribute("logical", parsedQuestion.isLogical());
-        model.addAttribute("validity", parsedQuestion.getValidity());
+        model.addAttribute("parsedQuestion", parsedQuestion);
         model.addAttribute("question", question);
         model.addAttribute("chapters", dao.getChapters());
         model.addAttribute("prefilled", prefilledBox.get(String.valueOf(numberOfInputs)));
         model.addAttribute("numberOfInputs", numberOfInputs);
-        model.addAttribute("inputChars", chars);
-        model.addAttribute("boxDepth", boxDepth);
+        model.addAttribute("inputChars", parser.parseChars(question.getQuestion()));
+        model.addAttribute("boxDepth", Math.round(Math.pow(2, numberOfInputs)));
         model.addAttribute("pageTitle", "Problem");
-        model.addAttribute("results", parsedQuestion.getResultList());
         model.addAttribute("submit", new Submission(parser.orderResults(parsedQuestion.getResultList())));
         return "practice-problem";
     }
@@ -93,7 +86,6 @@ public class MainController {
     public String adminSubmit(@ModelAttribute Question question, Model model) {
 
         int numberOfInputs = parser.parseChars(question.getQuestion()).length();
-        int boxDepth = (int) Math.round(Math.pow(2, numberOfInputs));
         ParsedQuestion parsedQuestion = parser.parseQuestion(question.getQuestion());
         String chars = parser.parseChars(question.getQuestion());
         model.addAttribute("question", question);
@@ -101,7 +93,7 @@ public class MainController {
         model.addAttribute("prefilled", prefilledBox.get(String.valueOf(numberOfInputs)));
         model.addAttribute("numberOfInputs", numberOfInputs);
         model.addAttribute("inputChars", chars);
-        model.addAttribute("boxDepth", boxDepth);
+        model.addAttribute("boxDepth", Math.round(Math.pow(2, numberOfInputs)));
         model.addAttribute("pageTitle", "Problem");
         model.addAttribute("results", parsedQuestion.getResultList());
         model.addAttribute("submit", new Submission(parser.orderResults(parsedQuestion.getResultList())));
