@@ -69,6 +69,7 @@ public class MainController {
     public String getChapterQuestions2(@PathVariable("chapter") int chapter, Model model) {
         model.addAttribute("pageTitle", "Chapter Questions");
         model.addAttribute("chapter", chapter);
+        model.addAttribute("chapters", dao.getChapters());
         model.addAttribute("pageTitle", "Problem");
 
         List<String> list = dao.getAllByChapter(chapter);
@@ -89,13 +90,10 @@ public class MainController {
         model.addAttribute("boxDepth" , boxDepth);
         model.addAttribute("submit" , submit);
 
-
         for(String q : list){
-
 
             int inputNum = parser.parseChars(q).length();
             ParsedQuestion pq = parser.parseQuestion(q);
-
             parsedQuestion.add(pq);
             question.add(q);
             prefilled.add(prefilledBox.get(String.valueOf(inputNum)));
@@ -103,24 +101,7 @@ public class MainController {
             inputChars.add(parser.parseChars(q));
             boxDepth.add((int) Math.round(Math.pow(2, inputNum)));
             submit.add(new Submission(parser.orderResults(pq.getResultList())));
-
-
-
-//            int numberOfInputs = parser.parseChars(question).length();
-//            ParsedQuestion parsedQuestion = parser.parseQuestion(question);
-//
-//            model.addAttribute("parsedQuestion" + i, parsedQuestion);
-//            model.addAttribute("question" + i, question);
-//            model.addAttribute("prefilled" + i, prefilledBox.get(String.valueOf(numberOfInputs)));
-//            model.addAttribute("numberOfInputs" + i, numberOfInputs);
-//            model.addAttribute("inputChars" + i, parser.parseChars(question));
-//            model.addAttribute("boxDepth" + i, Math.round(Math.pow(2, numberOfInputs)));
-//
-//            model.addAttribute("submit" + i, new Submission(parser.orderResults(parsedQuestion.getResultList())));
-//            i++;
         }
-
-
 
         return "chapter-questions";
     }
