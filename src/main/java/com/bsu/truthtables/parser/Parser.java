@@ -414,7 +414,7 @@ public class Parser {
                 i++; //skip over the next char since we already handle it
 
             } else if (original.charAt(i) == ':' && original.length() > i && original.charAt(i + 1) == '.') {
-                ret.add(new Pair<>( new String(Character.toChars(2234)), values.get(0)));  //using address 0 because values currently doesnt contain a set for :., this will use count once evaluation is completed
+                ret.add(new Pair<>( new String(Character.toChars(8756)), values.get(0)));  //using address 0 because values currently doesnt contain a set for :., this will use count once evaluation is completed
                 i++; //skip over the next char since we already handle it
             }
             else {
