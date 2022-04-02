@@ -396,6 +396,10 @@ public class Parser {
             if(c == '^' || c == 'v' || c == '!' || c == '-' || c == '~' ) {
                 String op = "" + c;
                 ops.add(op);
+            } else if (c == ':' && original.charAt(i+1) == ':') {
+                ops.add("::");
+            } else if (c == ':' && original.charAt(i+1) == '.') {
+                ops.add("::");
             }
         }
         ArrayList<Pair<String, String>> ret = new ArrayList<>();
@@ -405,6 +409,13 @@ public class Parser {
             if(count < ops.size() && s.equals(ops.get(count))) {
                 ret.add(new Pair<>(s, values.get(count)));
                 count++;
+            } else if (original.charAt(i) == ':' && original.length() > i && original.charAt(i + 1) == ':') {
+                ret.add(new Pair<>( new String(Character.toChars(8594)), values.get(0)));  //using address 0 because values currently doesnt contain a set for ::, this will use count once evaluation is completed
+                i++; //skip over the next char since we already handle it
+
+            } else if (original.charAt(i) == ':' && original.length() > i && original.charAt(i + 1) == '.') {
+                ret.add(new Pair<>( new String(Character.toChars(2234)), values.get(0)));  //using address 0 because values currently doesnt contain a set for :., this will use count once evaluation is completed
+                i++; //skip over the next char since we already handle it
             }
             else {
                 ret.add(new Pair<>(s, ""));
