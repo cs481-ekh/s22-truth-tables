@@ -399,7 +399,7 @@ public class Parser {
             } else if (c == ':' && original.charAt(i+1) == ':') {
                 ops.add("::");
             } else if (c == ':' && original.charAt(i+1) == '.') {
-                ops.add("::");
+                ops.add(":.");
             }
         }
         ArrayList<Pair<String, String>> ret = new ArrayList<>();
