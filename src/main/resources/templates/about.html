@@ -1,0 +1,48 @@
+<!DOCTYPE HTML>
+<html xmlns:th="https://www.thymeleaf.org">
+<head th:replace="fragments :: html_head"></head>
+
+<body class="d-flex flex-column min-vh-100">
+
+<!-- NavBar -->
+<div th:replace="fragments :: menu"></div>
+
+<section style="margin-top: 5%;" class="py-3 text-left container">
+    <div class="row py-0">
+        <div>
+            <h1>About</h1>
+            <p></p>
+            <p class="lead text-muted">
+                This site was created under the direction of Dr. Cortens at Boise State University to function as a Truth Table
+                Generator and grader for students looking to practice different logical statements and their respective evaluation.
+                <em>INCLUDE LATER: Information on where site is hosted and who to reach out to for technical issues</em>
+            </p>
+        </div>
+    </div>
+</section>
+
+<section class="py-3 text-left container">
+    <div class="row py-0">
+        <div>
+            <h1>For Future Developers</h1>
+            <p class="lead text-muted">
+                We've created this site as Spring Boot Web application using ThymeLeaf view. Below you can find resources that will help familiarize yourself with the framework.
+                We recommend using Intellij (premium edition is free for students) or VSCode for IDE use <em>INCLUDE LATER: Information on how to access DB, Spin up project</em>
+            </p>
+
+            <h2>Resources</h2>
+            <ul>
+                <li>https://www.thymeleaf.org/doc/tutorials/2.1/usingthymeleaf.html#what-is-thymeleaf</li>
+                <li>https://mkyong.com/spring-boot/spring-boot-hello-world-example-thymeleaf/</li>
+                <li>https://www.javatpoint.com/spring-boot-thymeleaf-view</li>
+                <li>include resources involving backend/DB</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+
+<footer th:replace="fragments :: footer"></footer>
+
+<script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
+</body>
