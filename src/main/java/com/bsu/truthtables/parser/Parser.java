@@ -77,22 +77,26 @@ public class Parser {
         if(parsedQuestion.isConsistency()) {
             evalConsistency();
         }
+        parsedQuestion.setMap(map);
         return parsedQuestion;
     }
 
     public void evalConsistency() {
-        List<String> list = Arrays.asList(original.split(","));
+        String[] list = original.split(",");
         String consistent = "";
-        for(int i = 0; i < map.get(list.get(0)).length(); i++) {
+        boolean cons = false;
+        for(int i = 0; i < map.get(list[0]).length(); i++) {
             String tmp = "T";
             for (String s : list) {
                 if (map.get(s).charAt(i) == 'F') {
                     tmp = "F";
                 }
             }
+            if(tmp.equals("T")) cons = true;
             consistent += tmp;
         }
-        parsedQuestion.setValidity(consistent);
+        parsedQuestion.setShowsConsistent(consistent);
+        parsedQuestion.setConsistent(cons);
     }
 
 
