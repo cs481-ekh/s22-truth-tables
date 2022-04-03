@@ -136,6 +136,7 @@ public class Parser {
         }
         else if(stmt.contains(":.")) {
             parsedQuestion.setArgument(true);
+            stmt = stmt.replaceAll(":.", ",");
             while(stmt.contains(",")) {
                 stmt();
                 map.put(",","");
