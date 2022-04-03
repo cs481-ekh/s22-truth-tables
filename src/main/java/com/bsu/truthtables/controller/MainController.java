@@ -160,4 +160,11 @@ public class MainController {
 
         return "help";
     }
+
+    @GetMapping("/about")
+    public String aboutPage(Model model) {
+        model.addAttribute("pageTitle", "About");
+
+        return "about";
+    }
 }
