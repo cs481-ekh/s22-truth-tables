@@ -35,7 +35,7 @@ public class ParsedQuestion {
     private boolean isContradiction = false;
     private boolean isEquivalent = false;
     private boolean isConsistent = false;
-    private boolean isValid = false;
+    private boolean isValid = true;
 
     private Map<String,String> map;
 }

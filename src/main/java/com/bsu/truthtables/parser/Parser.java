@@ -77,8 +77,33 @@ public class Parser {
         if(parsedQuestion.isConsistency()) {
             evalConsistency();
         }
+        else if(parsedQuestion.isArgument()) {
+            evalArgument();
+        }
         parsedQuestion.setMap(map);
         return parsedQuestion;
+    }
+
+    public void evalArgument() {
+        String[] list = original.split(":.");
+        String[] premises = list[0].split(",");
+        String conclusion = list[1];
+        String validity = "";
+        boolean valid = true;
+        for(int i = 0; i < get(conclusion).length(); i++) {
+            boolean allPremisesTrue = true;
+            String tmp = "F";
+            for(String premise: premises) {
+                if(map.get(premise).charAt(i) == 'F') allPremisesTrue = false;
+            }
+            if(allPremisesTrue && map.get(conclusion).charAt(i) == 'F') {
+                tmp = "T";
+                valid = false;
+            }
+            validity += tmp;
+        }
+        parsedQuestion.setValid(valid);
+        parsedQuestion.setShowsInvalid(validity);
     }
 
     public void evalConsistency() {
@@ -402,10 +427,6 @@ public class Parser {
             if(c == '^' || c == 'v' || c == '-' || c == '~' ) {
                 String op = "" + c;
                 ops.add(op);
-            } else if (c == ':' && original.charAt(i+1) == ':') {
-                ops.add("::");
-            } else if (c == ':' && original.charAt(i+1) == '.') {
-                ops.add(":.");
             }
         }
         ArrayList<Pair<String, String>> ret = new ArrayList<>();
