@@ -74,21 +74,33 @@ class TruthtablesApplicationTests {
 
     @Test
     void kyleStuff() {
-        String question = "A v B, B v C, ~B";
+        String question = "A v B, A ^ B :. B";
         ParsedQuestion q1 = parser.parseQuestion(question);
         ArrayList<Pair<String, String>> data = parser.getData();
         System.out.println(question);
-        System.out.println(q1.getShowsConsistent());
-        System.out.println(q1.isConsistent());
+        System.out.println(q1.getShowsInvalid());
+        System.out.println(q1.isValid());
 
-        String question2 = "A ^ B, B v C, ~B";
+        String question2 = "A v B, A :. B";
         ParsedQuestion q2 = parser.parseQuestion(question2);
         ArrayList<Pair<String, String>> data2 = parser.getData();
         System.out.println(question2);
-        System.out.println(q2.getShowsConsistent());
-        System.out.println(q2.isConsistent());
-//        System.out.println(q1.toString());
-//        System.out.println(data.toString());
+        System.out.println(q2.getShowsInvalid());
+        System.out.println(q2.isValid());
+
+        String question3 = "A v B, A ^ B, A";
+        ParsedQuestion q3 = parser.parseQuestion(question3);
+        ArrayList<Pair<String, String>> data3 = parser.getData();
+        System.out.println(question3);
+        System.out.println(q3.getShowsConsistent());
+        System.out.println(q3.isConsistent());
+
+        String question4 = "A v B, A, ~A";
+        ParsedQuestion q4 = parser.parseQuestion(question4);
+        ArrayList<Pair<String, String>> data4 = parser.getData();
+        System.out.println(question4);
+        System.out.println(q4.getShowsInvalid());
+        System.out.println(q4.isValid());
 
         System.out.println();
     }
