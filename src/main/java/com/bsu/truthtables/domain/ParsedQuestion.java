@@ -5,13 +5,13 @@ import org.javatuples.Pair;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Data
 public class ParsedQuestion {
 
     //Will remove once I change the implementation in the Parser, but for now they need to stay
     //so they don't break the build
-    private String validity = "";
     private ArrayList<Pair<String, String>> resultList;
 
     //Front end will iterate through each statement in this list in order to grab
@@ -19,10 +19,10 @@ public class ParsedQuestion {
     private ArrayList<ArrayList<Pair<String, String>>> statementList;
 
     //List of last column values for each problem type
-    private ArrayList<String> showsNotTautology;
-    private ArrayList<String> showsEquivalent;
-    private ArrayList<String> showsConsistent;
-    private ArrayList<String> showsInvalid;
+    private String showsNotTautology;
+    private String showsEquivalent;
+    private String showsConsistent;
+    private String showsInvalid;
 
     //Problem types
     private boolean argument = false;
@@ -36,4 +36,6 @@ public class ParsedQuestion {
     private boolean isEquivalent = false;
     private boolean isConsistent = false;
     private boolean isValid = false;
+
+    private Map<String,String> map;
 }
