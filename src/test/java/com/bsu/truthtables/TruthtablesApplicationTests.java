@@ -74,12 +74,13 @@ class TruthtablesApplicationTests {
 
     @Test
     void kyleStuff() {
-        String question = "A v B :: B v A";
+        String question = "A ^ ~A";
         ParsedQuestion q1 = parser.parseQuestion(question);
         ArrayList<Pair<String, String>> data = parser.getData();
         System.out.println(question);
-        System.out.println(q1.getShowsEquivalent());
-        System.out.println(q1.isEquivalent());
+        System.out.println(q1.getShowsNotTautology());
+        System.out.println(q1.isTautology());
+        System.out.println(q1.isContradiction());
 
 //        String question2 = "A v B, A :. B";
 //        ParsedQuestion q2 = parser.parseQuestion(question2);
