@@ -80,6 +80,9 @@ public class Parser {
         else if(parsedQuestion.isArgument()) {
             evalArgument();
         }
+        else if(parsedQuestion.isEquivalence()) {
+            evalEquivalence();
+        }
         parsedQuestion.setMap(map);
         return parsedQuestion;
     }
@@ -124,10 +127,28 @@ public class Parser {
         parsedQuestion.setConsistent(cons);
     }
 
+    public void evalEquivalence() {
+        String[] list = original.split("::");
+        String equivalent = "";
+        boolean equiv = true;
+        for(int i = 0; i < map.get(list[0]).length(); i++) {
+            String tmp = "T";
+            char c1 = map.get(list[0]).charAt(i);
+            char c2 = map.get(list[1]).charAt(i);
+            if(c1 != c2) {
+                equiv = false;
+                tmp = "F";
+            }
+            equivalent += tmp;
+        }
+        parsedQuestion.setShowsEquivalent(equivalent);
+        parsedQuestion.setEquivalent(equiv);
+    }
 
     public Object determineType() {
         if (stmt.contains("::")) {
             parsedQuestion.setEquivalence(true);
+            stmt = stmt.replaceAll("::", ",");
             while(stmt.contains(",")) {
                 stmt();
                 map.put(",","");
