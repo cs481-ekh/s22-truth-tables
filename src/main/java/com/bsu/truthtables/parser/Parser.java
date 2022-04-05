@@ -83,6 +83,9 @@ public class Parser {
         else if(parsedQuestion.isEquivalence()) {
             evalEquivalence();
         }
+        else {
+            evalLogical();
+        }
         parsedQuestion.setMap(map);
         return parsedQuestion;
     }
@@ -143,6 +146,28 @@ public class Parser {
         }
         parsedQuestion.setShowsEquivalent(equivalent);
         parsedQuestion.setEquivalent(equiv);
+    }
+
+    public void evalLogical() {
+        String values = map.get(original);
+        String logical = "";
+        boolean taut = true;
+        boolean contra = true;
+        for(int i = 0; i < values.length(); i++) {
+            char c = values.charAt(i);
+            String tmp = "T";
+            if(c == 'T') {
+                contra = false;
+            }
+            else {
+                tmp = "F";
+                taut = false;
+            }
+            logical += tmp;
+        }
+        parsedQuestion.setShowsNotTautology(logical);
+        parsedQuestion.setTautology(taut);
+        parsedQuestion.setContradiction(contra);
     }
 
     public Object determineType() {
