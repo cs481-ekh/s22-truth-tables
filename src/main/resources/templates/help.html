@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="https://www.thymeleaf.org">
 <head th:replace="fragments :: html_head">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -84,75 +84,38 @@
             <div class="col">
                 <h4>Logical Status</h4>
                 <p>The logical status will appear as a selectable field when only the standard operators are used (^, v, >, ~) </p>
-<!--                <p>-->
-                    <h5>Example</h5>
-<!--                    <b>Question:</b>-->
-<!--                    <br>-->
-<!--                    <br>-->
+                <h5>Example</h5>
                 <div class="w3-half">
-                    <img src="/images/LogicalStatus.png" style="width:100%" onclick="onClick(this)" alt="Logical Status">
+                    <img th:src="@{images/LogicalStatus.png}" style="width:210%" onclick="onClick(this)" alt="Logical Status">
                 </div>
-<!--                    <br>-->
-<!--                    <br>-->
-<!--                    <b>Explanation:</b>-->
-<!--                    <br>-->
-<!--                    <br>-->
-<!--                </p>-->
             </div>
             <div class="col">
                 <h4>Equivalence</h4>
-                <p>The equivalence of two statements is the truth value of the statement. For example, if the
-                    statement is "A and B" then the equivalence is the truth value of "A and B".</p>
-                <p>
-                    <b>Question:</b>
-                    <br>
-                    <br>
-                    <b>Answer:</b>
-                    <br>
-                    <br>
-                    <b>Explanation:</b>
-                    <br>
-                    <br>
-                </p>
+                <h5>Example</h5>
+                <div class="w3-half">
+                    <img th:src="@{images/LogicalStatus.png}" style="width:210%" onclick="onClick(this)" alt="Logical Status">
+                </div>
             </div>
 
             <div class="col">
                 <h4>Consistency</h4>
                 <p>The consistency of a statement is the truth value of the statement. For example, if the
                     statement is "A and B" then the consistency is the truth value of "A and B".</p>
-                <p>
-                    <b>Question:</b>
-                    <br>
-                    <br>
-                    <b>Answer:</b>
-                    <br>
-                    <br>
-                    <b>Explanation:</b>
-                    <br>
-                    <br>
-                </p>
+                <h5>Example</h5>
+                <div class="w3-half">
+                    <img th:src="@{images/LogicalStatus.png}" style="width:210%" onclick="onClick(this)" alt="Logical Status">
+                </div>
             </div>
 
             <div class="col">
                 <h4>Validity</h4>
                 <p>The equivalence of two statements is the truth value of the statement. For example, if the
                     statement is "A and B" then the equivalence is the truth value of "A and B".</p>
-                <p>
-                    <b>Question:</b>
-                    <br>
-                    <br>
-                    <b>Answer:</b>
-                    <br>
-                    <br>
-                    <b>Explanation:</b>
-                    <br>
-                    <br>
-                </p>
+                <h5>Example</h5>
+                <div class="w3-half">
+                    <img th:src="@{images/LogicalStatus.png}" style="width:210%" onclick="onClick(this)" alt="Logical Status">
+                </div>
             </div>
-            <p>AvB is good</p>
-            <p>Av(B^C) is good</p>
-            <p>AvB^C is bad</p>
-            <p>Logical Status: s1</p>
             <p>Equivalence: s1 :: s2</p>
             <p>Consistency: s1, s2, … , sx</p>
             <p>Validity: p1, p2, …, px :. c1</p>
@@ -213,7 +176,7 @@
         </div>
     </div>
 
-    <!-- Packages / Pricing Tables -->
+    <!-- Logic Refresher -->
     <div class="w3-container" id="Logic Refresher" style="margin-top:75px">
         <h1 class="w3-xxxlarge w3-text-darkgreen"><b>Logic Refresher</b></h1>
         <hr style="width:50px;border:5px solid darkgreen" class="w3-round">
