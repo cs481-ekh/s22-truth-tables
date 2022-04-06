@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="https://www.thymeleaf.org">
 <head th:replace="fragments :: html_head">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -27,7 +27,6 @@
         <span class="w3-bar-item w3-button w3-hover-lightgreen border-bottom border-dark"></span>
         <a href="#Help" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-light-green border-top border-dark w3-text-light-gray">Help</a>
         <a href="#Expected Format" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-light-green w3-text-light-gray">Expected Format</a>
-        <a href="#Add a Question" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-light-green w3-text-light-gray">Add a Question</a>
         <a href="#Logic Refresher" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-light-green w3-text-light-gray">Logic Refresher</a>
         <a href="#Report Bugs" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-light-green w3-text-light-gray">Report Bugs</a>
     </div>
@@ -38,97 +37,75 @@
 
     <!-- Header -->
     <div class="w3-container" style="margin-top:80px" id="Help">
-<!--        <h1 class="w3-jumbo"><b>Help Title</b></h1>-->
-        <h1 class="w3-xxxlarge w3-text-darkgreen"><b>Help</b></h1>
+        <h1 class="w3-xxxlarge w3-text-dark-green"><b>Help</b></h1>
         <hr style="width:50px;border:5px solid darkgreen" class="w3-round">
     </div>
 
-    <!-- Photo grid (modal) -->
-    <div class="w3-row-padding">
-<!--        <div class="w3-half">-->
-<!--            <img src="/w3images/kitchenconcrete.jpg" style="width:100%" onclick="onClick(this)" alt="Concrete meets bricks">-->
-<!--            <img src="/w3images/livingroom.jpg" style="width:100%" onclick="onClick(this)" alt="Light, white and tight scandinavian design">-->
-<!--            <img src="/w3images/diningroom.jpg" style="width:100%" onclick="onClick(this)" alt="White walls with designer chairs">-->
-<!--        </div>-->
 
-<!--        <div class="w3-half">-->
-<!--            <img src="/w3images/atrium.jpg" style="width:100%" onclick="onClick(this)" alt="Windows for the atrium">-->
-<!--            <img src="/w3images/bedroom.jpg" style="width:100%" onclick="onClick(this)" alt="Bedroom and office in one space">-->
-<!--            <img src="/w3images/livingroom2.jpg" style="width:100%" onclick="onClick(this)" alt="Scandinavian design">-->
-<!--        </div>-->
-        <p>Here is where you can find help.</p>
-    </div>
 
-    <!-- Modal for full size images on click-->
-    <div id="modal01" class="w3-modal w3-black" style="padding-top:0" onclick="this.style.display='none'">
-        <span class="w3-button w3-black w3-xxlarge w3-display-topright">×</span>
-        <div class="w3-modal-content w3-animate-zoom w3-center w3-transparent w3-padding-64">
-            <img id="img01" class="w3-image">
-            <p id="caption"></p>
-        </div>
-    </div>
+
 
     <!-- Expected Format -->
     <div class="w3-container" id="Expected Format" style="margin-top:75px">
         <h1 class="w3-xxxlarge w3-text-darkgreen"><b>Expected Format</b></h1>
         <hr style="width:50px;border:5px solid darkgreen" class="w3-round">
-            <p>AvB is good</p>
-            <p>Av(B^C) is good</p>
-            <p>AvB^C is bad</p>
-            <p>Logical Status: s1</p>
-            <p>Equivalence: s1 :: s2</p>
-            <p>Consistency: s1, s2, … , sx</p>
-            <p>Validity: p1, p2, …, px :. c1</p>
-            <p>s is statement, p is premise and c is conclusion (both of which are still just statements)</p>
-    </div>
+        <!-- Create three columns -->
+        <div class="row">
 
-    <!-- Add a Question -->
-    <div class="w3-container" id="Add a Question" style="margin-top:75px">
-        <h1 class="w3-xxxlarge w3-text-darkgreen"><b>Add a Question</b></h1>
-        <hr style="width:50px;border:5px solid #3e8e41" class="w3-round">
-        <p>The best team in the world.</p>
-        <p>We are lorem ipsum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
-            dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor
-            incididunt ut labore et quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-        </p>
-        <p><b>Our designers are thoughtfully chosen</b>:</p>
-    </div>
+            <p>The expected format for the different problem types can be seen as follows:</p>
+            <p>Note: It is assumed you will apply logically appropriate parentheses on your statements. Order of precedence will still be applied if not used. </p>
+            <p> Example: AvB &#9989;</p>
+            <p> Example: Av(B^C) &#9989;</p>
+            <p> Example: AvB^C &#10060;</p>
 
-    <!-- The Team -->
-    <div class="w3-row-padding w3-grayscale">
-        <div class="w3-col m4 w3-margin-bottom">
-            <div class="w3-light-grey">
-                <img src="/w3images/team2.jpg" alt="John" style="width:100%">
-                <div class="w3-container">
-                    <h3>John Doe</h3>
-                    <p class="w3-opacity">CEO & Founder</p>
-                    <p>Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse sodales pellentesque elementum.</p>
+            <div class="col">
+                <h4>Logical Status</h4>
+                <p>The logical status will appear as a selectable field when only the standard operators are used (^, v, >, ~) </p>
+                <h5>Example</h5>
+                <div class="w3-half">
+                    <img th:src="@{images/LogicalStatus.png}" style="width:210%" onclick="onClick(this)" alt="Logical Status">
                 </div>
             </div>
-        </div>
-        <div class="w3-col m4 w3-margin-bottom">
-            <div class="w3-light-grey">
-                <img src="/w3images/team1.jpg" alt="Jane" style="width:100%">
-                <div class="w3-container">
-                    <h3>Jane Doe</h3>
-                    <p class="w3-opacity">Designer</p>
-                    <p>Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse sodales pellentesque elementum.</p>
+            <div class="col">
+                <h4>Equivalence</h4>
+                <p>The equivalence will appear as a selectable field when a double colon (s1 :: s2) is used to separate two statements</p>
+                <h5>Example</h5>
+                <div class="w3-half">
+                    <img th:src="@{images/LogicalStatus.png}" style="width:210%" onclick="onClick(this)" alt="Logical Status">
                 </div>
             </div>
-        </div>
-        <div class="w3-col m4 w3-margin-bottom">
-            <div class="w3-light-grey">
-                <img src="/w3images/team3.jpg" alt="Mike" style="width:100%">
-                <div class="w3-container">
-                    <h3>Mike Ross</h3>
-                    <p class="w3-opacity">Architect</p>
-                    <p>Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse sodales pellentesque elementum.</p>
+
+            <div class="col">
+                <h4>Consistency</h4>
+                <p>The consistency will appear as a selectable field when a comma (s1, s2, … , sx) is used to separate two or more statements</p>
+                <h5>Example</h5>
+                <div class="w3-half">
+                    <img th:src="@{images/LogicalStatus.png}" style="width:210%" onclick="onClick(this)" alt="Logical Status">
                 </div>
             </div>
-        </div>
+
+            <div class="col">
+                <h4>Validity</h4>
+                <p>The validity will appear as a selectable field when a colon followed by a period (p1, p2, …, px :. c1) is used to separate two or more
+                premises from a conclusion statement</p>
+                <h5>Example</h5>
+                <div class="w3-half">
+                    <img th:src="@{images/LogicalStatus.png}" style="width:210%" onclick="onClick(this)" alt="Logical Status">
+                </div>
+            </div>
+
+            <!-- Modal for full size images on click-->
+            <div id="modal01" class="w3-modal w3-black" style="padding-top:0" onclick="this.style.display='none'">
+                <span class="w3-button w3-black w3-xxlarge w3-display-topright">×</span>
+                <div class="w3-modal-content w3-animate-zoom w3-center w3-transparent w3-padding-64">
+                    <img id="img01" class="w3-image">
+                    <p id="caption"></p>
+                </div>
+            </div>
     </div>
 
-    <!-- Packages / Pricing Tables -->
+
+    <!-- Logic Refresher -->
     <div class="w3-container" id="Logic Refresher" style="margin-top:75px">
         <h1 class="w3-xxxlarge w3-text-darkgreen"><b>Logic Refresher</b></h1>
         <hr style="width:50px;border:5px solid darkgreen" class="w3-round">
@@ -222,26 +199,6 @@
         captionText.innerHTML = element.alt;
     }
 </script>
-
-<!-- Content -->
-<!--<div class="container-fluid">-->
-<!--    <div class="row">-->
-<!--        <div class="col-12">-->
-<!--            <div class="card">-->
-<!--                <div class="card-header">-->
-<!--                    <h3 class="card-title">Help</h3>-->
-<!--                </div>-->
-<!--                <details>-->
-<!--                    <summary>-->
-<!--                        <h1>Help</h1>-->
-<!--                    </summary>-->
-<!--                    <p>-->
-<!--                        This is a help page.-->
-<!--                    </p>-->
-<!--                </details>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
 
 </body>
 
