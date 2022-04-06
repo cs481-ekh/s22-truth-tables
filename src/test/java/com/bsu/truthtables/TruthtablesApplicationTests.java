@@ -78,7 +78,7 @@ class TruthtablesApplicationTests {
         ParsedQuestion q1 = parser.parseQuestion(question);
         ArrayList<Pair<String, String>> data = parser.getData();
         System.out.println(question);
-        System.out.println(q1.getShowsNotTautology());
+        System.out.println(q1.getResults());
         System.out.println(q1.isTautology());
         System.out.println(q1.isContradiction());
 

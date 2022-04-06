@@ -345,7 +345,7 @@
 <script th:inline="javascript">
     function grade() {
         var count = /*[[${submit.getCount()}]]*/ 'default';
-        var list = /[[${parsedQuestion.getShowsConsistent()}]]/ 'default';
+        var list = /*[[${parsedQuestion.getResults()}]]*/ 'default';
         var answer = /*[[${submit.getParsedAnswers()}]]*/ 'default';
         for (let i = 0; i < count; i++) {
             var x = document.getElementById(i);
@@ -360,7 +360,7 @@
             var y = document.getElementById("valid" + i);
             console.log("hey " + y.value);
             console.log("is " + list[i].value );
-            if(list.charAt(i) != y.value && y.value != " ") {
+            if(list.charAt(i) != y.value) {
                 y.style.color = "red";
             } else {
                 y.style.color = "black";
