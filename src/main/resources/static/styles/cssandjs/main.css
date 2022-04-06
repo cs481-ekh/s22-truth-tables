@@ -388,6 +388,23 @@ form.form1 {
     padding-top: 25px;
 }
 
+th{
+    position: sticky;
+    top: 80px;
+    border-top: #000000;
+    border-bottom: #000000;
+    border-width: 2px;
+}
+
+tr.fill th{
+    background: #fafafa;
+}
+caption{
+    position: sticky;
+    top: 50px;
+    background-color: #fafafa;
+}
+  
 .footer {
     position: fixed;
     background-color: rgb(102, 102, 102);
