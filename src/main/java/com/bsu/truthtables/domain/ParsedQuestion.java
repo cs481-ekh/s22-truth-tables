@@ -19,10 +19,7 @@ public class ParsedQuestion {
     private ArrayList<ArrayList<Pair<String, String>>> statementList;
 
     //List of last column values for each problem type
-    private String showsNotTautology;
-    private String showsEquivalent;
-    private String showsConsistent;
-    private String showsInvalid;
+    private String results;
 
     //Problem types
     private boolean argument = false;

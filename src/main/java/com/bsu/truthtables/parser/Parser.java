@@ -109,7 +109,7 @@ public class Parser {
             validity += tmp;
         }
         parsedQuestion.setValid(valid);
-        parsedQuestion.setShowsInvalid(validity);
+        parsedQuestion.setResults(validity);
     }
 
     public void evalConsistency() {
@@ -126,7 +126,7 @@ public class Parser {
             if(tmp.equals("T")) cons = true;
             consistent += tmp;
         }
-        parsedQuestion.setShowsConsistent(consistent);
+        parsedQuestion.setResults(consistent);
         parsedQuestion.setConsistent(cons);
     }
 
@@ -144,7 +144,7 @@ public class Parser {
             }
             equivalent += tmp;
         }
-        parsedQuestion.setShowsEquivalent(equivalent);
+        parsedQuestion.setResults(equivalent);
         parsedQuestion.setEquivalent(equiv);
     }
 
@@ -165,7 +165,7 @@ public class Parser {
             }
             logical += tmp;
         }
-        parsedQuestion.setShowsNotTautology(logical);
+        parsedQuestion.setResults(logical);
         parsedQuestion.setTautology(taut);
         parsedQuestion.setContradiction(contra);
     }
