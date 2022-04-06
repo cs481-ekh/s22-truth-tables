@@ -74,30 +74,35 @@ class TruthtablesApplicationTests {
 
     @Test
     void kyleStuff() {
-        String question = "A v (B ->C)";
+        String question = "A ^ ~A";
         ParsedQuestion q1 = parser.parseQuestion(question);
         ArrayList<Pair<String, String>> data = parser.getData();
         System.out.println(question);
-        System.out.println(q1.toString());
-        System.out.println(data.toString());
+        System.out.println(q1.getResults());
+        System.out.println(q1.isTautology());
+        System.out.println(q1.isContradiction());
+
+//        String question2 = "A v B, A :. B";
+//        ParsedQuestion q2 = parser.parseQuestion(question2);
+//        ArrayList<Pair<String, String>> data2 = parser.getData();
+//        System.out.println(question2);
+//        System.out.println(q2.getShowsInvalid());
+//        System.out.println(q2.isValid());
+//
+//        String question3 = "A v B, A ^ B, A";
+//        ParsedQuestion q3 = parser.parseQuestion(question3);
+//        ArrayList<Pair<String, String>> data3 = parser.getData();
+//        System.out.println(question3);
+//        System.out.println(q3.getShowsConsistent());
+//        System.out.println(q3.isConsistent());
+//
+//        String question4 = "A v B, A, ~A";
+//        ParsedQuestion q4 = parser.parseQuestion(question4);
+//        ArrayList<Pair<String, String>> data4 = parser.getData();
+//        System.out.println(question4);
+//        System.out.println(q4.getShowsInvalid());
+//        System.out.println(q4.isValid());
 
         System.out.println();
-
-        String question2 = "!((!A v B) ^ C)";
-        ParsedQuestion q2 = parser.parseQuestion(question2);
-        data = parser.getData();
-        System.out.println(question2);
-        System.out.println(q2.toString());
-        System.out.println(data.toString());
-
-//		String question3 = "A v (B v (C v D))";
-//        List q3 =parser.parseQuestion(question3);
-//		data = parser.getData();
-//		ops = data.get(0);
-//		values = data.get(1);
-//		System.out.println(question3);
-//		System.out.println(q3.toString());
-//		System.out.println(ops.toString());
-//		System.out.println(values.toString());
     }
 }

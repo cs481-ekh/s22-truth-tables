@@ -3,7 +3,7 @@
 
 <head th:replace="fragments :: html_head"></head>
 
-<body class="d-flex flex-column min-vh-100">
+<body class="d-flex flex-column min-vh-100 body">
 
 <!-- NavBar -->
 <div th:replace="fragments :: menu"></div>
@@ -146,7 +146,7 @@
                             <!-- print the input statement -->
                             <!-- MAY NEED TO CHANGE LATER -->
 
-                            <th:block th:each="pair: ${results}">
+                            <th:block th:each="pair: ${parsedQuestion.getResultList()}">
                                 <th th:text="${pair.getValue0()}">
                             </th:block>
                             </thead>
@@ -157,7 +157,7 @@
                                 <tr class="tablecenterCSS">
 
                                     <!-- print the question values -->
-                                    <th:block th:each="pair: ${results}">
+                                    <th:block th:each="pair: ${parsedQuestion.getResultList()}">
                                         <th:block th:if="${pair.getValue1().length() != 0}">
                                             <td>
                                                 <div  style="height:25px">
@@ -188,7 +188,7 @@
                             <!-- print the input statement -->
                             <!-- MAY NEED TO CHANGE LATER -->
 
-                            <th:block th:each="pair: ${results}">
+                            <th:block th:each="pair: ${parsedQuestion.getResultList()}">
                                 <th th:text="${pair.getValue0()}">
                             </th:block>
                             </thead>
@@ -197,7 +197,7 @@
                                 <tr class="tablecenterCSS">
 
                                     <!-- print the question values -->
-                                    <th:block th:each="pair: ${results}">
+                                    <th:block th:each="pair: ${parsedQuestion.getResultList()}">
                                         <th:block th:if="${pair.getValue1().length() != 0}">
                                             <td>
                                                 <div style="height:25px" th:text="${pair.getValue1().charAt(i)}"></div>
@@ -214,7 +214,7 @@
                         </table>
                     </div>
                     <div class="col-sm-auto">
-                        <th:block th:if="${consistency}">
+                        <th:block th:if="${parsedQuestion.isConsistency()}">
                         <table class="tablecenterheadCSS dropdowntable table caption-top">
                             <caption>Consistency Test</caption>
                             <thead>
@@ -228,9 +228,8 @@
                                     <td>
                                         <div style="height:25px">
                                             <select th:id="'valid' + ${submit.getCount2()}" class="selectValidity">
-                                                <option value = " "></option>
+                                                <option value = "F"></option>
                                                 <option value="T">Shows Consistent</option>
-                                                <option value="F">Shows Inconsistent</option>
                                             </select>
                                         </div>
                                     </td>
@@ -240,7 +239,7 @@
                         </th:block>
                     </div>
                     <div class="col-sm-auto">
-                        <th:block th:if="${argument}">
+                        <th:block th:if="${parsedQuestion.isArgument()}">
                         <table class="tablecenterheadCSS dropdowntable table caption-top">
                             <caption>Validity Test</caption>
                             <thead>
@@ -254,9 +253,8 @@
                                     <td>
                                         <div style="height:25px">
                                             <select th:id="'valid' + ${submit.getCount2()}" class="selectValidity">
-                                                <option value = " "></option>
-                                                <option value="T">Valid</option>
-                                                <option value="F">Invalid</option>
+                                                <option value = "F"></option>
+                                                <option value="T">Invalid</option>
                                             </select>
                                         </div>
                                     </td>
@@ -266,7 +264,7 @@
                         </th:block>
                     </div>
                     <div class="col-sm-auto">
-                        <th:block th:if="${logical}">
+                        <th:block th:if="${parsedQuestion.isLogical()}">
                         <table class="tablecenterheadCSS dropdowntable table caption-top">
                             <caption>Logical Status</caption>
                             <thead>
@@ -292,7 +290,7 @@
                         </th:block>
                     </div>
                     <div class="col-sm-auto">
-                        <th:block th:if="${equivalence}">
+                        <th:block th:if="${parsedQuestion.isEquivalence()}">
                         <table class="tablecenterheadCSS dropdowntable table caption-top">
                             <caption>Equivalence</caption>
                             <thead>
@@ -306,8 +304,7 @@
                                     <td>
                                         <div style="height:25px">
                                             <select th:id="'valid' + ${submit.getCount2()}" class="selectValidity">
-                                                <option value = " "></option>
-                                                <option value="T">Equivalent</option>
+                                                <option value = "T"></option>
                                                 <option value="F">Not Equivalent</option>
                                             </select>
                                         </div>
@@ -329,8 +326,6 @@
         <button class="solution" onclick="grade()">Check</button>
     </div>
 </section>
-
-<footer th:replace="fragments :: footer"></footer>
 <script>
     function myFunction() {
         var x = document.getElementById("answers");
@@ -350,7 +345,7 @@
 <script th:inline="javascript">
     function grade() {
         var count = /*[[${submit.getCount()}]]*/ 'default';
-        var list = /*[[${validity}]]*/ 'default';
+        var list = /*[[${parsedQuestion.getResults()}]]*/ 'default';
         var answer = /*[[${submit.getParsedAnswers()}]]*/ 'default';
         for (let i = 0; i < count; i++) {
             var x = document.getElementById(i);
@@ -365,7 +360,7 @@
             var y = document.getElementById("valid" + i);
             console.log("hey " + y.value);
             console.log("is " + list[i].value );
-            if(list.charAt(i) != y.value && y.value != " ") {
+            if(list.charAt(i) != y.value) {
                 y.style.color = "red";
             } else {
                 y.style.color = "black";
@@ -375,5 +370,5 @@
 </script>
 
 </body>
-
+<footer th:replace="fragments :: footer"></footer>
 </html>

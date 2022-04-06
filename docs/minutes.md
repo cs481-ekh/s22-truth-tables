@@ -1,3 +1,16 @@
+## Saturday 4/02 - 6:00p - 7:15p
+
+Scribe: Zach
+
+Present: Trevor, Zach, Josh, Kyle
+
+Absent: Berto
+
+Summary: Touched base on the status of the grading feature for different problem types and discussed possible workarounds for bugs that the backend is experiencing. Also discussed what content we could throw into the help and about pages
+
+Action Items: Work on tasks
+
+------
 ## Tuesday 3/29 - 3:00p - 3:20p
 
 Scribe: Zach
