@@ -39,7 +39,7 @@
     <!-- Header -->
     <div class="w3-container" style="margin-top:80px" id="Help">
 <!--        <h1 class="w3-jumbo"><b>Help Title</b></h1>-->
-        <h1 class="w3-xxxlarge w3-text-darkgreen"><b>Help</b></h1>
+        <h1 class="w3-xxxlarge w3-text-dark-green"><b>Help</b></h1>
         <hr style="width:50px;border:5px solid darkgreen" class="w3-round">
     </div>
 
@@ -59,19 +59,96 @@
         <p>Here is where you can find help.</p>
     </div>
 
-    <!-- Modal for full size images on click-->
-    <div id="modal01" class="w3-modal w3-black" style="padding-top:0" onclick="this.style.display='none'">
-        <span class="w3-button w3-black w3-xxlarge w3-display-topright">×</span>
-        <div class="w3-modal-content w3-animate-zoom w3-center w3-transparent w3-padding-64">
-            <img id="img01" class="w3-image">
-            <p id="caption"></p>
-        </div>
-    </div>
+<!--    &lt;!&ndash; Modal for full size images on click&ndash;&gt;-->
+<!--    <div id="modal01" class="w3-modal w3-black" style="padding-top:0" onclick="this.style.display='none'">-->
+<!--        <span class="w3-button w3-black w3-xxlarge w3-display-topright">×</span>-->
+<!--        <div class="w3-modal-content w3-animate-zoom w3-center w3-transparent w3-padding-64">-->
+<!--            <img id="img01" class="w3-image">-->
+<!--            <p id="caption"></p>-->
+<!--        </div>-->
+<!--    </div>-->
 
     <!-- Expected Format -->
     <div class="w3-container" id="Expected Format" style="margin-top:75px">
         <h1 class="w3-xxxlarge w3-text-darkgreen"><b>Expected Format</b></h1>
         <hr style="width:50px;border:5px solid darkgreen" class="w3-round">
+        <!-- Create three columns -->
+        <div class="row">
+
+            <p>The expected format for the different problem types can be seen as follows:</p>
+            <p>Note: It is assumed you will apply logically appropriate parentheses on your statements. Order of precedence will still be applied if not used. </p>
+            <p> Example: AvB &#9989;</p>
+            <p> Example: Av(B^C) &#9989;</p>
+            <p> Example: AvB^C &#10060;</p>
+
+            <div class="col">
+                <h4>Logical Status</h4>
+                <p>The logical status will appear as a selectable field when only the standard operators are used (^, v, >, ~) </p>
+<!--                <p>-->
+                    <h5>Example</h5>
+<!--                    <b>Question:</b>-->
+<!--                    <br>-->
+<!--                    <br>-->
+                <div class="w3-half">
+                    <img src="/images/LogicalStatus.png" style="width:100%" onclick="onClick(this)" alt="Logical Status">
+                </div>
+<!--                    <br>-->
+<!--                    <br>-->
+<!--                    <b>Explanation:</b>-->
+<!--                    <br>-->
+<!--                    <br>-->
+<!--                </p>-->
+            </div>
+            <div class="col">
+                <h4>Equivalence</h4>
+                <p>The equivalence of two statements is the truth value of the statement. For example, if the
+                    statement is "A and B" then the equivalence is the truth value of "A and B".</p>
+                <p>
+                    <b>Question:</b>
+                    <br>
+                    <br>
+                    <b>Answer:</b>
+                    <br>
+                    <br>
+                    <b>Explanation:</b>
+                    <br>
+                    <br>
+                </p>
+            </div>
+
+            <div class="col">
+                <h4>Consistency</h4>
+                <p>The consistency of a statement is the truth value of the statement. For example, if the
+                    statement is "A and B" then the consistency is the truth value of "A and B".</p>
+                <p>
+                    <b>Question:</b>
+                    <br>
+                    <br>
+                    <b>Answer:</b>
+                    <br>
+                    <br>
+                    <b>Explanation:</b>
+                    <br>
+                    <br>
+                </p>
+            </div>
+
+            <div class="col">
+                <h4>Validity</h4>
+                <p>The equivalence of two statements is the truth value of the statement. For example, if the
+                    statement is "A and B" then the equivalence is the truth value of "A and B".</p>
+                <p>
+                    <b>Question:</b>
+                    <br>
+                    <br>
+                    <b>Answer:</b>
+                    <br>
+                    <br>
+                    <b>Explanation:</b>
+                    <br>
+                    <br>
+                </p>
+            </div>
             <p>AvB is good</p>
             <p>Av(B^C) is good</p>
             <p>AvB^C is bad</p>
@@ -80,6 +157,14 @@
             <p>Consistency: s1, s2, … , sx</p>
             <p>Validity: p1, p2, …, px :. c1</p>
             <p>s is statement, p is premise and c is conclusion (both of which are still just statements)</p>
+            <!-- Modal for full size images on click-->
+            <div id="modal01" class="w3-modal w3-black" style="padding-top:0" onclick="this.style.display='none'">
+                <span class="w3-button w3-black w3-xxlarge w3-display-topright">×</span>
+                <div class="w3-modal-content w3-animate-zoom w3-center w3-transparent w3-padding-64">
+                    <img id="img01" class="w3-image">
+                    <p id="caption"></p>
+                </div>
+            </div>
     </div>
 
     <!-- Add a Question -->
