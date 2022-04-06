@@ -2,9 +2,8 @@
 <html xmlns:th="https://www.thymeleaf.org">
 
 <head th:replace="fragments :: html_head"></head>
-<button onclick="myFunction()">Click Me</button>
 
-<body class="d-flex flex-column min-vh-100">
+<body class="d-flex flex-column min-vh-100 body">
 
 <!-- NavBar -->
 <div th:replace="fragments :: menu"></div>
@@ -327,8 +326,6 @@
         <button class="solution" onclick="grade()">Check</button>
     </div>
 </section>
-
-<footer th:replace="fragments :: footer"></footer>
 <script>
     function myFunction() {
         var x = document.getElementById("answers");
@@ -348,7 +345,7 @@
 <script th:inline="javascript">
     function grade() {
         var count = /*[[${submit.getCount()}]]*/ 'default';
-        var list = /*[[${parsedQuestion.getValidity()}]]*/ 'default';
+        var list = /[[${parsedQuestion.getShowsConsistent()}]]/ 'default';
         var answer = /*[[${submit.getParsedAnswers()}]]*/ 'default';
         for (let i = 0; i < count; i++) {
             var x = document.getElementById(i);
@@ -373,5 +370,5 @@
 </script>
 
 </body>
-
+<footer th:replace="fragments :: footer"></footer>
 </html>
