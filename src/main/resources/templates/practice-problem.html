@@ -402,7 +402,8 @@
             var count = /*[[${submit.getCount()}]]*/ 'default';
             var list = /*[[${parsedQuestion.getResults()}]]*/ 'default';
             var answer = /*[[${submit.getParsedAnswers()}]]*/ 'default';
-            /* parsedQuestion.getFinalAnswer */
+            var finalAnswer = /*[[${submit.getFinalAnswer()}]]*/ 'default';
+
             for (let i = 0; i < count; i++) {
                 var x = document.getElementById(i);
                 console.log(x.value);
