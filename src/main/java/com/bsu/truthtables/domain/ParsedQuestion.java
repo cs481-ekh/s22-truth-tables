@@ -31,11 +31,7 @@ public class ParsedQuestion {
     private boolean logical = false;
 
     //Final answer values
-    private boolean isTautology = false;
-    private boolean isContradiction = false;
-    private boolean isEquivalent = false;
-    private boolean isConsistent = false;
-    private boolean isValid = true;
+    private String finalAnswer = "";
 
     private Map<String,String> map;
 }

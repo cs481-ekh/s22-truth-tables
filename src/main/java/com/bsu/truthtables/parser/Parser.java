@@ -95,7 +95,7 @@ public class Parser {
         String[] premises = list[0].split(",");
         String conclusion = list[1];
         String validity = "";
-        boolean valid = true;
+        String valid = "valid";
         for(int i = 0; i < get(conclusion).length(); i++) {
             boolean allPremisesTrue = true;
             String tmp = "F";
@@ -104,18 +104,18 @@ public class Parser {
             }
             if(allPremisesTrue && map.get(conclusion).charAt(i) == 'F') {
                 tmp = "T";
-                valid = false;
+                valid = "invalid";
             }
             validity += tmp;
         }
-        parsedQuestion.setValid(valid);
+        parsedQuestion.setFinalAnswer(valid);
         parsedQuestion.setShowsInvalid(validity);
     }
 
     public void evalConsistency() {
         String[] list = original.split(",");
         String consistent = "";
-        boolean cons = false;
+        String cons = "not consistent";
         for(int i = 0; i < map.get(list[0]).length(); i++) {
             String tmp = "T";
             for (String s : list) {
@@ -123,29 +123,29 @@ public class Parser {
                     tmp = "F";
                 }
             }
-            if(tmp.equals("T")) cons = true;
+            if(tmp.equals("T")) cons = "consistent";
             consistent += tmp;
         }
         parsedQuestion.setShowsConsistent(consistent);
-        parsedQuestion.setConsistent(cons);
+        parsedQuestion.setFinalAnswer(cons);
     }
 
     public void evalEquivalence() {
         String[] list = original.split("::");
         String equivalent = "";
-        boolean equiv = true;
+        String equiv = "equivalent";
         for(int i = 0; i < map.get(list[0]).length(); i++) {
             String tmp = "T";
             char c1 = map.get(list[0]).charAt(i);
             char c2 = map.get(list[1]).charAt(i);
             if(c1 != c2) {
-                equiv = false;
+                equiv = "not equivalent";
                 tmp = "F";
             }
             equivalent += tmp;
         }
         parsedQuestion.setShowsEquivalent(equivalent);
-        parsedQuestion.setEquivalent(equiv);
+        parsedQuestion.setFinalAnswer(equiv);
     }
 
     public void evalLogical() {
@@ -166,8 +166,11 @@ public class Parser {
             logical += tmp;
         }
         parsedQuestion.setShowsNotTautology(logical);
-        parsedQuestion.setTautology(taut);
-        parsedQuestion.setContradiction(contra);
+        String status = "";
+        if(taut) status = "tautology";
+        else if(contra) status = "contradiction";
+        else status = "contingent";
+        parsedQuestion.setFinalAnswer(status);
     }
 
     public Object determineType() {
