@@ -2,138 +2,142 @@
 <html xmlns:th="https://www.thymeleaf.org">
 
 <head th:replace="fragments :: html_head"></head>
-<button onclick="myFunction()">Click Me</button>
 
-<body class="d-flex flex-column min-vh-100">
+<body class="d-flex flex-column min-vh-100 body">
 
-<!-- NavBar -->
-<div th:replace="fragments :: menu"></div>
+    <!-- NavBar -->
+    <div th:replace="fragments :: menu"></div>
 
-<section style="margin-top: 5%;" class="py-3 text-center container">
-    <div class="row py-0">
-        <div>
-            <p></p>
-            <p class="lead text-muted">
-                This tool exists to allow students to enter propositional logic formulas with the ability to
-                actively test
-                and evaluate their formula's truth tables. Additionally, students of Dr. Cortens will have the
-                ability to access and practice
-                questions created in chapters. To enter a propositional formula use upper case letters (A, B, C,
-                etc) and the included
-                operators below (ex. C v (~A > D)).
-            </p>
-        </div>
-</section>
+    <section style="margin-top: 5%;" class="py-3 text-center container">
+        <div class="row py-0">
+            <div>
+                <p></p>
+                <p class="lead text-muted">
+                    This tool exists to allow students to enter propositional logic formulas with the ability to
+                    actively test
+                    and evaluate their formula's truth tables. Additionally, students of Dr. Cortens will have the
+                    ability to access and practice
+                    questions created in chapters. To enter a propositional formula use upper case letters (A, B, C,
+                    etc) and the included
+                    operators below (ex. C v (~A > D)).
+                </p>
+            </div>
+    </section>
 
-<!--<section class="py-5 text-center container">-->
-<!--    <div class="row py-lg-5">-->
-<!--        <div class="col">-->
-<!--            <div class="col" style="border: 2px solid black">-->
-<!--                <h3>Operators</h3>-->
-<!--                <div class="container-sm" style="border-bottom: 2px solid black">-->
-<!--                    <p>|, ->, <-, v, ^, *</p>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--        <div class="col-lg-6 col-md-8 mx-auto">-->
-<!--            <h1 class="fw-light">Practice Problem</h1>-->
-<!--            <form action="#" th:action="@{/}" th:object="${question}" method="post">-->
-<!--                <p>Enter a question: <input type="text" id="question" th:field="*{question}"/> <input type="submit"-->
-<!--                                                                                                      onclick="return validate()"-->
-<!--                                                                                                      value="Add question"/>-->
-<!--                    </p>-->
-<!--            </form>-->
-<!--            <h3 id="idk"></h3>-->
-<!--        </div>-->
-<!--        <div class="col" style="border: 2px solid black">-->
-<!--            <h3>Chapter Questions</h3>-->
-<!--            <th:block th:each="chap : ${chapters}">-->
-<!--                <div class="container-sm" style="border-bottom: 2px solid black">-->
-<!--                    <a th:href="@{'/chapter-questions/'+${chap}}" th:text="'Chapter ' + ${chap}"></a>-->
-<!--                </div>-->
-<!--            </th:block>-->
-<!--        </div>-->
+    <!--<section class="py-5 text-center container">-->
+    <!--    <div class="row py-lg-5">-->
+    <!--        <div class="col">-->
+    <!--            <div class="col" style="border: 2px solid black">-->
+    <!--                <h3>Operators</h3>-->
+    <!--                <div class="container-sm" style="border-bottom: 2px solid black">-->
+    <!--                    <p>|, ->, <-, v, ^, *</p>-->
+    <!--                </div>-->
+    <!--            </div>-->
+    <!--        </div>-->
+    <!--        <div class="col-lg-6 col-md-8 mx-auto">-->
+    <!--            <h1 class="fw-light">Practice Problem</h1>-->
+    <!--            <form action="#" th:action="@{/}" th:object="${question}" method="post">-->
+    <!--                <p>Enter a question: <input type="text" id="question" th:field="*{question}"/> <input type="submit"-->
+    <!--                                                                                                      onclick="return validate()"-->
+    <!--                                                                                                      value="Add question"/>-->
+    <!--                    </p>-->
+    <!--            </form>-->
+    <!--            <h3 id="idk"></h3>-->
+    <!--        </div>-->
+    <!--        <div class="col" style="border: 2px solid black">-->
+    <!--            <h3>Chapter Questions</h3>-->
+    <!--            <th:block th:each="chap : ${chapters}">-->
+    <!--                <div class="container-sm" style="border-bottom: 2px solid black">-->
+    <!--                    <a th:href="@{'/chapter-questions/'+${chap}}" th:text="'Chapter ' + ${chap}"></a>-->
+    <!--                </div>-->
+    <!--            </th:block>-->
+    <!--        </div>-->
 
-<!--    </div>-->
-<!--</section>-->
+    <!--    </div>-->
+    <!--</section>-->
 
-<section class="py-sm-0 text-center container">
-    <div class="row py-lg-5">
-        <div class="col">
-            <div class="col" style="border: 2px solid black">
-                <h3>Operators</h3>
-                <div class="container-sm">
-                    <div class="row">
-                        <div class="col" style="border-bottom: 2px solid black">
-                            ^
+    <section class="py-sm-0 text-center container">
+        <div class="row py-lg-5">
+            <div class="col">
+                <div class="col" style="border: 2px solid black">
+                    <h3>Operators</h3>
+                    <div class="container-sm">
+                        <div class="row">
+                            <div class="col" style="border-bottom: 2px solid black">
+                                ^
+                            </div>
+                            <div class="col" style="border-bottom: 2px solid black">
+                                v
+                            </div>
+                            <div class="col" style="border-bottom: 2px solid black">
+                                >
+                            </div>
+                            <div class="col" style="border-bottom: 2px solid black">
+                                ~
+                            </div>
                         </div>
-                        <div class="col" style="border-bottom: 2px solid black">
-                            v
-                        </div>
-                        <div class="col" style="border-bottom: 2px solid black">
-                            >
-                        </div>
-                        <div class="col" style="border-bottom: 2px solid black">
-                            ~
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            and
-                        </div>
-                        <div class="col">
-                            or
-                        </div>
-                        <div class="col">
-                            if then
-                        </div>
-                        <div class="col">
-                            not
+                        <div class="row">
+                            <div class="col">
+                                and
+                            </div>
+                            <div class="col">
+                                or
+                            </div>
+                            <div class="col">
+                                if then
+                            </div>
+                            <div class="col">
+                                not
+                            </div>
                         </div>
                     </div>
                 </div>
+
+            </div>
+            <div class="col-6">
+                <p></p>
+                <!--            <p class="lead text-muted"> Replace me </p>-->
+                <form action="#" th:action="@{/}" th:object="${question}" method="post">
+                    <p>Enter a question: <input type="text" id="question" th:field="*{question}" /> <input type="submit"
+                            onclick="return validate()" value="Submit" /> <input type="reset" value="Reset" /></p>
+
+                </form>
             </div>
 
+            <div class="col"></div>
         </div>
-        <div class="col-6">
-            <p></p>
-            <!--            <p class="lead text-muted"> Replace me </p>-->
-            <form action="#" th:action="@{/}" th:object="${question}" method="post">
-                <p>Enter a question: <input type="text" id="question" th:field="*{question}" /> <input type="submit" onclick="return validate()" value="Submit" /> <input type="reset" value="Reset"/></p>
-
-            </form>
-        </div>
-
-        <div class="col"></div>
-    </div>
-</section>
-</section>
+    </section>
+    </section>
 
 
 
-<main role="main" class="container">
-    <div class="row">
-        <div class="col-xl-auto mx-auto">
-            <!-- Putting tables into columns -->
+    <main role="main" class="container">
+        <div class="row">
+            <div class="col-xl-auto mx-auto">
+                <!-- Putting tables into columns -->
                 <div class="row">
                     <div class="col-sm">
                         <!-- Center text in columns -->
                         <table class="tablecenterheadCSS tablecenterCSS table caption-top">
+                            <!-- start stickiness -->
                             <caption>Inputs</caption>
                             <thead>
-                            <!-- print the input chars -->
-                            <th:block th:each="char : ${inputChars.toCharArray()}">
-                                <th th:text="${char}"></th>
-                            </th:block>
+                                <!-- print the input chars -->
+                                <tr class="fill">
+                                    <th:block th:each="char : ${inputChars.toCharArray()}">
+                                        <th th:text="${char}"></th>
+                                    </th:block>
+                                </tr>
                             </thead>
+                            <!-- end stickiness -->
                             <!-- print the input values -->
                             <th:block th:each="i: ${#numbers.sequence(1, boxDepth)}">
                                 <tr class="tablecenterCSS">
-                                    <!-- need to figure out how to set specific height like for other columns -->
                                     <th:block th:each="j : ${#numbers.sequence(1, inputChars.length())}">
                                         <td>
                                             <div style="height:25px"
-                                                 th:text="${prefilled.charAt( i * inputChars.length() - inputChars.length() + j - 1)}"></div>
+                                                th:text="${prefilled.charAt( i * inputChars.length() - inputChars.length() + j - 1)}">
+                                            </div>
                                         </td>
                                     </th:block>
                                 </tr>
@@ -144,12 +148,12 @@
                         <table class="tablecenterheadCSS dropdowntable table caption-top">
                             <caption>Statement</caption>
                             <thead>
-                            <!-- print the input statement -->
-                            <!-- MAY NEED TO CHANGE LATER -->
-
-                            <th:block th:each="pair: ${results}">
-                                <th th:text="${pair.getValue0()}">
-                            </th:block>
+                                <tr class="fill">
+                                    <!-- print the input statement -->
+                                    <th:block th:each="pair: ${parsedQuestion.getResultList()}">
+                                        <th th:text="${pair.getValue0()}">
+                                    </th:block>
+                                </tr>
                             </thead>
                             <!-- print the test, use a switch to display this later -->
 
@@ -158,10 +162,10 @@
                                 <tr class="tablecenterCSS">
 
                                     <!-- print the question values -->
-                                    <th:block th:each="pair: ${results}">
+                                    <th:block th:each="pair: ${parsedQuestion.getResultList()}">
                                         <th:block th:if="${pair.getValue1().length() != 0}">
                                             <td>
-                                                <div  style="height:25px">
+                                                <div style="height:25px">
                                                     <select th:id="${submit.getCount()}" class="selectTF">
                                                         <option value=" "></option>
                                                         <option value="T">T</option>
@@ -186,19 +190,19 @@
                         <table class="tablecenterheadCSS dropdowntable table caption-top">
                             <caption>Answers</caption>
                             <thead>
-                            <!-- print the input statement -->
-                            <!-- MAY NEED TO CHANGE LATER -->
-
-                            <th:block th:each="pair: ${results}">
-                                <th th:text="${pair.getValue0()}">
-                            </th:block>
+                                <tr class="fill">
+                                    <!-- print the input statement -->
+                                    <th:block th:each="pair: ${parsedQuestion.getResultList()}">
+                                        <th th:text="${pair.getValue0()}">
+                                    </th:block>
+                                </tr>
                             </thead>
                             <!-- print the test, use a switch to display this later -->
                             <th:block th:each="i: ${#numbers.sequence(0, boxDepth -1)}">
                                 <tr class="tablecenterCSS">
 
                                     <!-- print the question values -->
-                                    <th:block th:each="pair: ${results}">
+                                    <th:block th:each="pair: ${parsedQuestion.getResultList()}">
                                         <th:block th:if="${pair.getValue1().length() != 0}">
                                             <td>
                                                 <div style="height:25px" th:text="${pair.getValue1().charAt(i)}"></div>
@@ -215,88 +219,170 @@
                         </table>
                     </div>
                     <div class="col-sm-auto">
-                        <th:block th:if="${consistency}">
-                        <table class="tablecenterheadCSS dropdowntable table caption-top">
-                            <caption>Consistency Test</caption>
-                            <thead>
-                            <th style="text-align: center" th:colspan="${inputChars.length()}">
-                                Shows Consistency?
-                            </th>
-                            </thead>
-                            <!-- print the select boxes -->
-                            <th:block th:each="i: ${#numbers.sequence(1, boxDepth)}">
-                                <tr class="tablecenterCSS">
-                                    <td>
-                                        <div style="height:25px">
-                                            <select th:id="'valid' + ${submit.getCount2()}" class="selectValidity">
-                                                <option value = " "></option>
-                                                <option value="T">Shows Consistent</option>
-                                                <option value="F">Shows Inconsistent</option>
-                                            </select>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </th:block>
-                        </table>
+                        <th:block th:if="${parsedQuestion.isConsistency()}">
+                            <table class="tablecenterheadCSS dropdowntable table caption-top">
+                                <caption>Consistency Test</caption>
+                                <thead>
+                                    <tr class="fill">
+                                        <th style="text-align: center" th:colspan="${inputChars.length()}">
+                                            Shows Consistency?
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <!-- print the select boxes -->
+                                <th:block th:each="i: ${#numbers.sequence(1, boxDepth)}">
+                                    <tr class="tablecenterCSS">
+                                        <td>
+                                            <div style="height:25px">
+                                                <select th:id="'valid' + ${submit.getCount2()}" class="selectValidity">
+                                                    <option value="F"></option>
+                                                    <option value="T">Shows Consistent</option>
+                                                </select>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </th:block>
+                            </table>
+                        </th:block>
+                    </div>
+                    <div class="col-sm-auto">
+                        <th:block th:if="${parsedQuestion.isArgument()}">
+                            <table class="tablecenterheadCSS dropdowntable table caption-top">
+                                <caption>Validity Test</caption>
+                                <thead>
+                                    <tr class="fill">
+                                        <th style="text-align: center" th:colspan="${inputChars.length()}">
+                                            Row Shows?
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <!-- print the select boxes -->
+                                <th:block th:each="i: ${#numbers.sequence(1, boxDepth)}">
+                                    <tr class="tablecenterCSS">
+                                        <td>
+                                            <div style="height:25px">
+                                                <select th:id="'valid' + ${submit.getCount2()}" class="selectValidity">
+                                                    <option value="F"></option>
+                                                    <option value="T">Invalid</option>
+                                                </select>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </th:block>
+                            </table>
+                        </th:block>
+                    </div>
+                    <div class="col-sm-auto">
+                        <th:block th:if="${parsedQuestion.isLogical()}">
+                            <table class="tablecenterheadCSS dropdowntable table caption-top">
+                                <caption>Logical Status</caption>
+                                <thead>
+                                    <tr class="fill">
+                                        <th style="text-align: center" th:colspan="${inputChars.length()}">
+                                            Row Shows?
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <!-- print the select boxes -->
+                                <th:block th:each="i: ${#numbers.sequence(1, boxDepth)}">
+                                    <tr class="tablecenterCSS">
+                                        <td>
+                                            <div style="height:25px">
+                                                <select th:id="'valid' + ${submit.getCount2()}" class="selectValidity">
+                                                    <option value=" "></option>
+                                                    <option value="T">Not Tautology</option>
+                                                    <option value="F">Not Contradiction</option>
+                                                </select>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </th:block>
+                            </table>
+                        </th:block>
+                    </div>
+                    <div class="col-sm-auto">
+                        <th:block th:if="${parsedQuestion.isEquivalence()}">
+                            <table class="tablecenterheadCSS dropdowntable table caption-top">
+                                <caption>Equivalence</caption>
+                                <thead>
+                                    <tr class="fill">
+                                        <th style="text-align: center" th:colspan="${inputChars.length()}">
+                                            Row Shows?
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <!-- print the select boxes -->
+                                <th:block th:each="i: ${#numbers.sequence(1, boxDepth)}">
+                                    <tr class="tablecenterCSS">
+                                        <td>
+                                            <div style="height:25px">
+                                                <select th:id="'valid' + ${submit.getCount2()}" class="selectValidity">
+                                                    <option value="T"></option>
+                                                    <option value="F">Not Equivalent</option>
+                                                </select>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </th:block>
+                            </table>
                         </th:block>
                     </div>
                 </div>
+            </div>
         </div>
-    </div>
-</main>
+    </main>
 
 
-<section class="py-3 text-center container">
-    <div style="display: inline;">
-        <button class="solution" style="margin-right: 30px;" onclick="myFunction()">Show Solution</button>
-        <button class="solution" onclick="grade()">Check</button>
-    </div>
-</section>
-
-<footer th:replace="fragments :: footer"></footer>
-<script>
-    function myFunction() {
-        var x = document.getElementById("answers");
-        var y = document.getElementById("selections");
-        if (x.style.display === "none") {
-            x.style.display = "block";
-        } else {
-            x.style.display = "none";
-        }
-        if (y.style.display === "none") {
-            y.style.display = "block";
-        } else {
-            y.style.display = "none";
-        }
-    }
-</script>
-<script th:inline="javascript">
-    function grade() {
-        var count = /*[[${submit.getCount()}]]*/ 'default';
-        var list = /*[[${validity}]]*/ 'default';
-        var answer = /*[[${submit.getParsedAnswers()}]]*/ 'default';
-        for (let i = 0; i < count; i++) {
-            var x = document.getElementById(i);
-            console.log(x.value);
-            if(answer.charAt(i) != x.value && x.value != " ") {
-                x.style.color = "red";
+    <section class="py-3 text-center container">
+        <div style="display: inline;">
+            <button class="solution" style="margin-right: 30px;" onclick="myFunction()">Show Solution</button>
+            <button class="solution" onclick="grade()">Check</button>
+        </div>
+    </section>
+    <script>
+        function myFunction() {
+            var x = document.getElementById("answers");
+            var y = document.getElementById("selections");
+            if (x.style.display === "none") {
+                x.style.display = "block";
             } else {
-                x.style.color = "black";
+                x.style.display = "none";
+            }
+            if (y.style.display === "none") {
+                y.style.display = "block";
+            } else {
+                y.style.display = "none";
             }
         }
-        for(let i = 0; i < list.length; i++) {
-            var y = document.getElementById("valid" + i);
-            console.log("hey " + y.value);
-            console.log("is " + list[i].value );
-            if(list.charAt(i) != y.value && y.value != " ") {
-                y.style.color = "red";
-            } else {
-                y.style.color = "black";
+    </script>
+    <script th:inline="javascript">
+        function grade() {
+            var count = /*[[${submit.getCount()}]]*/ 'default';
+            var list = /*[[${parsedQuestion.getResults()}]]*/ 'default';
+            var answer = /*[[${submit.getParsedAnswers()}]]*/ 'default';
+            for (let i = 0; i < count; i++) {
+                var x = document.getElementById(i);
+                console.log(x.value);
+                if (answer.charAt(i) != x.value && x.value != " ") {
+                    x.style.color = "red";
+                } else {
+                    x.style.color = "black";
+                }
+            }
+            for (let i = 0; i < list.length; i++) {
+                var y = document.getElementById("valid" + i);
+                console.log("hey " + y.value);
+                console.log("is " + list[i].value);
+                if (list.charAt(i) != y.value) {
+                    y.style.color = "red";
+                } else {
+                    y.style.color = "black";
+                }
             }
         }
-    }
-</script>
+    </script>
 
 </body>
+<footer th:replace="fragments :: footer"></footer>
 
 </html>

@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head th:replace="fragments :: html_head">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
+    <style>
+        body,h1,h2,h3,h4,h5 {font-family: "Poppins", sans-serif}
+        body {font-size:16px;}
+        .w3-half img{margin-bottom:-6px;margin-top:16px;opacity:0.8;cursor:pointer}
+        .w3-half img:hover{opacity:1}
+    </style>
+</head>
+<body class="d-flex flex-column min-vh-100">
+
+<!-- NavBar -->
+<div th:replace="fragments :: menu"></div>
+
+<!-- Side Menu -->
+<nav class="w3-sidebar bg-steel w3-collapse w3-top w3-large w3-padding" style="z-index:3;width:225px;font-weight:bold;" id="mySidebar"><br>
+    <a href="javascript:void(0)" onclick="w3_close()" class="w3-button w3-hide-large w3-display-topleft" style="width:100%;font-size:22px">Close Menu</a>
+    <div class="w3-container">
+<!--        <h3 class="w3-padding-64"><b>TruthTables<br>Help</b></h3>-->
+    </div>
+    <div class="w3-bar-block">
+<!--        <a href="#" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Help</a>-->
+        <span class="w3-bar-item w3-button w3-hover-lightgreen border-bottom border-dark"></span>
+        <a href="#Help" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-light-green border-top border-dark w3-text-light-gray">Help</a>
+        <a href="#Expected Format" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-light-green w3-text-light-gray">Expected Format</a>
+        <a href="#Logic Refresher" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-light-green w3-text-light-gray">Logic Refresher</a>
+        <a href="#Report Bugs" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-light-green w3-text-light-gray">Report Bugs</a>
+    </div>
+</nav>
+
+<!-- !PAGE CONTENT! -->
+<div class="w3-main" style="margin-left:340px;margin-right:40px">
+
+    <!-- Header -->
+    <div class="w3-container" style="margin-top:80px" id="Help">
+        <h1 class="w3-xxxlarge w3-text-dark-green"><b>Help</b></h1>
+        <hr style="width:50px;border:5px solid darkgreen" class="w3-round">
+    </div>
+
+
+
+
+
+    <!-- Expected Format -->
+    <div class="w3-container" id="Expected Format" style="margin-top:75px">
+        <h1 class="w3-xxxlarge w3-text-darkgreen"><b>Expected Format</b></h1>
+        <hr style="width:50px;border:5px solid darkgreen" class="w3-round">
+        <!-- Create three columns -->
+        <div class="row">
+
+            <p>The expected format for the different problem types can be seen as follows:</p>
+            <p>Note: It is assumed you will apply logically appropriate parentheses on your statements. Order of precedence will still be applied if not used. </p>
+            <p> Example: AvB &#9989;</p>
+            <p> Example: Av(B^C) &#9989;</p>
+            <p> Example: AvB^C &#10060;</p>
+
+            <div class="col">
+                <h4>Logical Status</h4>
+                <p>The logical status will appear as a selectable field when only the standard operators are used (^, v, >, ~) </p>
+                <h5>Example</h5>
+                <div class="w3-half">
+                    <img th:src="@{images/LogicalStatus.png}" style="width:210%" onclick="onClick(this)" alt="Logical Status">
+                </div>
+            </div>
+            <div class="col">
+                <h4>Equivalence</h4>
+                <p>The equivalence will appear as a selectable field when a double colon (s1 :: s2) is used to separate two statements</p>
+                <h5>Example</h5>
+                <div class="w3-half">
+                    <img th:src="@{images/LogicalStatus.png}" style="width:210%" onclick="onClick(this)" alt="Logical Status">
+                </div>
+            </div>
+
+            <div class="col">
+                <h4>Consistency</h4>
+                <p>The consistency will appear as a selectable field when a comma (s1, s2, … , sx) is used to separate two or more statements</p>
+                <h5>Example</h5>
+                <div class="w3-half">
+                    <img th:src="@{images/LogicalStatus.png}" style="width:210%" onclick="onClick(this)" alt="Logical Status">
+                </div>
+            </div>
+
+            <div class="col">
+                <h4>Validity</h4>
+                <p>The validity will appear as a selectable field when a colon followed by a period (p1, p2, …, px :. c1) is used to separate two or more
+                premises from a conclusion statement</p>
+                <h5>Example</h5>
+                <div class="w3-half">
+                    <img th:src="@{images/LogicalStatus.png}" style="width:210%" onclick="onClick(this)" alt="Logical Status">
+                </div>
+            </div>
+
+            <!-- Modal for full size images on click-->
+            <div id="modal01" class="w3-modal w3-black" style="padding-top:0" onclick="this.style.display='none'">
+                <span class="w3-button w3-black w3-xxlarge w3-display-topright">×</span>
+                <div class="w3-modal-content w3-animate-zoom w3-center w3-transparent w3-padding-64">
+                    <img id="img01" class="w3-image">
+                    <p id="caption"></p>
+                </div>
+            </div>
+    </div>
+
+
+    <!-- Logic Refresher -->
+    <div class="w3-container" id="Logic Refresher" style="margin-top:75px">
+        <h1 class="w3-xxxlarge w3-text-darkgreen"><b>Logic Refresher</b></h1>
+        <hr style="width:50px;border:5px solid darkgreen" class="w3-round">
+        <p>Some text our prices. Lorem ipsum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure</p>
+    </div>
+
+    <div class="w3-row-padding">
+        <div class="w3-half w3-margin-bottom">
+            <ul class="w3-ul w3-light-grey w3-center">
+                <li class="w3-dark-grey w3-xlarge w3-padding-32">Syntax</li>
+                <li class="w3-padding-16">Floorplanning</li>
+                <li class="w3-padding-16">10 hours support</li>
+                <li class="w3-padding-16">Photography</li>
+                <li class="w3-padding-16">20% furniture discount</li>
+                <li class="w3-padding-16">Good deals</li>
+                <li class="w3-padding-16">
+                    <h2>$ 199</h2>
+                    <span class="w3-opacity">per room</span>
+                </li>
+                <li class="w3-light-grey w3-padding-24">
+                    <button class="w3-button w3-white w3-padding-large w3-hover-black">Sign Up</button>
+                </li>
+            </ul>
+        </div>
+
+        <div class="w3-half">
+            <ul class="w3-ul w3-light-grey w3-center">
+                <li class="w3-red w3-xlarge w3-padding-32">Semantics</li>
+                <li class="w3-padding-16">Floorplanning</li>
+                <li class="w3-padding-16">50 hours support</li>
+                <li class="w3-padding-16">Photography</li>
+                <li class="w3-padding-16">50% furniture discount</li>
+                <li class="w3-padding-16">GREAT deals</li>
+                <li class="w3-padding-16">
+                    <h2>$ 249</h2>
+                    <span class="w3-opacity">per room</span>
+                </li>
+                <li class="w3-light-grey w3-padding-24">
+                    <button class="w3-button w3-red w3-padding-large w3-hover-black">Sign Up</button>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Report Bugs -->
+    <!-- Not Fully Implemented -->
+    <div class="w3-container" id="Report Bugs" style="margin-top:75px">
+        <h1 class="w3-xxxlarge w3-text-darkgreen"><b>Report Bugs</b></h1>
+        <hr style="width:50px;border:5px solid darkgreen" class="w3-round">
+        <p>Please fill out the form to report any bugs experienced while using this tool. Thank you!</p>
+        <form action="/action_page.php" target="_blank">
+            <div class="w3-section">
+                <label>Title</label>
+                <input class="w3-input w3-border" type="text" name="Name" required>
+            </div>
+            <div class="w3-section">
+                <label>Email</label>
+                <input class="w3-input w3-border" type="text" name="Email" required>
+            </div>
+            <div class="w3-section">
+                <label>Bug Description</label>
+                <input class="w3-input w3-border" type="text" name="Message" required>
+            </div>
+            <button type="submit" class="w3-button w3-block w3-padding-large w3-red w3-margin-bottom">Submit Report</button>
+        </form>
+    </div>
+
+    <!-- End page content -->
+</div>
+
+<!-- W3.CSS Container -->
+<div class="w3-light-grey w3-container w3-padding-32" style="margin-top:75px;padding-right:58px"><p class="w3-right"><a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" class="w3-hover-opacity"></a></p></div>
+
+<script>
+    // Script to open and close sidebar
+    function w3_open() {
+        document.getElementById("mySidebar").style.display = "block";
+        document.getElementById("myOverlay").style.display = "block";
+    }
+
+    function w3_close() {
+        document.getElementById("mySidebar").style.display = "none";
+        document.getElementById("myOverlay").style.display = "none";
+    }
+
+    // Modal Image Gallery
+    function onClick(element) {
+        document.getElementById("img01").src = element.src;
+        document.getElementById("modal01").style.display = "block";
+        var captionText = document.getElementById("caption");
+        captionText.innerHTML = element.alt;
+    }
+</script>
+
+</body>
+
+<footer th:replace="fragments :: footer"></footer>
+</html>

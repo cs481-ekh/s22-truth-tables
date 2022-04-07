@@ -1,3 +1,68 @@
+## Saturday 4/02 - 6:00p - 7:15p
+
+Scribe: Zach
+
+Present: Trevor, Zach, Josh, Kyle
+
+Absent: Berto
+
+Summary: Touched base on the status of the grading feature for different problem types and discussed possible workarounds for bugs that the backend is experiencing. Also discussed what content we could throw into the help and about pages
+
+Action Items: Work on tasks
+
+------
+## Tuesday 3/29 - 3:00p - 3:20p
+
+Scribe: Zach
+
+Present: Zach, Berto, Trevor, Kyle
+
+Absent: Josh
+
+Summary: Touched base on sprint status, discussed tasks that we have left to complete for the sprint, etc.
+
+Action Items: Work on tasks
+
+------
+## Sunday 3/20 - 11:15a - 1:15p
+
+Scribe: Trevor
+
+Present: Zach, Berto, Trevor
+
+Absent: N/A
+
+Summary: Group programming on front end tasks. Discussed UI components as well
+
+Action Items: Work on tasks
+
+------
+## Thursday 3/17 - 3:00p - 3:45p
+
+Scribe: Zach
+
+Present: All
+
+Absent: N/A
+
+Summary: Finalized planning for sprint 3
+
+Action Items: Work on tasks
+
+------
+## Tuesday 3/15 - 3:00p - 4:00p
+
+Scribe: Zach
+
+Present: All
+
+Absent: N/A
+
+Summary: Reviewed final tasks for sprint 2 and discussed plans for sprint 3 
+
+Action Items: Work on tasks
+
+------
 ## Thursday 3/10 - 3:00p - 4:00p
 
 Scribe: Trevor

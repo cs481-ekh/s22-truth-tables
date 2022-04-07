@@ -77,34 +77,125 @@ public class Parser {
         if(parsedQuestion.isConsistency()) {
             evalConsistency();
         }
+        else if(parsedQuestion.isArgument()) {
+            evalArgument();
+        }
+        else if(parsedQuestion.isEquivalence()) {
+            evalEquivalence();
+        }
+        else {
+            evalLogical();
+        }
+        parsedQuestion.setMap(map);
         return parsedQuestion;
     }
 
+    public void evalArgument() {
+        String[] list = original.split(":.");
+        String[] premises = list[0].split(",");
+        String conclusion = list[1];
+        String validity = "";
+        boolean valid = true;
+        for(int i = 0; i < get(conclusion).length(); i++) {
+            boolean allPremisesTrue = true;
+            String tmp = "F";
+            for(String premise: premises) {
+                if(map.get(premise).charAt(i) == 'F') allPremisesTrue = false;
+            }
+            if(allPremisesTrue && map.get(conclusion).charAt(i) == 'F') {
+                tmp = "T";
+                valid = false;
+            }
+            validity += tmp;
+        }
+        parsedQuestion.setValid(valid);
+        parsedQuestion.setResults(validity);
+    }
+
     public void evalConsistency() {
-        List<String> list = Arrays.asList(original.split(","));
+        String[] list = original.split(",");
         String consistent = "";
-        for(int i = 0; i < map.get(list.get(0)).length(); i++) {
+        boolean cons = false;
+        for(int i = 0; i < map.get(list[0]).length(); i++) {
             String tmp = "T";
             for (String s : list) {
                 if (map.get(s).charAt(i) == 'F') {
                     tmp = "F";
                 }
             }
+            if(tmp.equals("T")) cons = true;
             consistent += tmp;
         }
-        parsedQuestion.setValidity(consistent);
+        parsedQuestion.setResults(consistent);
+        parsedQuestion.setConsistent(cons);
     }
 
+    public void evalEquivalence() {
+        String[] list = original.split("::");
+        String equivalent = "";
+        boolean equiv = true;
+        for(int i = 0; i < map.get(list[0]).length(); i++) {
+            String tmp = "T";
+            char c1 = map.get(list[0]).charAt(i);
+            char c2 = map.get(list[1]).charAt(i);
+            if(c1 != c2) {
+                equiv = false;
+                tmp = "F";
+            }
+            equivalent += tmp;
+        }
+        parsedQuestion.setResults(equivalent);
+        parsedQuestion.setEquivalent(equiv);
+    }
+
+    public void evalLogical() {
+        String values = map.get(original);
+        String logical = "";
+        boolean taut = true;
+        boolean contra = true;
+        for(int i = 0; i < values.length(); i++) {
+            char c = values.charAt(i);
+            String tmp = "T";
+            if(c == 'T') {
+                contra = false;
+            }
+            else {
+                tmp = "F";
+                taut = false;
+            }
+            logical += tmp;
+        }
+        parsedQuestion.setResults(logical);
+        parsedQuestion.setTautology(taut);
+        parsedQuestion.setContradiction(contra);
+    }
 
     public Object determineType() {
         if (stmt.contains("::")) {
             parsedQuestion.setEquivalence(true);
+            stmt = stmt.replaceAll("::", ",");
+            while(stmt.contains(",")) {
+                stmt();
+                map.put(",","");
+            }
+            return stmt();
         }
         else if(stmt.contains(":.")) {
             parsedQuestion.setArgument(true);
+            stmt = stmt.replaceAll(":.", ",");
+            while(stmt.contains(",")) {
+                stmt();
+                map.put(",","");
+            }
+            return stmt();
         }
         else if (stmt.contains(",")) {
             parsedQuestion.setConsistency(true);
+            while(stmt.contains(",")) {
+                stmt();
+                map.put(",","");
+            }
+            return stmt();
         }
         parsedQuestion.setLogical(true);
         while(stmt.contains(",")) {
@@ -188,7 +279,7 @@ public class Parser {
                 eat(')');
             }
 
-             return paren(s);
+            return paren(s);
         }
         return t7();
     }
@@ -378,7 +469,9 @@ public class Parser {
         }
         for(int i = 0; i < original.length(); i++) {
             char c = original.charAt(i);
-            if(c == '^' || c == 'v' || c == '!' || c == '-' || c == '~' ) {
+
+            //clean up
+            if(c == '^' || c == 'v' || c == '-' || c == '~' ) {
                 String op = "" + c;
                 ops.add(op);
             }
@@ -388,9 +481,28 @@ public class Parser {
         for(int i = 0; i < original.length(); i++) {
             String s = "" + original.charAt(i);
             if(count < ops.size() && s.equals(ops.get(count))) {
-                ret.add(new Pair<>(s, values.get(count)));
-                count++;
+
+                if (original.charAt(i) == '~') {
+                    ret.add(new Pair<>( new String(Character.toChars(0x00AC)), values.get(0)));
+                } else if(original.charAt(i) == '^'){
+                    ret.add(new Pair<>( new String(Character.toChars(0x2227)), values.get(0)));
+                } else if(original.charAt(i) == '^') {
+                    ret.add(new Pair<>( new String(Character.toChars(0x2228)), values.get(0)));
+                }
+
+                else {
+                    ret.add(new Pair<>(s, values.get(count)));
+                    count++;
+                }
+            } else if (original.charAt(i) == ':' && original.length() > i && original.charAt(i + 1) == ':') {
+                ret.add(new Pair<>( new String(Character.toChars(8594)), values.get(0)));  //using address 0 because values currently doesnt contain a set for ::, this will use count once evaluation is completed
+                i++; //skip over the next char since we already handle it
+
+            } else if (original.charAt(i) == ':' && original.length() > i && original.charAt(i + 1) == '.') {
+                ret.add(new Pair<>( new String(Character.toChars(8756)), values.get(0)));  //using address 0 because values currently doesnt contain a set for :., this will use count once evaluation is completed
+                i++; //skip over the next char since we already handle it
             }
+
             else {
                 ret.add(new Pair<>(s, ""));
             }
