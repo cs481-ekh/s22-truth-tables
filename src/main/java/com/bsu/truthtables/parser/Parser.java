@@ -109,7 +109,7 @@ public class Parser {
             validity += tmp;
         }
         parsedQuestion.setFinalAnswer(valid);
-        parsedQuestion.setShowsInvalid(validity);
+        parsedQuestion.setResults(validity);
     }
 
     public void evalConsistency() {
@@ -126,7 +126,7 @@ public class Parser {
             if(tmp.equals("T")) cons = "consistent";
             consistent += tmp;
         }
-        parsedQuestion.setShowsConsistent(consistent);
+        parsedQuestion.setResults(consistent);
         parsedQuestion.setFinalAnswer(cons);
     }
 
@@ -144,7 +144,7 @@ public class Parser {
             }
             equivalent += tmp;
         }
-        parsedQuestion.setShowsEquivalent(equivalent);
+        parsedQuestion.setResults(equivalent);
         parsedQuestion.setFinalAnswer(equiv);
     }
 
@@ -165,7 +165,7 @@ public class Parser {
             }
             logical += tmp;
         }
-        parsedQuestion.setShowsNotTautology(logical);
+        parsedQuestion.setResults(logical);
         String status = "";
         if(taut) status = "tautology";
         else if(contra) status = "contradiction";
