@@ -346,10 +346,10 @@
                 Statement is:
                 <select th:id="'valid' + ${submit.getCount2()}" class="practiceDropdown">
                     <!-- change T/F values -->
-                    <option value="T"></option>
-                    <option value="F">Tautology</option>
-                    <option value="F">Contradiction</option>
-                    <option value="F">Contingent</option>
+                    <option value=" "></option>
+                    <option value="tautology">Tautology</option>
+                    <option value="contradiction">Contradiction</option>
+                    <option value="contingent">Contingent</option>
                 </select>
             </th:block>
             <th:block th:if="${parsedQuestion.isEquivalence()}">
@@ -357,8 +357,8 @@
                 <select th:id="'valid' + ${submit.getCount2()}" class="practiceDropdown">
                     <!-- change T/F values -->
                     <option value=" "></option>
-                    <option value="F">Equivalent</option>
-                    <option value="F">Non-equivalent</option>
+                    <option value="equivalent">Equivalent</option>
+                    <option value="not equivalent">Non-equivalent</option>
                 </select>
             </th:block>
             <th:block th:if="${parsedQuestion.isConsistency()}">
@@ -366,8 +366,8 @@
                 <select th:id="'valid' + ${submit.getCount2()}" class="practiceDropdown">
                     <!-- change T/F values -->
                     <option value=" "></option>
-                    <option value="F">Consistent</option>
-                    <option value="F">Inconsistent</option>
+                    <option value="consistent">Consistent</option>
+                    <option value="not consistent">Inconsistent</option>
                 </select>
             </th:block>
             <th:block th:if="${parsedQuestion.isArgument()}">
@@ -375,8 +375,8 @@
                 <select th:id="'valid' + ${submit.getCount2()}" class="practiceDropdown">
                     <!-- change T/F values -->
                     <option value=" "></option>
-                    <option value="F">Valid</option>
-                    <option value="F">Invalid</option>
+                    <option value="valid">Valid</option>
+                    <option value="invalid">Invalid</option>
                 </select>
             </th:block>
         </div>
