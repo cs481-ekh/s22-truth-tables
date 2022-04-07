@@ -234,6 +234,7 @@
                                     <tr class="tablecenterCSS">
                                         <td>
                                             <div style="height:25px">
+                                                Set is:
                                                 <select th:id="'valid' + ${submit.getCount2()}" class="selectValidity">
                                                     <option value="F"></option>
                                                     <option value="T">Shows Consistent</option>
@@ -260,7 +261,8 @@
                                 <th:block th:each="i: ${#numbers.sequence(1, boxDepth)}">
                                     <tr class="tablecenterCSS">
                                         <td>
-                                            <div style="height:25px">
+                                            <div style="height:25px;">
+                                                Argument is:
                                                 <select th:id="'valid' + ${submit.getCount2()}" class="selectValidity">
                                                     <option value="F"></option>
                                                     <option value="T">Invalid</option>
@@ -287,7 +289,8 @@
                                 <th:block th:each="i: ${#numbers.sequence(1, boxDepth)}">
                                     <tr class="tablecenterCSS">
                                         <td>
-                                            <div style="height:25px">
+                                            <div style="height:25px;">
+                                                Statement is:
                                                 <select th:id="'valid' + ${submit.getCount2()}" class="selectValidity">
                                                     <option value=" "></option>
                                                     <option value="T">Not Tautology</option>
@@ -316,6 +319,7 @@
                                     <tr class="tablecenterCSS">
                                         <td>
                                             <div style="height:25px">
+                                                Pair is:
                                                 <select th:id="'valid' + ${submit.getCount2()}" class="selectValidity">
                                                     <option value="T"></option>
                                                     <option value="F">Not Equivalent</option>
