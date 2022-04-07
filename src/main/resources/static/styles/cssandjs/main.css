@@ -97,7 +97,7 @@ a.article-title:hover {
     width: 20px;
     text-align: center;
 }
-.selectValidity {
+.practiceDropdown {
     outline: none;
     background-color: transparent;
     appearance: none;

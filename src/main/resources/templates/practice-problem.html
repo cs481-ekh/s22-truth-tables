@@ -235,7 +235,7 @@
                                         <td>
                                             <div style="height:25px">
                                                 Set is:
-                                                <select th:id="'valid' + ${submit.getCount2()}" class="selectValidity">
+                                                <select th:id="'valid' + ${submit.getCount2()}" class="practiceDropdown">
                                                     <option value="F"></option>
                                                     <option value="T">Shows Consistent</option>
                                                 </select>
@@ -263,7 +263,7 @@
                                         <td>
                                             <div style="height:25px;">
                                                 Argument is:
-                                                <select th:id="'valid' + ${submit.getCount2()}" class="selectValidity">
+                                                <select th:id="'valid' + ${submit.getCount2()}" class="practiceDropdown">
                                                     <option value="F"></option>
                                                     <option value="T">Invalid</option>
                                                 </select>
@@ -291,7 +291,7 @@
                                         <td>
                                             <div style="height:25px;">
                                                 Statement is:
-                                                <select th:id="'valid' + ${submit.getCount2()}" class="selectValidity">
+                                                <select th:id="'valid' + ${submit.getCount2()}" class="practiceDropdown">
                                                     <option value=" "></option>
                                                     <option value="T">Not Tautology</option>
                                                     <option value="F">Not Contradiction</option>
@@ -320,7 +320,7 @@
                                         <td>
                                             <div style="height:25px">
                                                 Pair is:
-                                                <select th:id="'valid' + ${submit.getCount2()}" class="selectValidity">
+                                                <select th:id="'valid' + ${submit.getCount2()}" class="practiceDropdown">
                                                     <option value="T"></option>
                                                     <option value="F">Not Equivalent</option>
                                                 </select>
@@ -340,7 +340,45 @@
     <section class="py-3 text-center container">
         <div style="display: inline;">
             <button class="solution" style="margin-right: 30px;" onclick="myFunction()">Show Solution</button>
-            <button class="solution" onclick="grade()">Check</button>
+            <button class="solution" style="margin-right:30px" onclick="grade()">Check</button>
+            <!-- may need to change th:id later -->
+            <th:block th:if="${parsedQuestion.isLogical()}">
+                Statement is:
+                <select th:id="'valid' + ${submit.getCount2()}" class="practiceDropdown">
+                    <!-- change T/F values -->
+                    <option value=" "></option>
+                    <option value="tautology">Tautology</option>
+                    <option value="contradiction">Contradiction</option>
+                    <option value="contingent">Contingent</option>
+                </select>
+            </th:block>
+            <th:block th:if="${parsedQuestion.isEquivalence()}">
+                Pair of statements is:
+                <select th:id="'valid' + ${submit.getCount2()}" class="practiceDropdown">
+                    <!-- change T/F values -->
+                    <option value=" "></option>
+                    <option value="equivalent">Equivalent</option>
+                    <option value="not equivalent">Non-equivalent</option>
+                </select>
+            </th:block>
+            <th:block th:if="${parsedQuestion.isConsistency()}">
+                Set of statements is:
+                <select th:id="'valid' + ${submit.getCount2()}" class="practiceDropdown">
+                    <!-- change T/F values -->
+                    <option value=" "></option>
+                    <option value="consistent">Consistent</option>
+                    <option value="not consistent">Inconsistent</option>
+                </select>
+            </th:block>
+            <th:block th:if="${parsedQuestion.isArgument()}">
+                Argument is:
+                <select th:id="'valid' + ${submit.getCount2()}" class="practiceDropdown">
+                    <!-- change T/F values -->
+                    <option value=" "></option>
+                    <option value="valid">Valid</option>
+                    <option value="invalid">Invalid</option>
+                </select>
+            </th:block>
         </div>
     </section>
     <script>
@@ -364,6 +402,8 @@
             var count = /*[[${submit.getCount()}]]*/ 'default';
             var list = /*[[${parsedQuestion.getResults()}]]*/ 'default';
             var answer = /*[[${submit.getParsedAnswers()}]]*/ 'default';
+            var finalAnswer = /*[[${submit.getFinalAnswer()}]]*/ 'default';
+
             for (let i = 0; i < count; i++) {
                 var x = document.getElementById(i);
                 console.log(x.value);
