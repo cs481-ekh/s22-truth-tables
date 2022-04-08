@@ -74,21 +74,20 @@ class TruthtablesApplicationTests {
 
     @Test
     void kyleStuff() {
-        String question = "A v (B ->C)";
+        String question = "A -> B :: A <-> B";
         ParsedQuestion q1 = parser.parseQuestion(question);
-        ArrayList<Pair<String, String>> data = parser.getData();
         System.out.println(question);
         System.out.println(q1.toString());
-        System.out.println(data.toString());
+        System.out.println(q1.getResultList().toString());
 
         System.out.println();
 
-        String question2 = "!((!A v B) ^ C)";
-        ParsedQuestion q2 = parser.parseQuestion(question2);
-        data = parser.getData();
-        System.out.println(question2);
-        System.out.println(q2.toString());
-        System.out.println(data.toString());
+//        String question2 = "!((!A v B) ^ C)";
+//        ParsedQuestion q2 = parser.parseQuestion(question2);
+//        data = parser.getData();
+//        System.out.println(question2);
+//        System.out.println(q2.toString());
+//        System.out.println(data.toString());
 
 //		String question3 = "A v (B v (C v D))";
 //        List q3 =parser.parseQuestion(question3);
