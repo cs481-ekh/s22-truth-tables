@@ -84,7 +84,7 @@ public class Parser {
         } else {
             evalLogical();
         }
-        parsedQuestion.setMap(map);
+        unicode();
         return parsedQuestion;
     }
 
@@ -481,31 +481,53 @@ public class Parser {
         int count = 0;
         for (int i = 0; i < original.length(); i++) {
             String s = "" + original.charAt(i);
-            if (count < ops.size() && s.equals(ops.get(count))) {
-
-                if (original.charAt(i) == '~') {
-                    ret.add(new Pair<>(new String(Character.toChars(0x00AC)), values.get(count)));
-                } else if (original.charAt(i) == '^') {
-                    ret.add(new Pair<>(new String(Character.toChars(0x2227)), values.get(count)));
-                } else if (original.charAt(i) == 'v') {
-                    ret.add(new Pair<>(new String(Character.toChars(0x2228)), values.get(count)));
-                } else {
-                    ret.add(new Pair<>(s, values.get(count)));
-                }
+            if(count < ops.size() && s.equals(ops.get(count))) {
+                ret.add(new Pair<>(s, values.get(count)));
                 count++;
-
-            } else if (original.charAt(i) == ':' && original.length() > i && original.charAt(i + 1) == ':') {
-                ret.add(new Pair<>(new String(Character.toChars(8594)), ""));  //using address 0 because values currently doesnt contain a set for ::, this will use count once evaluation is completed
-                i++; //skip over the next char since we already handle it
-
-            } else if (original.charAt(i) == ':' && original.length() > i && original.charAt(i + 1) == '.') {
-                ret.add(new Pair<>(new String(Character.toChars(8756)), ""));  //using address 0 because values currently doesnt contain a set for :., this will use count once evaluation is completed
-                i++; //skip over the next char since we already handle it
-            } else {
+            }
+            else {
                 ret.add(new Pair<>(s, ""));
             }
         }
         return ret;
+    }
+
+    public void unicode() {
+        ArrayList<Pair<String, String>> results = parsedQuestion.getResultList();
+        int size = results.size();
+        for(int i = 0; i < size; i++) {
+            Pair<String,String> p1 = results.get(i);
+            if(p1.getValue0().equals("-")) {
+                String value = p1.getValue1();
+                Pair<String,String> newPair = new Pair<>(new String(Character.toChars(8594)),value);
+                results.remove(i+1);
+                size--;
+                results.set(i, newPair);
+            }
+            else if(p1.getValue0().equals("<")) {
+                String value = results.get(i+1).getValue1();
+                Pair<String,String> newPair = new Pair<>(new String(Character.toChars(8596)),value);
+                results.remove(i+2);
+                results.remove(i);
+                size--;
+                size--;
+                results.set(i, newPair);
+            }
+            else if(p1.getValue0().equals(":")) {
+                if(results.get(i+1).getValue0().equals(".")) {
+                    Pair<String,String> newPair = new Pair<>(new String(Character.toChars(8756)),"");
+                    results.remove(i+1);
+                    size--;
+                    results.set(i, newPair);
+                }
+                else {
+                    Pair<String,String> newPair = new Pair<>(new String(Character.toChars(8759)),"");
+                    results.remove(i+1);
+                    size--;
+                    results.set(i, newPair);
+                }
+            }
+        }
     }
 
     public class KeyComparator implements Comparator<String> {
