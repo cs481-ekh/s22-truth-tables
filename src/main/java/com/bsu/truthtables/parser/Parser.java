@@ -1,12 +1,12 @@
 package com.bsu.truthtables.parser;
 
 import com.bsu.truthtables.domain.ParsedQuestion;
+import org.javatuples.Pair;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.util.*;
 import java.util.stream.Collectors;
-import org.javatuples.Pair;
 
 
 @Component
@@ -27,23 +27,24 @@ public class Parser {
 
     public String orderResults(ArrayList<Pair<String, String>> r) {
         int max = 0;
-        for(Pair<String,String> p : r){
-            if(p.getValue1().length() > max) {
+        for (Pair<String, String> p : r) {
+            if (p.getValue1().length() > max) {
                 max = p.getValue1().length();
             }
         }
         String res = "";
-        for(int i = 0; i < max; i++) {
-            for(Pair<String,String> p : r){
-                if(p.getValue1().length() != 0) {
+        for (int i = 0; i < max; i++) {
+            for (Pair<String, String> p : r) {
+                if (p.getValue1().length() != 0) {
                     res += p.getValue1().charAt(i);
                 }
             }
         }
         return res;
     }
+
     public String parseChars(String question) {
-        return  question.replaceAll("[" + operators + "]", "")
+        return question.replaceAll("[" + operators + "]", "")
                 .replaceAll("\\(", "")
                 .replaceAll("\\)", "")
                 .replaceAll(" ", "")
@@ -59,7 +60,7 @@ public class Parser {
         parsedQuestion = new ParsedQuestion();
         map = new LinkedHashMap<>();
         this.stmt = question.replaceAll(" ", "");
-        this.original=stmt;
+        this.original = stmt;
         this.chars = parseChars(question);
         String values = prefilledBox.get(String.valueOf(chars.length()));
         int i = 0;
@@ -73,17 +74,14 @@ public class Parser {
             i++;
         }
         determineType();
-        parsedQuestion.setResultList( getData());
-        if(parsedQuestion.isConsistency()) {
+        parsedQuestion.setResultList(getData());
+        if (parsedQuestion.isConsistency()) {
             evalConsistency();
-        }
-        else if(parsedQuestion.isArgument()) {
+        } else if (parsedQuestion.isArgument()) {
             evalArgument();
-        }
-        else if(parsedQuestion.isEquivalence()) {
+        } else if (parsedQuestion.isEquivalence()) {
             evalEquivalence();
-        }
-        else {
+        } else {
             evalLogical();
         }
         parsedQuestion.setMap(map);
@@ -96,13 +94,13 @@ public class Parser {
         String conclusion = list[1];
         String validity = "";
         String valid = "valid";
-        for(int i = 0; i < get(conclusion).length(); i++) {
+        for (int i = 0; i < get(conclusion).length(); i++) {
             boolean allPremisesTrue = true;
             String tmp = "F";
-            for(String premise: premises) {
-                if(map.get(premise).charAt(i) == 'F') allPremisesTrue = false;
+            for (String premise : premises) {
+                if (map.get(premise).charAt(i) == 'F') allPremisesTrue = false;
             }
-            if(allPremisesTrue && map.get(conclusion).charAt(i) == 'F') {
+            if (allPremisesTrue && map.get(conclusion).charAt(i) == 'F') {
                 tmp = "T";
                 valid = "invalid";
             }
@@ -116,14 +114,14 @@ public class Parser {
         String[] list = original.split(",");
         String consistent = "";
         String cons = "not consistent";
-        for(int i = 0; i < map.get(list[0]).length(); i++) {
+        for (int i = 0; i < map.get(list[0]).length(); i++) {
             String tmp = "T";
             for (String s : list) {
                 if (map.get(s).charAt(i) == 'F') {
                     tmp = "F";
                 }
             }
-            if(tmp.equals("T")) cons = "consistent";
+            if (tmp.equals("T")) cons = "consistent";
             consistent += tmp;
         }
         parsedQuestion.setResults(consistent);
@@ -134,11 +132,11 @@ public class Parser {
         String[] list = original.split("::");
         String equivalent = "";
         String equiv = "equivalent";
-        for(int i = 0; i < map.get(list[0]).length(); i++) {
+        for (int i = 0; i < map.get(list[0]).length(); i++) {
             String tmp = "T";
             char c1 = map.get(list[0]).charAt(i);
             char c2 = map.get(list[1]).charAt(i);
-            if(c1 != c2) {
+            if (c1 != c2) {
                 equiv = "not equivalent";
                 tmp = "F";
             }
@@ -153,13 +151,12 @@ public class Parser {
         String logical = "";
         boolean taut = true;
         boolean contra = true;
-        for(int i = 0; i < values.length(); i++) {
+        for (int i = 0; i < values.length(); i++) {
             char c = values.charAt(i);
             String tmp = "T";
-            if(c == 'T') {
+            if (c == 'T') {
                 contra = false;
-            }
-            else {
+            } else {
                 tmp = "F";
                 taut = false;
             }
@@ -167,8 +164,8 @@ public class Parser {
         }
         parsedQuestion.setResults(logical);
         String status = "";
-        if(taut) status = "tautology";
-        else if(contra) status = "contradiction";
+        if (taut) status = "tautology";
+        else if (contra) status = "contradiction";
         else status = "contingent";
         parsedQuestion.setFinalAnswer(status);
     }
@@ -177,33 +174,31 @@ public class Parser {
         if (stmt.contains("::")) {
             parsedQuestion.setEquivalence(true);
             stmt = stmt.replaceAll("::", ",");
-            while(stmt.contains(",")) {
+            while (stmt.contains(",")) {
                 stmt();
-                map.put(",","");
+                map.put(",", "");
             }
             return stmt();
-        }
-        else if(stmt.contains(":.")) {
+        } else if (stmt.contains(":.")) {
             parsedQuestion.setArgument(true);
             stmt = stmt.replaceAll(":.", ",");
-            while(stmt.contains(",")) {
+            while (stmt.contains(",")) {
                 stmt();
-                map.put(",","");
+                map.put(",", "");
             }
             return stmt();
-        }
-        else if (stmt.contains(",")) {
+        } else if (stmt.contains(",")) {
             parsedQuestion.setConsistency(true);
-            while(stmt.contains(",")) {
+            while (stmt.contains(",")) {
                 stmt();
-                map.put(",","");
+                map.put(",", "");
             }
             return stmt();
         }
         parsedQuestion.setLogical(true);
-        while(stmt.contains(",")) {
+        while (stmt.contains(",")) {
             stmt();
-            map.put(",","");
+            map.put(",", "");
         }
         return stmt();
     }
@@ -263,11 +258,11 @@ public class Parser {
 
     public Object t5() {
         int numOfNots = 0;
-        while(peek() == '~') {
+        while (peek() == '~') {
             eat('~');
             numOfNots++;
         }
-        if (numOfNots != 0 && numOfNots %2 == 1) {          //idk what the char is for not so I am using ! temporarily
+        if (numOfNots != 0 && numOfNots % 2 == 1) {          //idk what the char is for not so I am using ! temporarily
             Object obj = t6();
             return not(obj);
         }
@@ -278,7 +273,7 @@ public class Parser {
         if (more() && peek() == '(') {
             eat('(');
             Object s = stmt();
-            while(peek() == ')'){
+            while (peek() == ')') {
                 eat(')');
             }
 
@@ -293,43 +288,44 @@ public class Parser {
 
 
     //evaluate
-    public Object paren(Object o1){
+    public Object paren(Object o1) {
         String name = "(" + o1 + ")";
         put(name, get(o1));
         map.remove(o1);
-        if(stmt.length() == 0) {
+        if (stmt.length() == 0) {
             return name;
         }
         char op = next();
         Object o2 = stmt();
         String retval = "";
-        if(op == '^') {
-            retval = (String) and(name,o2);
+        if (op == '^') {
+            retval = (String) and(name, o2);
             name = name + "^" + o2;
         }
-        if(op == 'v') {
-            retval = (String) or(name,o2);
+        if (op == 'v') {
+            retval = (String) or(name, o2);
             name = name + "v" + o2;
         }
-        if(op == '-') {
-            retval = (String) ifThen(name,o2);
+        if (op == '-') {
+            retval = (String) ifThen(name, o2);
             name = name + "->" + o2;
         }
-        if(op == '<') {
-            retval = (String) ifAndOnlyIf(name,o2);
+        if (op == '<') {
+            retval = (String) ifAndOnlyIf(name, o2);
             name = name + "<->" + o2;
         }
         put(name, get(retval));
         return name;
 
     }
+
     public Object not(Object o1) {
         String retVal = "";
         String name = "~" + o1;
-        for (int i = 0 ; i < get(o1).length(); i++) {
-            if(get(o1).charAt(i) == 'T') {
+        for (int i = 0; i < get(o1).length(); i++) {
+            if (get(o1).charAt(i) == 'T') {
                 retVal += "F";
-            } else{
+            } else {
                 retVal += "T";
             }
 
@@ -342,7 +338,7 @@ public class Parser {
 
         String retVal = "";
         String name = o1 + "^" + o2;
-        for (int i = 0 ; i < get(o1).length(); i++) {
+        for (int i = 0; i < get(o1).length(); i++) {
             if (get(o1).charAt(i) == 'T' && get(o2).charAt(i) == 'T') {
                 retVal += "T";
             } else {
@@ -356,7 +352,7 @@ public class Parser {
     public Object or(Object o1, Object o2) {
         String retVal = "";
         String name = o1 + "v" + o2;
-        for (int i = 0 ; i < get(o1).length(); i++) {
+        for (int i = 0; i < get(o1).length(); i++) {
             if (get(o1).charAt(i) == 'T' || get(o2).charAt(i) == 'T') {
                 retVal += "T";
             } else {
@@ -371,7 +367,7 @@ public class Parser {
         String name = "" + o1;
         put(name, get(o1));
         String retVal = "";
-        for(int i = 0; i < get(name).length(); i++){
+        for (int i = 0; i < get(name).length(); i++) {
             retVal += get(name).charAt(i) == 'T' && get(o2).charAt(i) == 'F' ? "F" : "T";
         }
         name = name + "->" + o2;
@@ -383,7 +379,7 @@ public class Parser {
         String name = "" + o1;
         put(name, get(o1));
         String retVal = "";
-        for(int i = 0; i < get(name).length(); i++){
+        for (int i = 0; i < get(name).length(); i++) {
             retVal += get(name).charAt(i) == get(o2).charAt(i) ? "T" : "F";
         }
         name = name + "<->" + o2;
@@ -393,7 +389,7 @@ public class Parser {
 
     //helper methods for parser
     private char peek() {
-        if(stmt.length() == 0) {
+        if (stmt.length() == 0) {
             return '0';
         }
         return stmt.charAt(0);
@@ -434,15 +430,17 @@ public class Parser {
     private boolean more() {
         return stmt.length() > 0;
     }
-    public String get(Object o){
-        if(o instanceof String) {
+
+    public String get(Object o) {
+        if (o instanceof String) {
             return map.get(o);
         } else {
             return map.get(String.valueOf(o));
         }
     }
-    public String put(Object o, String val){
-        if(o instanceof String) {
+
+    public String put(Object o, String val) {
+        if (o instanceof String) {
 
             return map.put(o.toString(), val);
         } else {
@@ -456,8 +454,8 @@ public class Parser {
         ArrayList<String> keys = new ArrayList<>();
         int len = 1;
         String question = "";
-        for(String key: map.keySet()) {
-            if(key.length() > 1) {
+        for (String key : map.keySet()) {
+            if (key.length() > 1) {
                 keys.add(key);
                 if (key.length() > len) {
                     len = key.length();
@@ -466,47 +464,44 @@ public class Parser {
             }
         }
         keys.sort(new KeyComparator(original));
-        for(String key: keys) {
+        for (String key : keys) {
             String val = map.get(key);
             values.add(val);
         }
-        for(int i = 0; i < original.length(); i++) {
+        for (int i = 0; i < original.length(); i++) {
             char c = original.charAt(i);
 
             //clean up
-            if(c == '^' || c == 'v' || c == '-' || c == '~' ) {
+            if (c == '^' || c == 'v' || c == '-' || c == '~') {
                 String op = "" + c;
                 ops.add(op);
             }
         }
         ArrayList<Pair<String, String>> ret = new ArrayList<>();
         int count = 0;
-        for(int i = 0; i < original.length(); i++) {
+        for (int i = 0; i < original.length(); i++) {
             String s = "" + original.charAt(i);
-            if(count < ops.size() && s.equals(ops.get(count))) {
+            if (count < ops.size() && s.equals(ops.get(count))) {
 
                 if (original.charAt(i) == '~') {
-                    ret.add(new Pair<>( new String(Character.toChars(0x00AC)), values.get(0)));
-                } else if(original.charAt(i) == '^'){
-                    ret.add(new Pair<>( new String(Character.toChars(0x2227)), values.get(0)));
-                } else if(original.charAt(i) == '^') {
-                    ret.add(new Pair<>( new String(Character.toChars(0x2228)), values.get(0)));
-                }
-
-                else {
+                    ret.add(new Pair<>(new String(Character.toChars(0x00AC)), values.get(count)));
+                } else if (original.charAt(i) == '^') {
+                    ret.add(new Pair<>(new String(Character.toChars(0x2227)), values.get(count)));
+                } else if (original.charAt(i) == 'v') {
+                    ret.add(new Pair<>(new String(Character.toChars(0x2228)), values.get(count)));
+                } else {
                     ret.add(new Pair<>(s, values.get(count)));
-                    count++;
                 }
+                count++;
+
             } else if (original.charAt(i) == ':' && original.length() > i && original.charAt(i + 1) == ':') {
-                ret.add(new Pair<>( new String(Character.toChars(8594)), values.get(0)));  //using address 0 because values currently doesnt contain a set for ::, this will use count once evaluation is completed
+                ret.add(new Pair<>(new String(Character.toChars(8594)), ""));  //using address 0 because values currently doesnt contain a set for ::, this will use count once evaluation is completed
                 i++; //skip over the next char since we already handle it
 
             } else if (original.charAt(i) == ':' && original.length() > i && original.charAt(i + 1) == '.') {
-                ret.add(new Pair<>( new String(Character.toChars(8756)), values.get(0)));  //using address 0 because values currently doesnt contain a set for :., this will use count once evaluation is completed
+                ret.add(new Pair<>(new String(Character.toChars(8756)), ""));  //using address 0 because values currently doesnt contain a set for :., this will use count once evaluation is completed
                 i++; //skip over the next char since we already handle it
-            }
-
-            else {
+            } else {
                 ret.add(new Pair<>(s, ""));
             }
         }
@@ -515,22 +510,23 @@ public class Parser {
 
     public class KeyComparator implements Comparator<String> {
         public String question;
+
         public KeyComparator(String question) {
             this.question = question;
         }
+
         @Override
         public int compare(String o1, String o2) {
             int pos1 = findPos(o1, this.question);
             int pos2 = findPos(o2, this.question);
-            if(pos1 < pos2) {
+            if (pos1 < pos2) {
                 return -1;
-            }
-            else if(pos1 > pos2) {
+            } else if (pos1 > pos2) {
                 return 1;
             }
             int len1 = o1.length();
             int len2 = o2.length();
-            if(len1 < len2) {
+            if (len1 < len2) {
                 return -1;
             }
             return 1;
@@ -539,19 +535,19 @@ public class Parser {
         public int findPos(String s, String question) {
             int pos = 0;
             boolean found = false;
-            for(; pos < question.length(); pos++) {
-                for(int i = 0; i < s.length(); i++) {
-                    if(!(s.charAt(i) == question.charAt(pos+i))) {
+            for (; pos < question.length(); pos++) {
+                for (int i = 0; i < s.length(); i++) {
+                    if (!(s.charAt(i) == question.charAt(pos + i))) {
                         break;
                     }
-                    if(i == s.length()-1) {
+                    if (i == s.length() - 1) {
                         found = true;
                     }
                 }
-                if(found) break;
+                if (found) break;
             }
             int parenCheck = 0;
-            while(s.charAt(parenCheck) == '(') {
+            while (s.charAt(parenCheck) == '(') {
                 parenCheck++;
                 pos++;
             }
