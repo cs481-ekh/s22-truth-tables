@@ -344,7 +344,7 @@
             <!-- may need to change th:id later -->
             <th:block th:if="${parsedQuestion.isLogical()}">
                 Statement is:
-                <select th:id="'valid' + ${submit.getCount2()}" class="practiceDropdown">
+                <select th:id="finalAnswer" class="practiceDropdown">
                     <!-- change T/F values -->
                     <option value=" "></option>
                     <option value="tautology">Tautology</option>
@@ -354,7 +354,7 @@
             </th:block>
             <th:block th:if="${parsedQuestion.isEquivalence()}">
                 Pair of statements is:
-                <select th:id="'valid' + ${submit.getCount2()}" class="practiceDropdown">
+                <select th:id="finalAnswer" class="practiceDropdown">
                     <!-- change T/F values -->
                     <option value=" "></option>
                     <option value="equivalent">Equivalent</option>
@@ -363,7 +363,7 @@
             </th:block>
             <th:block th:if="${parsedQuestion.isConsistency()}">
                 Set of statements is:
-                <select th:id="'valid' + ${submit.getCount2()}" class="practiceDropdown">
+                <select th:id="finalAnswer" class="practiceDropdown">
                     <!-- change T/F values -->
                     <option value=" "></option>
                     <option value="consistent">Consistent</option>
@@ -372,7 +372,7 @@
             </th:block>
             <th:block th:if="${parsedQuestion.isArgument()}">
                 Argument is:
-                <select th:id="'valid' + ${submit.getCount2()}" class="practiceDropdown">
+                <select th:id="finalAnswer" class="practiceDropdown">
                     <!-- change T/F values -->
                     <option value=" "></option>
                     <option value="valid">Valid</option>
@@ -402,7 +402,7 @@
             var count = /*[[${submit.getCount()}]]*/ 'default';
             var list = /*[[${parsedQuestion.getResults()}]]*/ 'default';
             var answer = /*[[${submit.getParsedAnswers()}]]*/ 'default';
-            var finalAnswer = /*[[${submit.getFinalAnswer()}]]*/ 'default';
+            var finalAnswer = /*[[${parsedQuestion.getFinalAnswer()}]]*/ 'default';
 
             for (let i = 0; i < count; i++) {
                 var x = document.getElementById(i);
@@ -422,6 +422,13 @@
                 } else {
                     y.style.color = "black";
                 }
+            }
+            /* Final answer */
+            var z = document.getElementById("finalAnswer");
+            if(finalAnswer != z.value && z.value != " ") {
+                z.style.color = "red";
+            } else {
+                z.style.color = "black";
             }
         }
     </script>
