@@ -2,83 +2,101 @@
 <html xmlns:th="https://www.thymeleaf.org">
 <head th:replace="fragments :: html_head"></head>
 
-<body class="d-flex flex-column min-vh-100">
+<body class="d-flex flex-column min-vh-100 bg-light">
 
 <!-- NavBar -->
 <div th:replace="fragments :: menu"></div>
 
-<section style="margin-top: 5%;" class="py-3 text-center container">
-    <div class="row py-0">
-        <div>
-            <p></p>
-            <p class="lead text-muted">
-                This tool exists to allow students to enter propositional logic formulas with the ability to actively test
-                and evaluate their formula's truth tables. Additionally, students of Dr. Cortens will have the ability to access and practice
-                questions created in chapters. To enter a propositional formula use upper case letters (A, B, C, etc) and the included
-                operators below (ex. C v (~A > D)).
-            </p>
-
-<!--            <div class="col" >-->
-<!--                <h3>Operators</h3>-->
-<!--                <div class="container-sm">-->
-<!--                    <p> ^   v  >       ~</p>-->
-<!--                    <p>and or if-then not</p>-->
-<!--                </div>-->
-<!--            </div>-->
-        </div>
+<div class="position-relative overflow-hidden p-6 p-lg-5 m-lg-3 text-center bg-light">
+    <div class="col-md-7 p-lg-5 mx-auto my-6">
+        <h1 class="display-4 fw-normal" >Boise State University</h1>
+        <h2 class="display-4 fw-normal" style="margin-Bottom: 50px">Interactive Truth Table</h2>
+        <p class="lead fw-normal">This tool exists to allow students to enter propositional logic formulas with the ability to actively test
+            and evaluate their formula's truth tables. Additionally, students of Dr. Cortens will have the ability to access and practice
+            questions created in chapters. To enter a propositional formula use upper case letters (A, B, C, etc) and the included
+            operators below (ex. C v (~A > D)). For more information on problem types and bug reports you can navigate to our help page.</p>
     </div>
-
-    <section class="py-sm-0 text-center container">
-        <div class="row py-lg-5">
+    <div class="col-md-7 mx-auto my-6">
+        <div class="row">
             <div class="col">
-                <div class="col" style="border: 2px solid black">
-                    <h3>Operators</h3>
-                    <div class="container-sm">
-                        <div class="row">
-                            <div class="col" style="border-bottom: 2px solid black">
-                                ^
-                            </div>
-                            <div class="col" style="border-bottom: 2px solid black">
-                                v
-                            </div>
-                            <div class="col" style="border-bottom: 2px solid black">
-                                >
-                            </div>
-                            <div class="col" style="border-bottom: 2px solid black">
-                                ~
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col">
-                                and
-                            </div>
-                            <div class="col">
-                                or
-                            </div>
-                            <div class="col">
-                                if then
-                            </div>
-                            <div class="col">
-                                not
+                <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                    <div class="col p-4 d-flex flex-column position-static">
+                        <h3 class="mb-0">Operators</h3>
+                        <div class="col">
+                            <div class="container-sm">
+                                <div class="row">
+                                    <div class="col" style="border-bottom: 2px solid black">
+                                        ^
+                                    </div>
+                                    <div class="col" style="border-bottom: 2px solid black">
+                                        v
+                                    </div>
+                                    <div class="col" style="border-bottom: 2px solid black">
+                                        ::
+                                    </div>
+                                    <div class="col" style="border-bottom: 2px solid black">
+                                        :.
+                                    </div>
+                                    <div class="col" style="border-bottom: 2px solid black">
+                                        ~
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        and
+                                    </div>
+                                    <div class="col">
+                                        or
+                                    </div>
+                                    <div class="col">
+                                        if then
+                                    </div>
+                                    <div class="col">
+                                        therefore
+                                    </div>
+                                    <div class="col">
+                                        not
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
             </div>
-            <div class="col-6">
-                <p></p>
-                <!--            <p class="lead text-muted"> Replace me </p>-->
-                <form action="#" th:action="@{/}" th:object="${question}" method="post">
-                    <p>Enter a question: <input type="text" id="question" th:field="*{question}" /> <input type="submit" onclick="return validate()" value="Submit" /> </p>
-
-                </form>
+            <div class="col">
+                <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                    <div class="col p-4 d-flex flex-column position-static">
+                        <h3 class="mb-0">Problem Types</h3>
+                        <div class="row">
+                            <div class="col">
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item">Logical</li>
+                                    <li class="list-group-item">Equivalence</li>
+                                </ul>
+                            </div>
+                            <div class="col">
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item">Consistency</li>
+                                    <li class="list-group-item">Validity</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-
-            <div class="col"></div>
         </div>
-    </section>
-</section>
+    </div>
+    <div class="col-md-auto">
+        <p></p>
+        <form action="#" th:action="@{/}" th:object="${question}" method="post">
+            <p>Enter a question: <input type="text" id="question" th:field="*{question}" /> <input type="submit" onclick="return validate()" value="Submit" /> </p>
+        </form>
+    </div>
+
+</div>
+
+
+
 
 
 <footer th:replace="fragments :: footer"></footer>
