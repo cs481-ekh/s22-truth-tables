@@ -1,4 +1,4 @@
-#Interactive Truth Tables
+# Interactive Truth Tables
 
 
 ## Members:
@@ -8,7 +8,7 @@
  - Berto Cisneros
  - Zach Sherwood
 
-##Abstract
+## Abstract
 
 Instructors and students working with truth tables are often subjected to creating tables that all have a similar
 structure and contain the same or similar contents. This process can be repetitive, tedious, and unnecessary, so
@@ -24,7 +24,7 @@ Database and using Boise State services for back-end/hosting. This will allow us
 allowing the professor to organize different questions in chapters, and potentially evaluate student problems for
 class grades.
 
-##Project Description
+## Project Description
 
 
 
