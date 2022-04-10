@@ -1,8 +1,28 @@
-GitHub Page
+Interactive Truth Tables
 
-Each team must produce a web page hosted on their GitHub repo (using GitHub Pages). This is a static html page that gives a high-level overview of the project. The intended audience is employers who want to see examples of your work and other developers who may want to fork your project and/or contribute.
+Josh Gandalfo, Trevor Smith, Kyle Worley, Berto Cisneros, Zach Sherwood
 
-You should use a GitHub template or create your own style so the web page looks like more than a simple text README document.
+Abstract
+
+Instructors and students working with truth tables are often subjected to creating tables that all have a similar
+structure and contain the same or similar contents. This process can be repetitive, tedious, and unnecessary, so
+some automation could be used to generate a base portion of the table dependent on the statements/clauses
+provided.
+
+The idea is to have an application that allows instructors to create truth table problems such as testing an
+argument's validity, or finding out whether two propositional well-formed formulas (WFF) are equivalent, or
+finding out whether a WFF is a tautology, etc..
+
+We plan to build a Spring Boot application (Java based web framework), storing information in a MySQL
+Database and using Boise State services for back-end/hosting. This will allow us to create truth table problems,
+allowing the professor to organize different questions in chapters, and potentially evaluate student problems for
+class grades.
+
+Project Description
+
+
+
+
 
 Requirements
 
@@ -16,5 +36,3 @@ Requirements
         Describe what you actually built
         How it works
         Screenshots
-
-Here are some examples from past projects:
