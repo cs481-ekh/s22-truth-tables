@@ -2,7 +2,7 @@
 
 
 ## Members:
- - Josh Gandalfo
+ - Josh Gandolfo
  - Trevor Smith
  - Kyle Worley
  - Berto Cisneros
