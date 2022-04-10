@@ -15,7 +15,7 @@
 
             var user = document.getElementById("question").value;
             var user2 = document.getElementById("question");
-            var re = /([A-Za-u]{2,})|([w-z]{2,})|([\||\-|\>|\<|\*|\^]{2,})|(\|)|(!)/;
+            var re = /([A-Za-u]{2,})|([w-z]{2,})(\|)|(!)/;
             var re2 = /(^\||^v|^\-|^\>|^\<|^\^|^\*)/;
             var re3 = /(\|$|v$|\-$|\>$|\<$|\^$|\*$)/;
             if (!re.test(user) && !re2.test(user) && !re3.test(user)) {
