@@ -1,10 +1,26 @@
 <!DOCTYPE HTML>
 <html xmlns:th="https://www.thymeleaf.org">
-<head>
-    <title>SCREEEEECCCHHHHHH</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-</head>
-<body>
-<h1>You done broke't it! </h1>
-<p>HR wants to talk to you about some of your recent choices.</p>
+
+<head th:replace="fragments :: html_head"></head>
+
+<body class="d-flex flex-column min-vh-100 body">
+
+<!-- NavBar -->
+<div th:replace="fragments :: menu"></div>
+
+<h3> An error occurred. <a href="http://localhost:8080/truth-tables">Go Back.</a></h3>
+
+
+<div class="center-questions">
+    <div class="row justify-content-md-center gy-0">
+        <div class="col-md-auto">
+            <h3> An error occurred. <a href="http://localhost:8080/truth-tables">Go Back.</a></h3>
+        </div>
+    </div>
+</div>
+
+
 </body>
+<footer th:replace="fragments :: footer"></footer>
+
+</html>
