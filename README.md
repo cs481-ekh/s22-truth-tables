@@ -19,8 +19,11 @@ If you want to run it locally without a docker instance you will need to connect
 To run the application you have a few options. This is a maven project, therefore, you can run any maven command from the root directory such as ````./mvnw spring-boot:run````. We have also supplied ````run.sh````, ````test.sh```` and ````build.sh````.
 
 <b>Notes for future Developers</b>
+
 Branching strategies:
+
 Main - used for deployment to BSU servers
+
 Development - used to run locally, useful for implementing and testing changes before they go to main. Build your branch off this one, test locally, PR into main, run docker-compose up --build on the BSU server, your changes are now live. 
 
 Additional resources:
