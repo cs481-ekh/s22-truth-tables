@@ -1,7 +1,7 @@
 version: "3"
 services:
   truthtables:
-    build: https://github.com/cs481-ekh/s22-truth-tables.git#MigrateToBsu-55
+    build: https://github.com/cs481-ekh/s22-truth-tables.git#Main
     image: truthtables
     ports:
       - "${HOST_PORT:-8080}:8080"
