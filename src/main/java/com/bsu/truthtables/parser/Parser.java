@@ -153,11 +153,11 @@ public class Parser {
         boolean contra = true;
         for (int i = 0; i < values.length(); i++) {
             char c = values.charAt(i);
-            String tmp = "T";
+            String tmp = "F";
             if (c == 'T') {
                 contra = false;
             } else {
-                tmp = "F";
+                tmp = "T";
                 taut = false;
             }
             logical += tmp;
@@ -296,6 +296,7 @@ public class Parser {
             return name;
         }
         char op = next();
+        if (op == ',') return name;
         Object o2 = stmt();
         String retval = "";
         if (op == '^') {
