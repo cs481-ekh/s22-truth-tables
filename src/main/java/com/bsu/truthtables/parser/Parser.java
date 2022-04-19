@@ -498,7 +498,12 @@ public class Parser {
         int size = results.size();
         for(int i = 0; i < size; i++) {
             Pair<String,String> p1 = results.get(i);
-            if(p1.getValue0().equals("-")) {
+            if(p1.getValue0().equals("~")) {
+                String value = p1.getValue1();
+                Pair<String,String> newPair = new Pair<>(new String(Character.toChars(172)),value);
+                results.set(i, newPair);
+            }
+            else if(p1.getValue0().equals("-")) {
                 String value = p1.getValue1();
                 Pair<String,String> newPair = new Pair<>(new String(Character.toChars(8594)),value);
                 results.remove(i+1);
