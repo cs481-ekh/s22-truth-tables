@@ -133,12 +133,12 @@ public class Parser {
         String equivalent = "";
         String equiv = "equivalent";
         for (int i = 0; i < map.get(list[0]).length(); i++) {
-            String tmp = "T";
+            String tmp = "F";
             char c1 = map.get(list[0]).charAt(i);
             char c2 = map.get(list[1]).charAt(i);
             if (c1 != c2) {
                 equiv = "not equivalent";
-                tmp = "F";
+                tmp = "T";
             }
             equivalent += tmp;
         }
