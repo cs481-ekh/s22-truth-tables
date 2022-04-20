@@ -24,16 +24,19 @@
                                         v
                                     </div>
                                     <div class="col" style="border-bottom: 2px solid black">
-                                        ~
+                                        ~ (&#172;)
                                     </div>
                                     <div class="col" style="border-bottom: 2px solid black">
-                                        < (&#8594;)
+                                        -> (&#8594;)
                                     </div>
                                     <div class="col" style="border-bottom: 2px solid black">
-                                        - (&#10231;)
+                                        <-> (&#10231;)
                                     </div>
                                     <div class="col" style="border-bottom: 2px solid black">
                                         :. (&#x2234;)
+                                    </div>
+                                    <div class="col" style="border-bottom: 2px solid black">
+                                        ::
                                     </div>
                                 </div>
                                 <div class="row">
@@ -54,6 +57,9 @@
                                     </div>
                                     <div class="col">
                                         therefore
+                                    </div>
+                                    <div class="col">
+                                        logical equivalence
                                     </div>
                                 </div>
                             </div>
@@ -317,8 +323,8 @@
                                             <div style="height:25px">
                                                 Pair is:
                                                 <select th:id="'valid' + ${submit.getCount2()}" class="practiceDropdown">
-                                                    <option value="T"></option>
-                                                    <option value="F">Not Equivalent</option>
+                                                    <option value="F"></option>
+                                                    <option value="T">Not Equivalent</option>
                                                 </select>
                                             </div>
                                         </td>
@@ -341,7 +347,6 @@
             <th:block th:if="${parsedQuestion.isLogical()}">
                 Statement is:
                 <select th:id="finalAnswer" class="practiceDropdown">
-                    <!-- change T/F values -->
                     <option value=" "></option>
                     <option value="tautology">Tautology</option>
                     <option value="contradiction">Contradiction</option>
@@ -351,7 +356,6 @@
             <th:block th:if="${parsedQuestion.isEquivalence()}">
                 Pair of statements is:
                 <select th:id="finalAnswer" class="practiceDropdown">
-                    <!-- change T/F values -->
                     <option value=" "></option>
                     <option value="equivalent">Equivalent</option>
                     <option value="not equivalent">Non-equivalent</option>
@@ -360,7 +364,6 @@
             <th:block th:if="${parsedQuestion.isConsistency()}">
                 Set of statements is:
                 <select th:id="finalAnswer" class="practiceDropdown">
-                    <!-- change T/F values -->
                     <option value=" "></option>
                     <option value="consistent">Consistent</option>
                     <option value="not consistent">Inconsistent</option>
@@ -369,12 +372,12 @@
             <th:block th:if="${parsedQuestion.isArgument()}">
                 Argument is:
                 <select th:id="finalAnswer" class="practiceDropdown">
-                    <!-- change T/F values -->
                     <option value=" "></option>
                     <option value="valid">Valid</option>
                     <option value="invalid">Invalid</option>
                 </select>
             </th:block>
+               <p id="feedback" style="display: none; color: red;"> Must select supporting row(s)</p>
         </div>
     </section>
     <script>
@@ -399,6 +402,7 @@
             var list = /*[[${parsedQuestion.getResults()}]]*/ 'default';
             var answer = /*[[${submit.getParsedAnswers()}]]*/ 'default';
             var finalAnswer = /*[[${parsedQuestion.getFinalAnswer()}]]*/ 'default';
+            document.getElementById("feedback").style.display = "none";
 
             for (let i = 0; i < count; i++) {
                 var x = document.getElementById(i);
@@ -421,10 +425,46 @@
             }
             /* Final answer */
             var z = document.getElementById("finalAnswer");
-            if(finalAnswer != z.value && z.value != " ") {
-                z.style.color = "red";
-            } else {
-                z.style.color = "black";
+            console.log("doc is" + z.value);
+            
+            if(z.value != " "){
+                if (z.value == "contingent" || z.value == "not equivalent" ||
+                    z.value == "consistent" || z.value == "invalid") {
+                
+                    var oneTrue = false;
+                    for (let i = 0; i < list.length; i++) {
+                        y = document.getElementById("valid" + i);
+                        if (y.value == "T") {
+                            oneTrue = true;
+                        }
+                    }
+                    if (z.value == "contingent" ){
+                        var oneFalse = false;
+                        for (let i = 0; i < list.length; i++) {
+                            y = document.getElementById("valid" + i);
+                            if (y.value == "F") {
+                                oneFalse = true;
+                            }
+                        }
+                        if (!(oneTrue && oneFalse)) {
+                            document.getElementById("feedback").style.display = "inline";
+                            z.style.color = "red";
+                            return;
+                        }
+                    } else {
+                        if (!oneTrue) {
+                            document.getElementById("feedback").style.display = "inline";
+                            z.style.color = "red";
+                            return;
+                        }
+                    }
+                }
+
+                if(finalAnswer != z.value) {
+                    z.style.color = "red";
+                } else {
+                    z.style.color = "black";
+                }
             }
         }
     </script>
