@@ -11,8 +11,10 @@
     <section style="margin-top: 5%;" class="py-3 text-center container">
         <div class="row py-0">
             <div class="col-6">
-                <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                <div
+                    class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
                     <div class="col p-4 d-flex flex-column position-static">
+                        <!-- Operators Box -->
                         <h3 class="mb-0">Operators</h3>
                         <div class="col">
                             <div class="container-sm">
@@ -67,8 +69,11 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Problem types box -->
             <div class="col">
-                <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                <div
+                    class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
                     <div class="col p-4 d-flex flex-column position-static">
                         <h3 class="mb-0">Problem Types</h3>
                         <div class="row">
@@ -89,16 +94,12 @@
                 </div>
     </section>
 
-
+    <!-- Input field -->
     <section class="py-sm-0 text-center container">
         <div class="row py-lg-5">
             <div class="col">
-
             </div>
-
             <div class="col-6">
-                <p></p>
-                <!--            <p class="lead text-muted"> Replace me </p>-->
                 <form action="#" th:action="@{/}" th:object="${question}" method="post">
                     <p>Enter a question: <input type="text" id="question" th:field="*{question}" /> <input type="submit"
                             onclick="return validate()" value="Submit" /> <input type="reset" value="Reset" /></p>
@@ -109,10 +110,8 @@
             <div class="col"></div>
         </div>
     </section>
-    </section>
 
-
-
+    <!-- Main Table -->
     <main role="main" class="container">
         <div class="row">
             <div class="col-xl-auto mx-auto">
@@ -121,7 +120,6 @@
                     <div class="col-sm">
                         <!-- Center text in columns -->
                         <table class="tablecenterheadCSS tablecenterCSS table caption-top">
-                            <!-- start stickiness -->
                             <caption>Inputs</caption>
                             <thead>
                                 <!-- print the input chars -->
@@ -131,7 +129,6 @@
                                     </th:block>
                                 </tr>
                             </thead>
-                            <!-- end stickiness -->
                             <!-- print the input values -->
                             <th:block th:each="i: ${#numbers.sequence(1, boxDepth)}">
                                 <tr class="tablecenterCSS">
@@ -237,7 +234,8 @@
                                         <td>
                                             <div style="height:25px">
                                                 Set is:
-                                                <select th:id="'valid' + ${submit.getCount2()}" class="practiceDropdown">
+                                                <select th:id="'valid' + ${submit.getCount2()}"
+                                                    class="practiceDropdown">
                                                     <option value="F"></option>
                                                     <option value="T">Shows Consistent</option>
                                                 </select>
@@ -265,7 +263,8 @@
                                         <td>
                                             <div style="height:25px;">
                                                 Argument is:
-                                                <select th:id="'valid' + ${submit.getCount2()}" class="practiceDropdown">
+                                                <select th:id="'valid' + ${submit.getCount2()}"
+                                                    class="practiceDropdown">
                                                     <option value="F"></option>
                                                     <option value="T">Invalid</option>
                                                 </select>
@@ -293,7 +292,8 @@
                                         <td>
                                             <div style="height:25px;">
                                                 Statement is:
-                                                <select th:id="'valid' + ${submit.getCount2()}" class="practiceDropdown">
+                                                <select th:id="'valid' + ${submit.getCount2()}"
+                                                    class="practiceDropdown">
                                                     <option value=" "></option>
                                                     <option value="T">Not Tautology</option>
                                                     <option value="F">Not Contradiction</option>
@@ -322,7 +322,8 @@
                                         <td>
                                             <div style="height:25px">
                                                 Pair is:
-                                                <select th:id="'valid' + ${submit.getCount2()}" class="practiceDropdown">
+                                                <select th:id="'valid' + ${submit.getCount2()}"
+                                                    class="practiceDropdown">
                                                     <option value="F"></option>
                                                     <option value="T">Not Equivalent</option>
                                                 </select>
@@ -338,12 +339,11 @@
         </div>
     </main>
 
-
+    <!-- Bottom div containing buttons and final answer dropdown -->
     <section class="py-3 text-center container">
         <div style="display: inline;">
             <button class="solution" style="margin-right: 30px;" onclick="myFunction()">Show Solution</button>
             <button class="solution" style="margin-right:30px" onclick="grade()">Check</button>
-            <!-- may need to change th:id later -->
             <th:block th:if="${parsedQuestion.isLogical()}">
                 Statement is:
                 <select th:id="finalAnswer" class="practiceDropdown">
@@ -377,9 +377,11 @@
                     <option value="invalid">Invalid</option>
                 </select>
             </th:block>
-               <p id="feedback" style="display: none; color: red;"> Must select supporting row(s)</p>
+            <p id="feedback" style="display: none; color: red;"> Must select supporting row(s)</p>
         </div>
     </section>
+
+    <!-- Function for showing answers -->
     <script>
         function myFunction() {
             var x = document.getElementById("answers");
@@ -396,6 +398,8 @@
             }
         }
     </script>
+
+    <!-- Grading function-->
     <script th:inline="javascript">
         function grade() {
             var count = /*[[${submit.getCount()}]]*/ 'default';
@@ -404,6 +408,7 @@
             var finalAnswer = /*[[${parsedQuestion.getFinalAnswer()}]]*/ 'default';
             document.getElementById("feedback").style.display = "none";
 
+            // T/F table grading
             for (let i = 0; i < count; i++) {
                 var x = document.getElementById(i);
                 console.log(x.value);
@@ -413,6 +418,7 @@
                     x.style.color = "black";
                 }
             }
+            // rightmost column grading
             for (let i = 0; i < list.length; i++) {
                 var y = document.getElementById("valid" + i);
                 console.log("hey " + y.value);
@@ -426,11 +432,14 @@
             /* Final answer */
             var z = document.getElementById("finalAnswer");
             console.log("doc is" + z.value);
-            
-            if(z.value != " "){
+
+            //This if statement verifies that the user has selected supporting
+            // rows for the final answer if required
+            if (z.value != " ") {
                 if (z.value == "contingent" || z.value == "not equivalent" ||
                     z.value == "consistent" || z.value == "invalid") {
-                
+                    
+                    /* Check if there is at least on T value in rightmost column */
                     var oneTrue = false;
                     for (let i = 0; i < list.length; i++) {
                         y = document.getElementById("valid" + i);
@@ -438,7 +447,9 @@
                             oneTrue = true;
                         }
                     }
-                    if (z.value == "contingent" ){
+
+                    /* Check if there is at least on F value in rightmost column */
+                    if (z.value == "contingent") {
                         var oneFalse = false;
                         for (let i = 0; i < list.length; i++) {
                             y = document.getElementById("valid" + i);
@@ -459,8 +470,8 @@
                         }
                     }
                 }
-
-                if(finalAnswer != z.value) {
+                // Checks final answer
+                if (finalAnswer != z.value) {
                     z.style.color = "red";
                 } else {
                     z.style.color = "black";
