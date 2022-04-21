@@ -487,20 +487,22 @@ public class Parser {
         int size = results.size();
         for(int i = 0; i < size; i++) {
             Pair<String,String> p1 = results.get(i);
-            Pair<String,String> newPair = new Pair<>("","");
             if(p1.getValue0().equals("~")) {
                 String value = p1.getValue1();
-                newPair = new Pair<>(new String(Character.toChars(172)),value);
+                Pair<String,String> newPair = new Pair<>(new String(Character.toChars(172)),value);
+                results.set(i, newPair);
             }
             else if(p1.getValue0().equals("-")) {
                 String value = p1.getValue1();
-                newPair = new Pair<>(new String(Character.toChars(8594)),value);
+                Pair<String,String> newPair = new Pair<>(new String(Character.toChars(8594)),value);
+                results.set(i, newPair);
                 results.remove(i+1);
                 size--;
             }
             else if(p1.getValue0().equals("<")) {
                 String value = results.get(i+1).getValue1();
-                newPair = new Pair<>(new String(Character.toChars(8596)),value);
+                Pair<String,String> newPair = new Pair<>(new String(Character.toChars(8596)),value);
+                results.set(i, newPair);
                 results.remove(i+2);
                 results.remove(i);
                 size--;
@@ -508,15 +510,16 @@ public class Parser {
             }
             else if(p1.getValue0().equals(":")) {
                 if(results.get(i+1).getValue0().equals(".")) {
-                    newPair = new Pair<>(new String(Character.toChars(8756)),"");
+                    Pair<String,String> newPair = new Pair<>(new String(Character.toChars(8756)),"");
+                    results.set(i, newPair);
                 }
                 else {
-                    newPair = new Pair<>(new String(Character.toChars(8759)),"");
+                    Pair<String,String> newPair = new Pair<>(new String(Character.toChars(8759)),"");
+                    results.set(i, newPair);
                 }
                 results.remove(i+1);
                 size--;
             }
-            results.set(i, newPair);
         }
     }
 
