@@ -7,40 +7,69 @@
 <!-- NavBar -->
 <div th:replace="fragments :: menu"></div>
 
-<section style="margin-top: 5%;" class="py-3 text-left container">
+<section style="margin-top: 5%;" class="py-3 text-left container jumbotron">
     <div class="row py-0">
         <div>
             <h1>About</h1>
-            <p></p>
+            <hr>
             <p class="lead text-muted">
                 This site was created under the direction of Dr. Cortens at Boise State University to function as a Truth Table
                 Generator and grader for students looking to practice different logical statements and their respective evaluation.
-                <em>INCLUDE LATER: Information on where site is hosted and who to reach out to for technical issues</em>
+                <em>Please visit our help page for more information on the problem types and a brief explanation of logical syntax, semantics and grammar.</em>
             </p>
         </div>
     </div>
 </section>
-
 <section class="py-3 text-left container">
     <div class="row py-0">
         <div>
-            <h1>For Future Developers</h1>
+            <h2>For Future Developers</h2>
             <p class="lead text-muted">
-                We've created this site as Spring Boot Web application using ThymeLeaf view. Below you can find resources that will help familiarize yourself with the framework.
-                We recommend using Intellij (premium edition is free for students) or VSCode for IDE use <em>INCLUDE LATER: Information on how to access DB, Spin up project</em>
+                We've created this site as Spring Boot Web application using ThymeLeaf view with Bootstrap. Below you can find resources that will help familiarize yourself with the framework.
+                We recommend using Intellij (premium edition is free for students) or VSCode for IDE use.
             </p>
-            <h2>Resources</h2>
+            <h3>Resources</h3>
             <ul>
-                <li>https://www.thymeleaf.org/doc/tutorials/2.1/usingthymeleaf.html#what-is-thymeleaf</li>
-                <li>https://mkyong.com/spring-boot/spring-boot-hello-world-example-thymeleaf/</li>
-                <li>https://www.javatpoint.com/spring-boot-thymeleaf-view</li>
-                <li>include resources involving backend/DB</li>
+                <li>
+                    <a href ="https://www.thymeleaf.org/doc/tutorials/2.1/usingthymeleaf.html#what-is-thymeleaf">https://www.thymeleaf.org/doc/tutorials/2.1/usingthymeleaf.html#what-is-thymeleaf</a>
+                </li>
+                <li>
+                    <a href="https://mkyong.com/spring-boot/spring-boot-hello-world-example-thymeleaf/">https://mkyong.com/spring-boot/spring-boot-hello-world-example-thymeleaf/</a>
+                </li>
+                <li>
+                    <a href="https://www.javatpoint.com/spring-boot-thymeleaf-view">https://www.javatpoint.com/spring-boot-thymeleaf-view</a>
+                </li>
+                <li>
+                    <a href="https://www.jetbrains.com/community/education/#students">https://www.jetbrains.com/community/education/#students</a>
+                </li>
+                <li>
+                    <a href="https://getbootstrap.com/docs/5.1/getting-started/introduction/">https://getbootstrap.com/docs/5.1/getting-started/introduction/</a>
+                </li>
             </ul>
         </div>
     </div>
 </section>
 
-
+<div class="container">
+    <div class="row">
+        <div class="col-12 col-md-6">
+            <h3>Previous Contributors</h3>
+            <ul class="list-group">
+                <li class="list-group-item">
+                    <img src="https://iconutopia.com/wp-content/uploads/2016/06/space-dog-laika1.png" alt="twbs" width="32" height="32" class="rounded-circle flex-shrink-0" style="margin-right: 5px">
+                    Josh Gandolfo</li>
+                <li class="list-group-item"><img src="data:image/png;base64,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" alt="twbs" width="32" height="32" class="rounded-circle flex-shrink-0" style="margin-right: 5px">
+                    Trevor Smith</li>
+                <li class="list-group-item"><img src="https://e7.pngegg.com/pngimages/317/690/png-clipart-dance-party-computer-icons-music-ballet-text-logo.png" alt="twbs" width="32" height="32" class="rounded-circle flex-shrink-0" style="margin-right: 5px">
+                    Kyle Worley</li>
+                <li class="list-group-item"><img src="https://www.iconpacks.net/icons/2/free-rocket-icon-3432-thumb.png" alt="twbs" width="32" height="32" class="rounded-circle flex-shrink-0" style="margin-right: 5px">
+                    Berto Cisnero</li>
+                <li class="list-group-item"><img src="https://cdn2.iconfinder.com/data/icons/food-volume-iii/128/cheeseburger-512.png" alt="twbs" width="32" height="32" class="rounded-circle flex-shrink-0" style="margin-right: 5px">
+                    Zach Sherwood</li>
+            </ul>
+        </div>
+    </div>
+</div>
 <footer th:replace="fragments :: footer"></footer>
 
 <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
