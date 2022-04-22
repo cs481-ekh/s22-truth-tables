@@ -36,6 +36,17 @@
         <header class="site-header">
             <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
                 <div class="container">
+                    <img height="45" th:src="@{images/sdp-logo.png}" alt="senior design project logo" onmouseover="$('#sdp_info').css('visibility', 'revert')">
+                    <div id="sdp_info" onmouseleave="$('#sdp_info').css('visibility', 'collapse')">
+                        This website was created for a<br/>
+                        Boise State University<br/>
+                        Computer Science Senior Design Project by
+                        <div> Student 1 Name </div>
+                        <div> Student 2 Name </div>
+                        <div> Student 3 Name </div>
+                        For information about sponsoring a project go to<br/>
+                        <a href="https://www.boisestate.edu/coen-cs/community/cs481-senior-design-project/">https://www.boisestate.edu/coen-cs/community/cs481-senior-design-project/</a>
+                    </div>
                     <a class="navbar-brand mr-4" href="/truth-tables">Interactive Truth Table</a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
