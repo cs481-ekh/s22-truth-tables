@@ -42,6 +42,7 @@ public class Parser {
         return res;
     }
 
+    //Parses a list of which literals appear in the question
     public String parseChars(String question) {
         return question.replaceAll("[" + operators + "]", "")
                 .replaceAll("\\(", "")
@@ -55,6 +56,7 @@ public class Parser {
                 .mapToObj(c -> String.valueOf((char) c)).collect(Collectors.joining());
     }
 
+    //Main method for parsing a question
     public ParsedQuestion parseQuestion(String question) {
         parsedQuestion = new ParsedQuestion();
         map = new LinkedHashMap<>();
@@ -87,6 +89,7 @@ public class Parser {
         return parsedQuestion;
     }
 
+    //Evaluates the validity of an argument in the question
     public void evalArgument() {
         String[] list = original.split(":.");
         String[] premises = list[0].split(",");
@@ -109,6 +112,7 @@ public class Parser {
         parsedQuestion.setResults(validity);
     }
 
+    //Evaluates the consistency of two or more statements in the question
     public void evalConsistency() {
         String[] list = original.split(",");
         String consistent = "";
@@ -127,6 +131,7 @@ public class Parser {
         parsedQuestion.setFinalAnswer(cons);
     }
 
+    //Evaluates the equivalence of two statements in the question
     public void evalEquivalence() {
         String[] list = original.split("::");
         String equivalent = "";
@@ -145,6 +150,7 @@ public class Parser {
         parsedQuestion.setFinalAnswer(equiv);
     }
 
+    //Evaluates the logical status of the statement in the question
     public void evalLogical() {
         String values = map.get(original);
         String logical = "";
@@ -169,6 +175,7 @@ public class Parser {
         parsedQuestion.setFinalAnswer(status);
     }
 
+    //Determines which problem type the question is
     public Object determineType() {
         if (stmt.contains("::")) {
             parsedQuestion.setEquivalence(true);
@@ -442,6 +449,7 @@ public class Parser {
         }
     }
 
+    //Creates the results list for the parsed question
     public ArrayList<Pair<String, String>> getData() {
         ArrayList<String> ops = new ArrayList<>();
         ArrayList<String> values = new ArrayList<>();
@@ -482,6 +490,7 @@ public class Parser {
         return ret;
     }
 
+    //Converts operators to their unicode equivalents
     public void unicode() {
         ArrayList<Pair<String, String>> results = parsedQuestion.getResultList();
         int size = results.size();
@@ -523,6 +532,7 @@ public class Parser {
         }
     }
 
+    //Custom comparator used in the getData() method
     public class KeyComparator implements Comparator<String> {
         public String question;
 
