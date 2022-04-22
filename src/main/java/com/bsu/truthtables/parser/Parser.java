@@ -13,8 +13,7 @@ import java.util.stream.Collectors;
 public class Parser {
 
     @Value("${operators}")
-    private String operators;   //loaded from applicaiton properties, this is all the known operators
-    private int rows;
+    private String operators;   //loaded from application properties, this is all the known operators
     private String stmt;
     private String original;
     private String chars;
@@ -133,12 +132,12 @@ public class Parser {
         String equivalent = "";
         String equiv = "equivalent";
         for (int i = 0; i < map.get(list[0]).length(); i++) {
-            String tmp = "T";
+            String tmp = "F";
             char c1 = map.get(list[0]).charAt(i);
             char c2 = map.get(list[1]).charAt(i);
             if (c1 != c2) {
                 equiv = "not equivalent";
-                tmp = "F";
+                tmp = "T";
             }
             equivalent += tmp;
         }
@@ -153,11 +152,11 @@ public class Parser {
         boolean contra = true;
         for (int i = 0; i < values.length(); i++) {
             char c = values.charAt(i);
-            String tmp = "T";
+            String tmp = "F";
             if (c == 'T') {
                 contra = false;
             } else {
-                tmp = "F";
+                tmp = "T";
                 taut = false;
             }
             logical += tmp;
@@ -287,7 +286,6 @@ public class Parser {
     }
 
 
-    //evaluate
     public Object paren(Object o1) {
         String name = "(" + o1 + ")";
         put(name, get(o1));
@@ -296,6 +294,7 @@ public class Parser {
             return name;
         }
         char op = next();
+        if (op == ',') return name;
         Object o2 = stmt();
         String retval = "";
         if (op == '^') {
@@ -416,11 +415,6 @@ public class Parser {
             throw new RuntimeException("Expected: " + c + "; got: " + peek());
     }
 
-    private void eatWhiteSpace() {
-        if (stmt.length() > 0 && stmt.charAt(0) == ' ')
-            this.stmt = this.stmt.substring(1);
-    }
-
     private char next() {
         char c = peek();
         eat(c);
@@ -453,13 +447,11 @@ public class Parser {
         ArrayList<String> values = new ArrayList<>();
         ArrayList<String> keys = new ArrayList<>();
         int len = 1;
-        String question = "";
         for (String key : map.keySet()) {
             if (key.length() > 1) {
                 keys.add(key);
                 if (key.length() > len) {
                     len = key.length();
-                    question = key;
                 }
             }
         }
@@ -470,8 +462,6 @@ public class Parser {
         }
         for (int i = 0; i < original.length(); i++) {
             char c = original.charAt(i);
-
-            //clean up
             if (c == '^' || c == 'v' || c == '-' || c == '~') {
                 String op = "" + c;
                 ops.add(op);
@@ -497,35 +487,38 @@ public class Parser {
         int size = results.size();
         for(int i = 0; i < size; i++) {
             Pair<String,String> p1 = results.get(i);
-            if(p1.getValue0().equals("-")) {
+            if(p1.getValue0().equals("~")) {
+                String value = p1.getValue1();
+                Pair<String,String> newPair = new Pair<>(new String(Character.toChars(172)),value);
+                results.set(i, newPair);
+            }
+            else if(p1.getValue0().equals("-")) {
                 String value = p1.getValue1();
                 Pair<String,String> newPair = new Pair<>(new String(Character.toChars(8594)),value);
+                results.set(i, newPair);
                 results.remove(i+1);
                 size--;
-                results.set(i, newPair);
             }
             else if(p1.getValue0().equals("<")) {
                 String value = results.get(i+1).getValue1();
                 Pair<String,String> newPair = new Pair<>(new String(Character.toChars(8596)),value);
+                results.set(i, newPair);
                 results.remove(i+2);
                 results.remove(i);
                 size--;
                 size--;
-                results.set(i, newPair);
             }
             else if(p1.getValue0().equals(":")) {
                 if(results.get(i+1).getValue0().equals(".")) {
                     Pair<String,String> newPair = new Pair<>(new String(Character.toChars(8756)),"");
-                    results.remove(i+1);
-                    size--;
                     results.set(i, newPair);
                 }
                 else {
                     Pair<String,String> newPair = new Pair<>(new String(Character.toChars(8759)),"");
-                    results.remove(i+1);
-                    size--;
                     results.set(i, newPair);
                 }
+                results.remove(i+1);
+                size--;
             }
         }
     }
