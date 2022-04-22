@@ -28,6 +28,12 @@
                 return false;
             }
         }
+        function show_sdp() {
+            document.getElementById("sdp").style.display = "block";
+        }
+        function hide_sdp() {
+            document.getElementById("sdp").style.display = "none";
+        }
     </script>
     <title th:text="${pageTitle}"></title>
 </head>
@@ -36,14 +42,16 @@
         <header class="site-header">
             <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
                 <div class="container">
-                    <img height="45" th:src="@{images/sdp-logo.png}" alt="senior design project logo" onmouseover="$('#sdp_info').css('visibility', 'revert')">
-                    <div id="sdp_info" onmouseleave="$('#sdp_info').css('visibility', 'collapse')">
+                    <img style="padding-right: 20px;" height="45" th:src="@{images/sdp-logo.png}" alt="senior design project logo" onmouseover="show_sdp()">
+                    <div id="sdp" onmouseleave="hide_sdp()" style="display: none">
                         This website was created for a<br/>
                         Boise State University<br/>
                         Computer Science Senior Design Project by
-                        <div> Student 1 Name </div>
-                        <div> Student 2 Name </div>
-                        <div> Student 3 Name </div>
+                        <h6> Trevor Smith</h6>
+                        <h6> Berto Cisneros </h6>
+                        <h6> Josh Gandolfo </h6>
+                        <h6> Zach Sherwood </h6>
+                        <h6> Kyle Worley </h6>
                         For information about sponsoring a project go to<br/>
                         <a href="https://www.boisestate.edu/coen-cs/community/cs481-senior-design-project/">https://www.boisestate.edu/coen-cs/community/cs481-senior-design-project/</a>
                     </div>
@@ -87,7 +95,6 @@
             </nav>
         </header>
     </div>
-
 </body>
 <footer class="footer" th:fragment="footer">
     <p style="text-align: center; color: white; padding-top: 10px; ">
