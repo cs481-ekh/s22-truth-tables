@@ -504,7 +504,7 @@ public class Parser {
                 Pair<String,String> newPair = new Pair<>(new String(Character.toChars(8596)),value);
                 results.set(i, newPair);
                 results.remove(i+2);
-                results.remove(i);
+                results.remove(i+1);
                 size--;
                 size--;
             }
