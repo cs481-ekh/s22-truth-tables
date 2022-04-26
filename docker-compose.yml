@@ -1,7 +1,7 @@
 version: "3"
 services:
   truthtables:
-    build: https://github.com/cs481-ekh/s22-truth-tables.git#Main
+    build: https://github.com/cs481-ekh/s22-truth-tables.git#main
     image: truthtables
     ports:
       - "${HOST_PORT:-8080}:8080"
