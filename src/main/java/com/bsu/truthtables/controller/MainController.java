@@ -157,14 +157,14 @@ public class MainController {
     @GetMapping("/help")
     public String about(Model model) {
         model.addAttribute("pageTitle", "Help");
-
+        model.addAttribute("chapters", dao.getChapters());
         return "help";
     }
 
     @GetMapping("/about")
     public String aboutPage(Model model) {
         model.addAttribute("pageTitle", "About");
-
+        model.addAttribute("chapters", dao.getChapters());
         return "about";
     }
 }
