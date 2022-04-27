@@ -32,18 +32,3 @@ To use our application navigate to sdp.boisestate.edu/truth-tables. From here yo
 
 This demo shows the process of entering a logical status type problem and interacting with the resulting table. The interactive table includes functionality for checking the user's input, showing the correct true and false values, and also partially enforces correct flow of work requiring supporting answers when selecting specific final answers.
 <img src="demo.gif">
-
-
-
-Requirements
-
-    Project title
-    Team Members
-    Project abstract
-        Start with your project statement
-        Should be concise (~200 words)
-        Descriptive enough for someone outside to understand
-    Project Description
-        Describe what you actually built
-        How it works
-        Screenshots
