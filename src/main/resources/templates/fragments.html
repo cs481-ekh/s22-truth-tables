@@ -28,6 +28,12 @@
                 return false;
             }
         }
+        function show_sdp() {
+            document.getElementById("sdp").style.display = "block";
+        }
+        function hide_sdp() {
+            document.getElementById("sdp").style.display = "none";
+        }
     </script>
     <title th:text="${pageTitle}"></title>
 </head>
@@ -36,6 +42,19 @@
         <header class="site-header">
             <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
                 <div class="container">
+                    <img style="position:absolute; top:3px; left: 3px; padding-right: 20px;" height="45" th:src="@{/images/sdp-logo.png}" alt="senior design project logo" onmouseover="show_sdp()">
+                    <div id="sdp" onmouseleave="hide_sdp()" style="display: none">
+                        This website was created for a<br/>
+                        Boise State University<br/>
+                        Computer Science Senior Design Project by
+                        <h6> Trevor Smith</h6>
+                        <h6> Berto Cisneros </h6>
+                        <h6> Josh Gandolfo </h6>
+                        <h6> Zach Sherwood </h6>
+                        <h6> Kyle Worley </h6>
+                        For information about sponsoring a project go to<br/>
+                        <a href="https://www.boisestate.edu/coen-cs/community/cs481-senior-design-project/">https://www.boisestate.edu/coen-cs/community/cs481-senior-design-project/</a>
+                    </div>
                     <a class="navbar-brand mr-4" href="/truth-tables">Interactive Truth Table</a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
@@ -60,7 +79,7 @@
                         <div class="navbar-nav ml-auto">
                             <th:block th:if="${pageTitle != null}">
                             <div class="chapter dropdown">
-                                <select class="form-control" onchange="window.location = 'http://' + window.location.hostname + ':8080/truth-tables/chapter/' + this.value;"  id="dropOperator1">
+                                <select class="form-control" onchange="window.location = 'http://' + window.location.hostname + '/truth-tables/chapter/' + this.value;"  id="dropOperator1">
                                     <option value="0">Go To Chapter</option>
                                     <option th:each="chapter : ${chapters}" th:value=" ${chapter}" th:text="${chapter}"></option>
                                 </select>
@@ -76,11 +95,10 @@
             </nav>
         </header>
     </div>
-
 </body>
 <footer class="footer" th:fragment="footer">
     <p style="text-align: center; color: white; padding-top: 10px; ">
-        Interactive Truth Table Version 1.4 2022
+        Interactive Truth Table Version 1.9 2022
     </p>
 </footer>
 </html>

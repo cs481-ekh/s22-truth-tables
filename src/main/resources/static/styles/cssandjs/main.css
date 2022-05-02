@@ -415,3 +415,38 @@ caption{
     border-top: 5px solid #3e8e41;
     color: white;
 }
+
+#sdp {
+    position: absolute;
+    margin-top: 330px;
+    width: 350px;
+    background-color:rgb(150, 150, 150);
+    color: white;
+    text-align: center;
+    border: #333333;
+    border-style: solid;
+    border-width: 2px;
+    left: 5px;
+}
+#sdp img {
+    width: 80px;
+    cursor: pointer;
+    display: block;
+}
+#sdp > h6 {
+    color: rgb(75, 75, 75);
+}
+#sdp > div {
+    background-color: #0033A0;
+    color: white;
+    text-align: center;
+    margin: 15px;
+    padding: 15px;
+    border-radius: 15px;
+    position: relative;
+}
+
+#sdp a {
+    text-decoration: none;
+    font-weight: bold;
+}

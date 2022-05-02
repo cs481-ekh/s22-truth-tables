@@ -1,3 +1,70 @@
+## Thursday 4/21 - 8:30p - 11:30p
+
+Scribe: Trevor
+
+Present: Zach, Berto, Josh, Trevor
+
+Absent: None
+
+Summary: Pair programmed a little bit on some tasks and discussed final front end changes.
+
+------
+
+## Thursday 4/14 - 10:30a - 11:40p
+
+Scribe: Trevor
+
+Present: All
+
+
+Summary: Project handoff meeting with Dr. Cortens
+
+------
+## Sunday 4/10 - 11:00a - 12:30p
+
+Scribe: Trevor
+
+Present: All
+
+
+Summary: Worked on documentation (github page and handoff)
+
+------
+## Thursday 4/07 - 6:00p - 7:00p
+
+Scribe: Trevor
+
+Present: All
+
+Summary: Planned sprint 4 and discussed final tasks that needed to be completed
+
+**Sprint goal: The goal of this sprint is to complete the project and prepare for the handoff. By the end of this sprint we should have documentation, a deployed application on bsu servers and prepared for handoff/signoff from stakeholders.**
+
+------
+## Wednesday 4/06 - 7:30p - 10:00p
+
+Scribe: Zach
+
+Present: Zach, Trevor, Josh, Kyle, Berto
+
+Absent: N/A
+
+Summary: Primarily pair programming between Zach and Trevor, but contained an impromptu meeting with the whole team to discuss functionality between front end and back end
+
+------
+## Tuesday 4/05 - 3:30p - 4:00p
+
+Scribe: Zach
+
+Present: Trevor, Zach, Josh, Berto
+
+Absent: Kyle
+
+Summary: Discussed what tasks we have left to add to sprint 4, also planned meeting time to plan final sprint
+
+Action Items: Think of additional tasks
+
+------
 ## Saturday 4/02 - 6:00p - 7:15p
 
 Scribe: Zach

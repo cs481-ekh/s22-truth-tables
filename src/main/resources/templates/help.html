@@ -28,7 +28,7 @@
         <a href="#Help" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-light-green border-top border-dark w3-text-light-gray">Help</a>
         <a href="#Expected Format" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-light-green w3-text-light-gray">Expected Format</a>
         <a href="#Logic Refresher" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-light-green w3-text-light-gray">Logic Refresher</a>
-        <a href="#Report Bugs" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-light-green w3-text-light-gray">Report Bugs</a>
+        <!--<a href="#Report Bugs" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-light-green w3-text-light-gray">Report Bugs</a>-->
     </div>
 </nav>
 
@@ -71,7 +71,7 @@
                 <p>The equivalence will appear as a selectable field when a double colon (s1 :: s2) is used to separate two statements</p>
                 <h5>Example</h5>
                 <div class="w3-half">
-                    <img th:src="@{images/LogicalStatus.png}" style="width:210%" onclick="onClick(this)" alt="Logical Status">
+                    <img th:src="@{images/Equivalence.png}" style="width:210%" onclick="onClick(this)" alt="Equivalence">
                 </div>
             </div>
 
@@ -80,7 +80,7 @@
                 <p>The consistency will appear as a selectable field when a comma (s1, s2, … , sx) is used to separate two or more statements</p>
                 <h5>Example</h5>
                 <div class="w3-half">
-                    <img th:src="@{images/LogicalStatus.png}" style="width:210%" onclick="onClick(this)" alt="Logical Status">
+                    <img th:src="@{images/Consistency.jpeg}" style="width:210%" onclick="onClick(this)" alt="Consistency">
                 </div>
             </div>
 
@@ -90,7 +90,7 @@
                 premises from a conclusion statement</p>
                 <h5>Example</h5>
                 <div class="w3-half">
-                    <img th:src="@{images/LogicalStatus.png}" style="width:210%" onclick="onClick(this)" alt="Logical Status">
+                    <img th:src="@{images/Validity.jpeg}" style="width:210%" onclick="onClick(this)" alt="Validity">
                 </div>
             </div>
 
@@ -135,27 +135,27 @@
 
 
     <!-- Report Bugs -->
-    <!-- Not Fully Implemented -->
-    <div class="w3-container" id="Report Bugs" style="margin-top:75px">
-        <h1 class="w3-xxxlarge w3-text-darkgreen"><b>Report Bugs</b></h1>
-        <hr style="width:50px;border:5px solid darkgreen" class="w3-round">
-        <p>Please fill out the form to report any bugs experienced while using this tool. Thank you!</p>
-        <form action="/action_page.php" target="_blank">
-            <div class="w3-section">
-                <label>Title</label>
-                <input class="w3-input w3-border" type="text" name="Name" required>
-            </div>
-            <div class="w3-section">
-                <label>Email</label>
-                <input class="w3-input w3-border" type="text" name="Email" required>
-            </div>
-            <div class="w3-section">
-                <label>Bug Description</label>
-                <input class="w3-input w3-border" type="text" name="Message" required>
-            </div>
-            <button type="submit" class="w3-button w3-block w3-padding-large w3-red w3-margin-bottom">Submit Report</button>
-        </form>
-    </div>
+    <!-- Not Fully Implemented to work with database and store reports -->
+<!--        <div class="w3-container" id="Report Bugs" style="margin-top:75px">-->
+<!--        <h1 class="w3-xxxlarge w3-text-darkgreen"><b>Report Bugs</b></h1>-->
+<!--        <hr style="width:50px;border:5px solid darkgreen" class="w3-round">-->
+<!--        <p>Please fill out the form to report any bugs experienced while using this tool. Thank you!</p>-->
+<!--        <form action="/action_page.php" target="_blank">-->
+<!--            <div class="w3-section">-->
+<!--                <label>Title</label>-->
+<!--                <input class="w3-input w3-border" type="text" name="Name" required>-->
+<!--            </div>-->
+<!--            <div class="w3-section">-->
+<!--                <label>Email</label>-->
+<!--                <input class="w3-input w3-border" type="text" name="Email" required>-->
+<!--            </div>-->
+<!--            <div class="w3-section">-->
+<!--                <label>Bug Description</label>-->
+<!--                <input class="w3-input w3-border" type="text" name="Message" required>-->
+<!--            </div>-->
+<!--            <button type="submit" class="w3-button w3-block w3-padding-large w3-red w3-margin-bottom">Submit Report</button>-->
+<!--        </form>-->
+<!--    </div>-->
 
     <!-- End page content -->
 </div>
